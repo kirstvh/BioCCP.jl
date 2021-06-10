@@ -1,9 +1,10 @@
 module BioCCP
 
-using LinearAlgebra
+#using 
 
 # export all functions that are relevant for the user
-export solve_quadratic_system, quadratic_function
+export expectation_minsamplesize, std_minsamplesize, success_probability, expectation_fraction_collected, prob_occurence_module
+
 
 """
     exp_ccdf(n, T; p_vec = ones(n), m = 1, r = 1, normalize = true)
