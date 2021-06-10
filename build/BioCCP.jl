@@ -17,12 +17,12 @@ Calculates `1 - F(t)`, which is the complement of the success probability
   see each module at least `m` times.). This function
   serves as the integrand for calculating `E[T]`.
  
-`n`: number of modules in the design space
-`p_vec`: vector with the probabilities/relative abundances of the different coupons
-`T`: number of designs
-`m`: number of complete sets of modules that need to be collected 
-`r`: number of modules per design
-normalize: if true, normalize `p_vec`
+- `n`: number of modules in the design space
+- `p_vec`: vector with the probabilities/relative abundances of the different coupons
+- `T`: number of designs
+- `m`: number of complete sets of modules that need to be collected 
+- `r`: number of modules per design
+- normalize: if true, normalize `p_vec`
 
 References:
 - Doumas, A. V., & Papanicolaou, V. G. (2016). The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp. ESAIM: Probability and Statistics, 20, 367-399.
@@ -96,11 +96,11 @@ end
 Calculates the expected number of designs needed `E[T]`, 
 the minimum sample size to observe each module at least `m` times.
 
-`n`: number of modules in the design space
-`p_vec`: vector with the probabilities or abundances of the different modules
-`m`: number of complete sets of modules that need to be collected 
-`r`: number of modules per design
-normalize: if true, normalize `p_vec`
+- `n`: number of modules in the design space
+- `p_vec`: vector with the probabilities or abundances of the different modules
+- `m`: number of complete sets of modules that need to be collected 
+- `r`: number of modules per design
+- normalize: if true, normalize `p_vec`
 
 References:
 - Doumas, A. V., & Papanicolaou, V. G. (2016). The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp. ESAIM: Probability and Statistics, 20, 367-399.
@@ -127,11 +127,11 @@ end
 Calculates the standard deviation on the number of designs needed `std[T]`, 
 the standard deviation on the minimum sample size to observe each module at least `m` times.
     
-`n`: number of modules in the design space
-`p_vec`: vector with the probabilities or abundances of the different modules
-`m`: number of complete sets of modules that need to be collected 
-`r`: number of modules per design
-normalize: if true, normalize `p_vec`
+- `n`: number of modules in the design space
+- `p_vec`: vector with the probabilities or abundances of the different modules
+- `m`: number of complete sets of modules that need to be collected 
+- `r`: number of modules per design
+- normalize: if true, normalize `p_vec`
 
 ## Examples
 
@@ -156,12 +156,12 @@ Calculates the success probability `F(t) = P(T < t)` or the chance that
 the required number of designs to see each module at least `m` times
 is smaller than `t`.
 
-`n`: number of modules in design space
-`t`: sample size/number of designs for which to calculate the success probability 
-`p_vec`: vector with the probabilities or abundances of the different modules
-`m`: number of complete sets of modules that need to be collected 
-`r`: number of modules per design
-normalize: if true, normalize `p_vec`
+- `n`: number of modules in design space
+- `t`: sample size/number of designs for which to calculate the success probability 
+- `p_vec`: vector with the probabilities or abundances of the different modules
+- `m`: number of complete sets of modules that need to be collected 
+- `r`: number of modules per design
+- normalize: if true, normalize `p_vec`
 
 References:
 - Boneh, A., & Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66.
@@ -186,11 +186,11 @@ end
 Calculates the expected fraction of all modules observed
 after collecting `t`designs.
 
-`n`: number of modules in design space
-`t`: sample size/number of designs for which to calculate the expected fraction of modules observed
-`p_vec`: vector with the probabilities or abundances of the different modules 
-`r`: number of modules per design
-normalize: if true, normalize `p_vec`
+- `n`: number of modules in design space
+- `t`: sample size/number of designs for which to calculate the expected fraction of modules observed
+- `p_vec`: vector with the probabilities or abundances of the different modules 
+- `r`: number of modules per design
+- normalize: if true, normalize `p_vec`
 
 References:
 - Boneh, A., & Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66.
@@ -220,9 +220,9 @@ has occured `j` times after collecting `t` designs.
 
 Sampling of modules are assumed to be independent Poisson processes.
 
-`p`: module probaility
-`t`: sample size/number of designs 
-`j`: number of occurence 
+- `p`: module probaility
+- `t`: sample size/number of designs 
+- `j`: number of occurence 
 
 References:
 - Boneh, A., & Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66.
