@@ -13,107 +13,8 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ 71324ea0-0e29-48cb-b057-21677b352dfb
-begin
-	
-using Plots, Distributions, Random, PlutoUI
-	
-	function exp_ccdf(n, t; p_vec = ones(n), m = 1, r = 1, normalize = true)
-	    """ Calculates exceedance or probability P(T > t) 
-	    that required number of trials T is larger then t, 
-	    in order to see each coupon at least m times.
-	    n: number of coupons
-	    p_vec: vector with the probabilities/relative abundances of the different coupons
-	    T: number of trials
-	    m: number of complete sets of coupons that need to be collected 
-		q: number of coupons/modules per design
-	    normalize: if true, normalize p_vec"""
-	    @assert length(p_vec) == n
-	    
-	    # Normalize probabilities
-	    if normalize
-	        p_vec = p_vec ./ sum(p_vec)    
-	    end   
-	    # Initialize probability P
-	    P_cdf = 1
-	    for i in 1:n
-	          Sm = 0
-	        for j in 1:m
-	            Sm += ((p_vec[i]*r*t)^(j-1))/factorial(j-1) #formulas see paper <Introduction
-	        end 
-	        P_cdf *= (1 - Sm*exp(-p_vec[i]*r*t))        
-	    end   
-	    P = 1 - P_cdf
-	    return P
-	end
-	
-	function approximate_moment(n, fun; p_vec = ones(n), q=1, m = 1, r = 1,
-	        steps = 10000, normalize = true)
-	    """ Calculates the q-th rising moment of Tm[N] (number of trials that are needed to collect
-	    all coupons m times). Integral is approximated by the Riemann sum.
-	     """
-	    @assert length(p_vec) == n
-	    a = 0; b = 0
-	        while fun(n, b; p_vec = p_vec, m = m, r=r, normalize=normalize) > 0.00001
-	            b += 5
-	        end
-	    δ = (b-a)/steps; t = a:δ:b
-	    qth_moment = q .* sum(δ .* fun.(n, t; p_vec = p_vec, m = m, r=r, normalize = normalize) .* t.^[q-1]) #integration exp_ccdf, see paper References [1]
-	    return qth_moment
-	end
-	
-	function expectation_minsamplesize(n; p_vec = ones(n), m = 1, r = 1, normalize = true)
-		""" Calculates the expected number of designs needed `E[T]`, 
-	the minimum sample size to observe each module at least `m` times.
-
-	`n`: number of modules in the design space
-	`p_vec`: vector with the probabilities or abundances of the different modules
-	`m`: number of complete sets of modules that need to be collected 
-	`r`: number of modules per design
-	normalize: if true, normalize `p_vec` """
-		
-	    @assert length(p_vec) == n
-	    E = approximate_moment(n, exp_ccdf; p_vec = p_vec, q = 1, m = m, r = r, normalize = normalize)
-	    return ceil(E)
-	end
-
-
-function std_minsamplesize(n; p_vec = ones(n), m = 1, r = 1, normalize = true)
-    @assert length(p_vec) == n
-    M1 = approximate_moment(n, exp_ccdf; p_vec = p_vec, q=1, m = m, r = r,  normalize = normalize)
-    M2 = approximate_moment(n, exp_ccdf; p_vec = p_vec, q=2, m = m, r = r, normalize = normalize)
-    var = M2 - M1 - M1^2
-    return ceil(sqrt(var))
-end
-	
-function success_probability(n, t; p_vec = ones(n), m = 1, r = 1, normalize = true)
-    
-    P_success = 1 - exp_ccdf(n, t; p_vec = p_vec, m = m, r = r, normalize = normalize) 
-    return P_success
-end
-	
- 
-
-function expectation_fraction_collected(n, t; p_vec = ones(n), r = 1, normalize=true)
-    if normalize
-        p_vec = p_vec./sum(p_vec)
-    end
-    frac = sum( (1-(1-p_vec[i])^(t*r)) for i in 1:n )/n
-    return frac
-end
-	
-function prob_occurence_module(p, t, j)
-	    """ 
-	    p: probability module
-	    n: number of trials
-	    j: times occurence module """
-	    return (exp(-1*(p*t))*(p*t)^j)/factorial(j) 
-end
-	
-
-
-md"  "
-end
+# ╔═╡ 2d3ad982-ef1f-45ae-b247-9679c0faa853
+using BioCCP, Plots, Distributions, Random, PlutoUI
 
 # ╔═╡ 4d246460-af05-11eb-382b-590e60ba61f5
 md"## The Coupon Collector's Problem in Combinatorial Biotechnology
@@ -123,7 +24,7 @@ This notebook provides functions and visualizations to determine minimum sample 
 "
 
 # ╔═╡ a2fd6000-1450-4dfe-9426-5303ae64bfb3
-md"""Please install the packages `Plots` , `Distributions`, `Random` and `PlutoUI` in the Julia Package Manager for this notebook to work."""
+md"""Please install the packages `BioCCP`, `Plots` , `Distributions`, `Random` and `PlutoUI` in the Julia Package Manager for this notebook to work."""
 
 # ╔═╡ a8c81622-194a-443a-891b-bfbabffccff1
 begin
@@ -565,7 +466,7 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╔═╡ Cell order:
 # ╟─4d246460-af05-11eb-382b-590e60ba61f5
 # ╟─a2fd6000-1450-4dfe-9426-5303ae64bfb3
-# ╠═71324ea0-0e29-48cb-b057-21677b352dfb
+# ╠═2d3ad982-ef1f-45ae-b247-9679c0faa853
 # ╟─a8c81622-194a-443a-891b-bfbabffccff1
 # ╟─45507d48-d75d-41c9-a018-299e209f900e
 # ╟─b17f3b8a-61ee-4563-97cd-19ff049a8e1e
@@ -582,8 +483,8 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─db4371e4-7f86-4db3-b076-12f6cd220b89
 # ╟─317995ed-bdf4-4f78-bd66-a39ffd1dc452
 # ╟─ca5a4cef-df67-4a5e-8a86-75a9fe8c6f37
-# ╠═24f7aae7-d37a-4db5-ace0-c910b178da88
-# ╠═37f951ee-885c-4bbe-a05f-7c5e48ff4b6b
+# ╟─24f7aae7-d37a-4db5-ace0-c910b178da88
+# ╟─37f951ee-885c-4bbe-a05f-7c5e48ff4b6b
 # ╟─dc696281-7a5b-4568-a4c2-8dde90af43f0
 # ╟─eb92ff7c-0140-468c-8b32-f15d1cf15913
 # ╟─f0eaf96b-0bc0-4194-9a36-886cb1d66e00
