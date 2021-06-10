@@ -1,61 +1,243 @@
-# Michiel Stock
-# Example of a source code file implementing a module.
+module BioCCP
 
-
-# all your code is part of the module you are implementing
-module Example
-
-# you have to import everything you need for your module to work
-# if you use a new package, don't forget to add it in the package manager
 using LinearAlgebra
 
 # export all functions that are relevant for the user
 export solve_quadratic_system, quadratic_function
 
 """
-    solve_quadratic_system(P, q, r=0; testPD=false)
+    exp_ccdf(n, T; p_vec = ones(n), m = 1, r = 1, normalize = true)
 
 Find the minimizer of a canonical quadratic system:
 
-``f(x) = 0.5xᵀ  P  x + x ⋅ q + r``
+Calculates `1 - F(t)`, which is the complement of the success probability
+`F(t) = P(T < t)` (= probability that that required
+  number of designs T is smaller than `t` in order to 
+  see each module at least `m` times.). This function
+  serves as the integrand for calculating `E[T]`.
+ 
+`n`: number of modules in the design space
+`p_vec`: vector with the probabilities/relative abundances of the different coupons
+`T`: number of designs
+`m`: number of complete sets of modules that need to be collected 
+`r`: number of modules per design
+normalize: if true, normalize `p_vec`
 
-with `P` a positive scalar or a positive-definite n x n matrix and `q` a scalar or
-a n x n vector. The intercept `r` can optionally be given but does not influence
-the minimizer. One can use the keyword argument `testPD` to test if `P` is positive definite,
-though this comes at a computational cost.
+References:
+- Doumas, A. V., & Papanicolaou, V. G. (2016). The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp. ESAIM: Probability and Statistics, 20, 367-399.
+- Boneh, A., & Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66.
+
+## Examples
+ 
+
+```julia-repl
+julia> n = 100
+julia> t = 500
+julia> exp_ccdf(n, t; p_vec = ones(n), m = 1, r = 1, normalize = true)
+0.4913906004535237
+```
+"""
+function exp_ccdf(n, t; p_vec = ones(n), m = 1, r = 1, normalize = true)    testPD && @assert isposdef(P) "Provided P is not positive definite"
+    @assert length(p_vec) == n
+	    
+    # Normalize probabilities
+    if normalize
+        p_vec = p_vec ./ sum(p_vec)    
+    end   
+    # Initialize probability P
+    P_cdf = 1
+    for i in 1:n
+          Sm = 0
+        for j in 1:m
+            Sm += ((p_vec[i]*r*t)^(j-1))/factorial(j-1) #formulas see paper <Introduction
+        end 
+        P_cdf *= (1 - Sm*exp(-p_vec[i]*r*t))        
+    end   
+    P = 1 - P_cdf
+    return P
+end   
+
+"""
+    approximate_moment(n, fun; p_vec = ones(n), q=1, m = 1, r = 1,
+steps = 10000, normalize = true)
+
+Calculates the q-th rising moment of `T[N]` (number of designs that are needed to collect
+all modules `m` times). Integral is approximated by the Riemann sum.
+
+Reference: 
+- Doumas, A. V., & Papanicolaou, V. G. (2016). The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp. ESAIM: Probability and Statistics, 20, 367-399.
 
 ## Examples
 
-Scalar case:
-
 ```julia-repl
-julia> solve_quadratic_system(8, -4, 3)
-0.5
-```
-
-Vector case:
-
-```julia-repl
-julia> P = [3 1; 1 2];
-
-julia> q = [0.5, -2];
-
-julia> solve_quadratic_system(P, q)
-2-element Array{Float64,1}:
- -0.6               
-  1.2999999999999998
+julia> n = 100
+julia> fun = exp_ccdf
+julia> approximate_moment(n, fun; p_vec = ones(n), q=1, m = 1, r = 1,
+steps = 10000, normalize = true)
+518.8175339489885
 ```
 """
-function solve_quadratic_system(P, q, r=0; testPD=false)
-    testPD && @assert isposdef(P) "Provided P is not positive definite"
-    return - P \ q
+function approximate_moment(n, fun; p_vec = ones(n), q=1, m = 1, r = 1,
+	        steps = 10000, normalize = true)
+    @assert length(p_vec) == n
+    a = 0; b = 0
+    while fun(n, b; p_vec = p_vec, m = m, r=r, normalize=normalize) > 0.00001
+        b += 5
+    end
+    δ = (b-a)/steps; t = a:δ:b
+    qth_moment = q .* sum(δ .* fun.(n, t; p_vec = p_vec, m = m, r=r, normalize = normalize) .* t.^[q-1]) #integration exp_ccdf, see paper References [1]
+    return qth_moment           
 end
 
 """
-    quadratic_function(P, q, r)
+    expectation_minsamplesize(n; p_vec = ones(n), m = 1, r = 1, normalize = true)
 
-Give the paramters of a canonical quatratic function and returns a function.
+Calculates the expected number of designs needed `E[T]`, 
+the minimum sample size to observe each module at least `m` times.
+
+`n`: number of modules in the design space
+`p_vec`: vector with the probabilities or abundances of the different modules
+`m`: number of complete sets of modules that need to be collected 
+`r`: number of modules per design
+normalize: if true, normalize `p_vec`
+
+References:
+- Doumas, A. V., & Papanicolaou, V. G. (2016). The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp. ESAIM: Probability and Statistics, 20, 367-399.
+- Boneh, A., & Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66.
+
+
+## Examples
+
+```julia-repl
+julia> n = 100
+julia> expectation_minsamplesize(n; p_vec = ones(n), m = 1, r = 1, normalize = true)
+519.0
+```
 """
-quadratic_function(P, q, r) = x -> 0.5x' * P * x + q ⋅ x + r 
+function expectation_minsamplesize(n; p_vec = ones(n), m = 1, r = 1, normalize = true)
+    @assert length(p_vec) == n
+    E = approximate_moment(n, exp_ccdf; p_vec = p_vec, q = 1, m = m, r = r, normalize = normalize)
+    return ceil(E)
+end
+
+"""
+    std_minsamplesize(n; p_vec = ones(n), m = 1, r = 1, normalize = true)
+
+Calculates the standard deviation on the number of designs needed `std[T]`, 
+the standard deviation on the minimum sample size to observe each module at least `m` times.
+    
+`n`: number of modules in the design space
+`p_vec`: vector with the probabilities or abundances of the different modules
+`m`: number of complete sets of modules that need to be collected 
+`r`: number of modules per design
+normalize: if true, normalize `p_vec`
+
+## Examples
+
+```julia-repl
+julia> n = 100
+julia> std_minsamplesize(n; p_vec = ones(n), m = 1, r = 1, normalize = true)
+126.0
+```
+"""
+function std_minsamplesize(n; p_vec = ones(n), m = 1, r = 1, normalize = true)
+    @assert length(p_vec) == n
+    M1 = approximate_moment(n, exp_ccdf; p_vec = p_vec, q=1, m = m, r = r,  normalize = normalize)
+    M2 = approximate_moment(n, exp_ccdf; p_vec = p_vec, q=2, m = m, r = r, normalize = normalize)
+    var = M2 - M1 - M1^2
+    return ceil(sqrt(var))
+end
+
+"""
+    success_probability(n, t; p_vec = ones(n), m = 1, r = 1, normalize = true)
+
+Calculates the success probability `F(t) = P(T < t)` or the chance that 
+the required number of designs to see each module at least `m` times
+is smaller than `t`.
+
+`n`: number of modules in design space
+`t`: sample size/number of designs for which to calculate the success probability 
+`p_vec`: vector with the probabilities or abundances of the different modules
+`m`: number of complete sets of modules that need to be collected 
+`r`: number of modules per design
+normalize: if true, normalize `p_vec`
+
+References:
+- Boneh, A., & Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66.
+
+## Examples
+
+```julia-repl
+julia> n = 100
+julia> t = 600
+julia> success_probability(n, t; p_vec = ones(n), m = 1, r = 1, normalize = true)
+0.7802171997092149
+```
+"""
+function success_probability(n, t; p_vec = ones(n), m = 1, r = 1, normalize = true)   
+    P_success = 1 - exp_ccdf(n, t; p_vec = p_vec, m = m, r = r, normalize = normalize) 
+    return P_success
+end
+
+"""
+    expectation_fraction_collected(n, t; p_vec = ones(n), r = 1, normalize=true) 
+
+Calculates the expected fraction of all modules observed
+after collecting `t`designs.
+
+`n`: number of modules in design space
+`t`: sample size/number of designs for which to calculate the expected fraction of modules observed
+`p_vec`: vector with the probabilities or abundances of the different modules 
+`r`: number of modules per design
+normalize: if true, normalize `p_vec`
+
+References:
+- Boneh, A., & Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66.
+
+## Examples
+
+```julia-repl
+julia> n = 100
+julia> t = 200
+julia> expectation_fraction_collected(n, t; p_vec = ones(n), r = 1, normalize=true)
+0.8660203251420364
+```
+"""
+function expectation_fraction_collected(n, t; p_vec = ones(n), r = 1, normalize=true)
+    if normalize
+        p_vec = p_vec./sum(p_vec)
+    end
+    frac = sum( (1-(1-p_vec[i])^(t*r)) for i in 1:n )/n
+    return frac
+end
+
+"""
+    prob_occurence_module(p, t, j)
+
+Calculates probability that specific module with module probability `p` 
+has occured `j` times after collecting `t` designs.
+
+Sampling of modules are assumed to be independent Poisson processes.
+
+`p`: module probaility
+`t`: sample size/number of designs 
+`j`: number of occurence 
+
+References:
+- Boneh, A., & Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66.
+
+## Examples
+
+```julia-repl
+julia> p = 0.005
+julia> t = 500
+julia> t = 2
+julia> prob_occurence_module(p, t, j)
+0.25651562069968376
+```
+"""
+function prob_occurence_module(p, t, j)
+	return (exp(-1*(p*t))*(p*t)^j)/factorial(j) 
+end
 
 end
