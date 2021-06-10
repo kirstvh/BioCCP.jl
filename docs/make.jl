@@ -1,15 +1,12 @@
 using Documenter
 using BioCCP
-using STMOZOO.LocalSearch
+ 
 
 makedocs(sitename="BioCCP",
     format = Documenter.HTML(),
-    modules=[Example,
-            SingleCellNMF,], # add your module
+    modules=[BioCCP],  
     pages=Any[
-        "Example"=> "man/example.md",  # add the page to your documentation
-        "GenProgAlign" => "man/gen_prog_align.md",
-	       
+        "BioCCP"=> "man/BioCCP.md", 	       
     ])
 
 #=
