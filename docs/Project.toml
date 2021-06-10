@@ -1,3 +1,3 @@
 [deps]
-Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 BioCCP = "79e6b149-e254-49fe-a721-3c4960de1574"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
