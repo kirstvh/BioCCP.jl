@@ -37,7 +37,7 @@ julia> exp_ccdf(n, t; p_vec = ones(n), m = 1, r = 1, normalize = true)
 0.4913906004535237
 ```
 """
-function exp_ccdf(n, t; p_vec = ones(n), m = 1, r = 1, normalize = true)    testPD && @assert isposdef(P) "Provided P is not positive definite"
+function exp_ccdf(n, t; p_vec = ones(n), m = 1, r = 1, normalize = true)   
     @assert length(p_vec) == n
 	    
     # Normalize probabilities
