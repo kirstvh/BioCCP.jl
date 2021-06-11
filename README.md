@@ -19,7 +19,7 @@ Function name    | Short description
 
 For more info about the implementation of the functions, please consult the docs.
 
-The [Pluto notebook](BioCCP/notebook/BioCCP Interactive Notebook.jl) provides an interactive illustration of these functionalities and allows to make calculations for specific settings. 
+The [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl) provides an interactive illustration of these functionalities and allows to make calculations for specific settings. 
 
 ## Getting started
 - Pluto notebook
