@@ -5,13 +5,13 @@ During the **combinatorial engineering of biosystems** such as proteins, genetic
 
 BioCCP contains functions for calculating minimum sample sizes and related statistics:
 - `expectation_minsamplesize`
-- std_minsamplesize
-- success_probability
-- expectation_fraction_collected
-- prob_occurence_module
+- `std_minsamplesize`
+- `success_probability`
+- `expectation_fraction_collected`
+- `prob_occurence_module`
 
-For more informatio about the implementation of the functions, please consult the docs.
+For more info about the implementation of the functions, please consult the docs.
 
-The Pluto notebook provides an interactive illustration of these functionalities and allows to make calculations for specific settings. 
+The **Pluto notebook** provides an interactive illustration of these functionalities and allows to make calculations for specific settings. 
   
 
