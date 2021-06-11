@@ -9,8 +9,6 @@ export expectation_minsamplesize, std_minsamplesize, success_probability, expect
 """
     exp_ccdf(n, T; p_vec = ones(n), m = 1, r = 1, normalize = true)
 
-Find the minimizer of a canonical quadratic system:
-
 Calculates `1 - F(t)`, which is the complement of the success probability
 `F(t) = P(T < t)` (= probability that that required
   number of designs T is smaller than `t` in order to 
