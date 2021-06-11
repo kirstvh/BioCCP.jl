@@ -27,12 +27,12 @@ or
 
 
 - Install [Julia](https://julialang.org/downloads/) to work outside Binder
- - Install BioCCP
+  - Install BioCCP
 
     using Pkg
     Pkg.add("BioCCP") 
     
-- For using the Pluto notebook, install the additional packages Pluto, PlutoUI and Plots
+  - For using the Pluto notebook, install the additional packages Pluto, PlutoUI and Plots
   
     using Pkg
     Pkg.add("Pluto"); Pkg.add("PlutoUI"); Pkg.add("Plots")
