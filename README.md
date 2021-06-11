@@ -26,6 +26,9 @@ The [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl) provides an
 
 Install [Pluto](https://github.com/fonsp/Pluto.jl) 
 
+    using Pkg
+    Pkg.add("Pluto")
+
 - Binder
   
 
