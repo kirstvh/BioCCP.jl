@@ -19,15 +19,18 @@ Function name    | Short description
 
 For more info about the implementation of the functions, please consult the docs.
 
-The Pluto notebook **BioCCP Interactive Notebook.jl** provides an interactive illustration of these functionalities and allows to make calculations for specific settings. 
+The [Pluto notebook](notebook/BioCCP Interactive Notebook.jl) provides an interactive illustration of these functionalities and allows to make calculations for specific settings. 
 
 ## Getting started
+- Pluto notebook
+Install the 
 
+- binder
   
 
 ## References
 Implementation of formula's was based on:
 
-[1] Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp.* ESAIM: Probability and Statistics, 20, 367-399.
+> [1] Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp.* ESAIM: Probability and Statistics, 20, 367-399. doi:
 
-[2] Boneh, A., & Hofri, M. (1997). *The coupon-collector problem revisited—a survey of engineering problems and computational methods.* Stochastic Models, 13(1), 39-66.
+> [2] Boneh, A., & Hofri, M. (1997). *The coupon-collector problem revisited—a survey of engineering problems and computational methods.* Stochastic Models, 13(1), 39-66.
