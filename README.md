@@ -33,13 +33,11 @@ Launch directly form your browser: [![Binder](https://mybinder.org/badge_logo.sv
 
 (2) Install BioCCP
 
-    using Pkg
-    Pkg.add("BioCCP")
+    ] add https://github.com/kirstvh/BioCCP
 
 (3) For using the [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl), install the additional packages [Pluto](https://github.com/fonsp/Pluto.jl), [PlutoUI](https://github.com/fonsp/PlutoUI.jl) and [Plots](https://github.com/JuliaPlots/Plots.jl)
   
-    using Pkg
-    Pkg.add(["Pluto", "PlutoUI", "Plots"])
+    ] add Pluto, PlutoUI, Plots
     
 
 ## References
