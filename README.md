@@ -30,7 +30,7 @@ The Pluto notebook provides an interactive illustration of all functions in BioC
 
 **Work outside Binder**:
 
-(1) Install [Julia](https://julialang.org/downloads/) \\
+(1) Install [Julia](https://julialang.org/downloads/) \n
 (2) Install BioCCP
 
     using Pkg
