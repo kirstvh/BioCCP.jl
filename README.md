@@ -24,7 +24,7 @@ The [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl) provides an
 ## Getting started
 - Pluto notebook
 
-Install the 
+Install [Pluto](https://github.com/fonsp/Pluto.jl) 
 
 - Binder
   
