@@ -21,15 +21,16 @@ For more info about the implementation of the functions, please consult the docs
 
 ## Getting started
 
-**Binder**: The Pluto notebook provides an interactive illustration of all functions in BioCCP and assembles a report for your specific design set-up (launch directly form your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/BioCCP.git/main?filepath=%2Fmain%2Fnotebook%2FBioCCP_Interactive_Notebook.jl) )
+**Binder**: 
 
-or
+The Pluto notebook provides an interactive illustration of all functions in BioCCP and assembles a report for your specific design set-up (launch directly form your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/BioCCP.git/main?filepath=%2Fmain%2Fnotebook%2FBioCCP_Interactive_Notebook.jl) )
+
+**or**
 
 
 **Work outside Binder**:
 
-(1) Install [Julia](https://julialang.org/downloads/) 
-
+(1) Install [Julia](https://julialang.org/downloads/) \\
 (2) Install BioCCP
 
     using Pkg
