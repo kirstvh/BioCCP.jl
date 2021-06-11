@@ -19,13 +19,11 @@ Function name    | Short description
 
 For more info about the implementation of the functions, please consult the docs.
 
-The [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl) provides an interactive illustration of these functionalities and allows to make calculations for specific settings. 
-
 ## Getting started
 
-- Launch an interactive computing environment directly from your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/BioCCP.git/main?filepath=%2Fmain%2Fnotebook%2FBioCCP_Interactive_Notebook.jl)
+- The [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl) provides an interactive illustration of these functionalities and allows to make calculations for specific settings (launch directly form your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/BioCCP.git/main?filepath=%2Fmain%2Fnotebook%2FBioCCP_Interactive_Notebook.jl) )
 
-- Install Julia and required packages to use functions outside of Binder
+- Install [Julia](https://julialang.org/downloads/) and required packages to use functions outside of Binder
 
 Install [Pluto](https://github.com/fonsp/Pluto.jl) 
 
