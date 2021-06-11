@@ -21,19 +21,21 @@ For more info about the implementation of the functions, please consult the docs
 
 ## Getting started
 
-- The Pluto notebook provides an interactive illustration of all functions in BioCCP and allows to make calculations for specific settings (launch directly form your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/BioCCP.git/main?filepath=%2Fmain%2Fnotebook%2FBioCCP_Interactive_Notebook.jl) )
+The Pluto notebook provides an interactive illustration of all functions in BioCCP and allows to make calculations for specific settings (launch directly form your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/BioCCP.git/main?filepath=%2Fmain%2Fnotebook%2FBioCCP_Interactive_Notebook.jl) )
 
 or
 
 
-- Install [Julia](https://julialang.org/downloads/) to work outside Binder
+To work outside Binder:
 
-Install BioCCP
+(1) Install [Julia](https://julialang.org/downloads/) 
+
+(2) Install BioCCP
 
     using Pkg
     Pkg.add("BioCCP")
 
-For using the [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl), install the additional packages [Pluto](https://github.com/fonsp/Pluto.jl), [PlutoUI](https://github.com/fonsp/PlutoUI.jl) and [Plots](https://github.com/JuliaPlots/Plots.jl)
+(3) For using the [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl), install the additional packages [Pluto](https://github.com/fonsp/Pluto.jl), [PlutoUI](https://github.com/fonsp/PlutoUI.jl) and [Plots](https://github.com/JuliaPlots/Plots.jl)
   
     using Pkg
     Pkg.add("Pluto"); Pkg.add("PlutoUI"); Pkg.add("Plots")
