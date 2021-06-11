@@ -26,12 +26,13 @@ For more info about the implementation of the functions, please consult the docs
 or
 
 
-- Install [Julia](https://julialang.org/downloads/) and required packages to use functions outside of Binder
-
-Install [Pluto](https://github.com/fonsp/Pluto.jl) 
-
+- Install [Julia](https://julialang.org/downloads/) to work outside Binder
+ - Install BioCCP
     using Pkg
-    Pkg.add("Pluto")
+    Pkg.add("BioCCP") 
+- For using the Pluto notebook, install the additional packages Pluto, PlutoUI and Plots  
+    using Pkg
+    Pkg.add("Pluto"); Pkg.add("PlutoUI"); Pkg.add("Plots")
 
 ## References
 Implementation of formula's was based on:
