@@ -30,7 +30,8 @@ Install [Pluto](https://github.com/fonsp/Pluto.jl)
     Pkg.add("Pluto")
 
 - Binder
-  
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/BioCCP.git/main?filepath=%2Fmain%2Fnotebook%2FBioCCP_Interactive_Notebook.jl)
 
 ## References
 Implementation of formula's was based on:
