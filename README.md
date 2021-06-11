@@ -28,7 +28,7 @@ or
 
 - Install [Julia](https://julialang.org/downloads/) to work outside Binder
  - Install BioCCP
- 
+
     using Pkg
     Pkg.add("BioCCP") 
     
