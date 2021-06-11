@@ -25,3 +25,7 @@ The Pluto notebook **BioCCP Interactive Notebook.jl** provides an interactive il
 
   
 
+## References
+Implemented formula's were based on:
+[1] Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp.* ESAIM: Probability and Statistics, 20, 367-399.
+[2] Boneh, A., & Hofri, M. (1997). *The coupon-collector problem revisited—a survey of engineering problems and computational methods.* Stochastic Models, 13(1), 39-66.
