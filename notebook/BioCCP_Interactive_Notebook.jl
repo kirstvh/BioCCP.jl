@@ -14,7 +14,7 @@ macro bind(def, element)
 end
 
 # ╔═╡ 2d3ad982-ef1f-45ae-b247-9679c0faa853
-using BioCCP, Plots, Distributions, Random, PlutoUI
+using BioCCP, Plots, PlutoUI
 
 # ╔═╡ 4d246460-af05-11eb-382b-590e60ba61f5
 md"## The Coupon Collector's Problem in Combinatorial Biotechnology
