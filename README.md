@@ -21,7 +21,7 @@ For more info about the implementation of the functions, please consult the docs
 
 ## Getting started
 
-- The [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl) provides an interactive illustration of these functionalities and allows to make calculations for specific settings (launch directly form your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/BioCCP.git/main?filepath=%2Fmain%2Fnotebook%2FBioCCP_Interactive_Notebook.jl) )
+- The [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl) provides an interactive illustration of all functions in BioCCP and allows to make calculations for specific settings (launch directly form your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/BioCCP.git/main?filepath=%2Fmain%2Fnotebook%2FBioCCP_Interactive_Notebook.jl) )
 
 - Install [Julia](https://julialang.org/downloads/) and required packages to use functions outside of Binder
 
