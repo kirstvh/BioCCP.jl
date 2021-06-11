@@ -12,7 +12,7 @@ BioCCP contains functions for calculating minimum sample sizes and related stati
 
 For more info about the implementation of the functions, please consult the docs.
 
-The **Pluto notebook** provides an interactive illustration of these functionalities and allows to make calculations for specific settings. 
+The **Pluto notebook** ``BioCCP Interactive Notebook.jl`` provides an interactive illustration of these functionalities and allows to make calculations for specific settings. 
 
 ## Getting started
 
