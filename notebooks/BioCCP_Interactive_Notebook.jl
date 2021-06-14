@@ -24,7 +24,7 @@ This notebook provides functions and visualizations to determine minimum sample 
 "
 
 # ╔═╡ a2fd6000-1450-4dfe-9426-5303ae64bfb3
-md"""Please install the packages `BioCCP`, `Plots` , `Distributions`, `Random` and `PlutoUI` in the Julia Package Manager for this notebook to work."""
+md"""Please install the packages `BioCCP`, `Plots` and `PlutoUI` in the Julia Package Manager for this notebook to work."""
 
 # ╔═╡ a8c81622-194a-443a-891b-bfbabffccff1
 begin
@@ -81,6 +81,8 @@ end
 
 # ╔═╡ 44d4dfee-3073-49aa-867c-3abea10e6e37
 begin
+	# load your custom probability vector!
+	# see for example XLSX package
 	if distribution == "Custom vector"
 		abundances = rand(200:1:400, n)
 	end
@@ -143,13 +145,27 @@ end
 
 # ╔═╡ 87c3f5cd-79bf-4ad8-b7f8-3e98ec548a9f
 begin
-	if show_modprobs == "🔻 SHOW "  && distribution == "Normally distributed"
+	if show_modprobs == "🔻 SHOW "  && distribution == "Bell curve"
 		histogram(p_vec_unnorm, normalize=:probability,  bar_edges=true,  size = (650, 300), orientation=:v, bar_position=:stack)
 		# if distribution == "Normally distributed"
 		# 	plot!(x->pdf(Normal(μ, σ), x), xlim=xlims())
 		# 	xlabel!("Abundance"); ylabel!("probability"); title!("Distribution of module abundances")
 		# end
 		xlabel!("Abundance"); ylabel!("Relative frequency"); title!("Distribution of module abundances")
+	end	
+end
+
+# ╔═╡ d877bd4c-497d-46d1-9c58-b6fe26933bfc
+begin
+	if show_modprobs == "🔻 SHOW "  && distribution == "Bell curve"
+md"""To generate module probabilities that form a bell curve around the module probability $(µ/sum(p_vec_unnorm)), we follow the percentiles of normal distribution, which states, that for a normal distribution, 68% of the values lies in the interval [μ - σ, μ + σ], 13.5% of the values falls into the range [μ + σ, μ + 2σ], 13.5% of the values lies in [μ - 2σ, μ - σ] , ... with as a result:
+-  $(n_perc_1+n_perc_rest) probabilities of $(µ/sum(p_vec_unnorm))
+-  $(n_perc_2) probabilities of $((μ+1.5*σ)/sum(p_vec_unnorm))
+-  $(n_perc_2) probabilities of $((μ-1.5*σ)/sum(p_vec_unnorm))
+-  $(n_perc_3) probabilities of $((μ+2.5*σ)/sum(p_vec_unnorm))
+-  $(n_perc_3) probabilities of $((μ-2.5*σ)/sum(p_vec_unnorm))
+-  $(n_perc_4) probabilities of $((μ+3.5*σ)/sum(p_vec_unnorm))
+-  $(n_perc_4) probabilities of $((μ-3.5*σ)/sum(p_vec_unnorm)) """
 	end	
 end
 
@@ -243,7 +259,7 @@ end
 # ╔═╡ 22fe8006-0e81-4e0a-a460-28610a55cd97
 md""" **💻 Success probability**               $(@bind show_success Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE ") )\
 
- + *The chance that all modules are observed for a given sample size.* """
+ + *The probability that all modules are observed for a given sample size.* """
 
 # ╔═╡ db4371e4-7f86-4db3-b076-12f6cd220b89
 begin
@@ -422,7 +438,7 @@ if show_occ == "🔻 SHOW "
 	
 		else
 		rank = parse(Int64, rank_string)
-			p = C*i^-rank
+			p = C*α^-rank
 	sample_size_4 = parse(Int64, sample_size_4_string)
  	# module_ = 1
 # 	p = p_vec[module_]
@@ -475,6 +491,7 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─44d4dfee-3073-49aa-867c-3abea10e6e37
 # ╟─f6ebf9fb-0a29-4cb4-a544-6c6e32bedcc4
 # ╟─87c3f5cd-79bf-4ad8-b7f8-3e98ec548a9f
+# ╟─d877bd4c-497d-46d1-9c58-b6fe26933bfc
 # ╟─d4a9da7a-f455-426b-aecd-227c25e1d4e8
 # ╟─f098570d-799b-47e2-b692-476a4d95825b
 # ╟─caf67b2f-cc2f-4d0d-b619-6e1969fabc1a
