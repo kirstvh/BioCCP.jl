@@ -29,8 +29,9 @@ Inputs for generating the report:
 - the number of complete sets of modules to collect, and
 - probability distribution of the modules 
    - *When exact probabilities are known:* A custom module probability/abundance vector 
-   - *When probabilities unknown:
-      1) Assume probabilities to follow Zipf's law, specifying p_{max} and p_{min}        
+   - *When probabilities unknown*:
+      1) Assume probabilities to follow Zipf's law, specifying p_{max} and p_{min} 
+      2) Assume histogram of probabilities to behave like a bell curve, specifying the mean and variance       
 
 Using this information, a report for sample size determination is created using the [functions](/src/BioCCP.jl) described above. The report contains the following sections:
 - Module probabilities
