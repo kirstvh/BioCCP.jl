@@ -40,11 +40,14 @@ Probability distribution of the modules *p<sub>vec</sub>*|
 
 #### Report
 Using the inputs, a report for sample size determination is created using the [functions](/src/BioCCP.jl) described above. The report contains the following sections:
-- Module probabilities
-- Minimum sample size required
-- Success probability
-- Expected saturation
-- Occurence of a specific module
+
+Report    | 
+---------------- |
+Module probabilities       | 
+Minimum sample size required      | 
+Success probability      | 
+Expected saturation      | 
+Occurence of a specific module      | 
 
 
 ## Getting started
