@@ -19,26 +19,52 @@ Function name    | Short description
 
 For more info about the implementation of the functions, please consult the docs.
 
+## Pluto notebook
+
+The Pluto notebook provides an interactive illustration of all functions in BioCCP and assembles a report for your specific design set-up. 
+Given the inputs:
+- total number of modules in the design space, 
+- the number of modules per design, 
+- the number of complete sets of modules to collect, and
+- probability distribution of the modules (custom or by assuming a specific distribution)
+   - *When exact probabilities are known:* A custom module probability/abundance vector 
+   - *When probabilities unknown:
+      - A max 
+
+Using this information, a report for sample size determination is created using the functions described above. The report contains the following sections:
+- Module probabilities
+- Minimum sample size required
+- Success probability
+- Expected saturation
+- Occurence of a specific module
+
+* *the notebook allows to enter a custom module probabilty/abundance vector or to assume that the module probabilities obey one of the following distributions:
+- 
+
+
 ## Getting started
 
-#### Launch notebook from Browser 
+#### Launch Pluto notebook from Browser 
 
-The Pluto notebook provides an interactive illustration of all functions in BioCCP and assembles a report for your specific design set-up.
-
-Launch directly form your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/PlutoNotebooks/main?urlpath=pluto/open?path=/home/jovyan/notebooks/BioCCP_Interactive_Notebook.jl)
+Launch the Pluto notebook directly from your browser using Binder (no installation of Julia/packages required): [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/PlutoNotebooks/main?urlpath=pluto/open?path=/home/jovyan/notebooks/BioCCP_Interactive_Notebook.jl)
 
 #### Execute functions in Julia
 
-(1) Install [Julia](https://julialang.org/downloads/) 
+(1) [Install Julia](https://julialang.org/downloads/) 
 
-(2) Install BioCCP
+(2) Install BioCCP in the Julia REPL (hit ] to enter package mode):
 
     ] add https://github.com/kirstvh/BioCCP
 
-(3) For using the [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl), install the additional packages [Pluto](https://github.com/fonsp/Pluto.jl), [PlutoUI](https://github.com/fonsp/PlutoUI.jl) and [Plots](https://github.com/JuliaPlots/Plots.jl)
+(3) For using the [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl):
+
+ In the Julia REPL, hit the following command to install the additional packages [Pluto](https://github.com/fonsp/Pluto.jl), [PlutoUI](https://github.com/fonsp/PlutoUI.jl) and [Plots](https://github.com/JuliaPlots/Plots.jl) 
   
     ] add Pluto, PlutoUI, Plots
-    
+
+ Then start Pluto in the Julia REPL:
+
+    using Pluto; Pluto.run()
 
 ## References
 Implementation of formula's was based on:
