@@ -65,6 +65,8 @@ Launch the Pluto notebook directly from your browser using Binder (no installati
  Then start Pluto in the Julia REPL:
 
     using Pluto; Pluto.run()
+    
+Open the [notebook file](/notebooks/BioCCP_Interactive_Notebook.jl).
 
 ## References
 Implementation of formula's was based on:
