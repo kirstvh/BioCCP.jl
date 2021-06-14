@@ -27,10 +27,10 @@ Inputs for generating the report:
 - total number of modules in the design space, 
 - the number of modules per design, 
 - the number of complete sets of modules to collect, and
-- probability distribution of the modules (custom or by assuming a specific distribution)
+- probability distribution of the modules 
    - *When exact probabilities are known:* A custom module probability/abundance vector 
    - *When probabilities unknown:
-      - A max        
+      1) Assume probabilities to follow Zipf's law, specifying p_{max} and p_{min}        
 
 Using this information, a report for sample size determination is created using the [functions](/src/BioCCP.jl) described above. The report contains the following sections:
 - Module probabilities
@@ -38,9 +38,6 @@ Using this information, a report for sample size determination is created using 
 - Success probability
 - Expected saturation
 - Occurence of a specific module
-
-* *the notebook allows to enter a custom module probabilty/abundance vector or to assume that the module probabilities obey one of the following distributions:
-- 
 
 
 ## Getting started
