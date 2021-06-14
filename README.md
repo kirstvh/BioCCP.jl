@@ -27,6 +27,7 @@ Given the inputs:
 - the number of modules per design, 
 - the number of complete sets of modules to collect, and
 - probability distribution of the modules (custom or by assuming a specific distribution)*
+   - custom
 
 the functions mentioned above are employed to create report for sample size determination, containing the following sections
 - Module probabilities
