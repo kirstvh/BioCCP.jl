@@ -35,10 +35,15 @@ Launch directly form your browser: [![Binder](https://mybinder.org/badge_logo.sv
 
     ] add https://github.com/kirstvh/BioCCP
 
-(3) For using the [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl), install the additional packages [Pluto](https://github.com/fonsp/Pluto.jl), [PlutoUI](https://github.com/fonsp/PlutoUI.jl) and [Plots](https://github.com/JuliaPlots/Plots.jl)
+(3) For using the [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl)
+
+(3.1) In the Julia REPL, hit the following command to install the additional packages [Pluto](https://github.com/fonsp/Pluto.jl), [PlutoUI](https://github.com/fonsp/PlutoUI.jl) and [Plots](https://github.com/JuliaPlots/Plots.jl) 
   
     ] add Pluto, PlutoUI, Plots
-    
+
+(3.2) Start Pluto in the Julia REPL:
+
+    using Pluto; Pluto.run()
 
 ## References
 Implementation of formula's was based on:
