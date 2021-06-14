@@ -19,13 +19,31 @@ Function name    | Short description
 
 For more info about the implementation of the functions, please consult the docs.
 
-## Getting started
-
-#### Launch notebook from Browser 
+## Pluto notebook
 
 The Pluto notebook provides an interactive illustration of all functions in BioCCP and assembles a report for your specific design set-up. 
+Given the inputs:
+- total number of modules in the design space, 
+- the number of modules per design, 
+- the number of complete sets of modules to collect, and
+- probability distribution of the modules (custom or by assuming a specific distribution)*
 
-Launch the notebook directly from your browser using Binder (no installation of Julia/packages required): [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/PlutoNotebooks/main?urlpath=pluto/open?path=/home/jovyan/notebooks/BioCCP_Interactive_Notebook.jl)
+the functions mentioned above are employed to create report for sample size determination, containing the following sections
+- Module probabilities
+- Minimum sample size required
+- Success probability
+- Expected saturation
+- Occurence of a specific module
+
+* *the notebook allows to enter a custom module probabilty/abundance vector or to assume that the module probabilities obey one of the following distributions:
+- 
+
+
+## Getting started
+
+#### Launch Pluto notebook from Browser 
+
+Launch the Pluto notebook directly from your browser using Binder (no installation of Julia/packages required): [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/PlutoNotebooks/main?urlpath=pluto/open?path=/home/jovyan/notebooks/BioCCP_Interactive_Notebook.jl)
 
 #### Execute functions in Julia
 
@@ -41,7 +59,7 @@ Launch the notebook directly from your browser using Binder (no installation of 
   
     ] add Pluto, PlutoUI, Plots
 
- Start Pluto in the Julia REPL:
+ Then start Pluto in the Julia REPL:
 
     using Pluto; Pluto.run()
 
