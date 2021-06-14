@@ -43,11 +43,11 @@ Using the inputs, a report for sample size determination is created using the [f
 
 Report section    |   Short description     |  
 ---------------- |             
-Module probabilities       |        |
-Minimum sample size required      |         |
-Success probability      |         |
-Expected saturation      |         |
-Occurence of a specific module      |         |
+Module probabilities       |     x   |
+Minimum sample size required      |      x   |
+Success probability      |    x     |
+Expected saturation      |    x     |
+Occurence of a specific module      |      x   |
 
 
 ## Getting started
