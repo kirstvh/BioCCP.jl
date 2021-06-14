@@ -32,7 +32,7 @@ Inputs for generating the report:
    - *When probabilities unknown:
       - A max        
 
-Using this information, a report for sample size determination is created using the [functions](## Functions) described above. The report contains the following sections:
+Using this information, a report for sample size determination is created using the [functions](/src/BioCCP.jl) described above. The report contains the following sections:
 - Module probabilities
 - Minimum sample size required
 - Success probability
