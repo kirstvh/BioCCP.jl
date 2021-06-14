@@ -27,11 +27,11 @@ Inputs for generating the report:
 
 Function name    | 
 ---------------- | 
-`expectation_minsamplesize`        |  
-`std_minsamplesize`      |  
-`success_probability`         | 
-`expectation_fraction_collected` |  
-`prob_occurence_module` |  
+total number of modules in the design space        |  
+the number of modules per design      |  
+the number of complete sets of modules to collect         | 
+probability distribution of the modules |  
+
 
 - total number of modules in the design space, 
 - the number of modules per design, 
