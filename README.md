@@ -23,9 +23,9 @@ For more info about the implementation of the functions, please consult the docs
 
 #### Launch notebook from Browser 
 
-The Pluto notebook provides an interactive illustration of all functions in BioCCP and assembles a report for your specific design set-up.
+The Pluto notebook provides an interactive illustration of all functions in BioCCP and assembles a report for your specific design set-up. 
 
-Launch directly form your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/PlutoNotebooks/main?urlpath=pluto/open?path=/home/jovyan/notebooks/BioCCP_Interactive_Notebook.jl)
+Launch the notebook directly from your browser using Binder (no installation of Julia/packages required): [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/PlutoNotebooks/main?urlpath=pluto/open?path=/home/jovyan/notebooks/BioCCP_Interactive_Notebook.jl)
 
 #### Execute functions in Julia
 
