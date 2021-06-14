@@ -22,6 +22,9 @@ For more info about the implementation of the functions, please consult the docs
 ## Pluto notebook
 
 The Pluto notebook provides an interactive illustration of all functions in BioCCP and assembles a report for your specific design set-up. 
+
+Inputs    | Report
+---------------- | -----------------
 Given the inputs:
 - total number of modules in the design space, 
 - the number of modules per design, 
@@ -29,7 +32,10 @@ Given the inputs:
 - probability distribution of the modules (custom or by assuming a specific distribution)
    - *When exact probabilities are known:* A custom module probability/abundance vector 
    - *When probabilities unknown:
-      - A max 
+      - A max        | Calculated expectation of required number of designs to observe all modules at least *m* times
+
+
+
 
 Using this information, a report for sample size determination is created using the functions described above. The report contains the following sections:
 - Module probabilities
