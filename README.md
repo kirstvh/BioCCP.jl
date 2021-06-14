@@ -24,6 +24,15 @@ For more info about the implementation of the functions, please consult the docs
 The Pluto notebook provides an interactive illustration of all functions in BioCCP and assembles a report for your specific design set-up. 
 
 Inputs for generating the report:
+
+Function name    | 
+---------------- | 
+`expectation_minsamplesize`        |  
+`std_minsamplesize`      |  
+`success_probability`         | 
+`expectation_fraction_collected` |  
+`prob_occurence_module` |  
+
 - total number of modules in the design space, 
 - the number of modules per design, 
 - the number of complete sets of modules to collect, and
