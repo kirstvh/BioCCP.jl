@@ -31,7 +31,7 @@ Inputs for generating the report:
    - *When exact probabilities are known:*
       1) Define your custom module probability/abundance vector or load them in the notebook from an external file
    - *When probabilities unknown*:
-      1) Assume probabilities to follow Zipf's law, specifying p<sub>max<sub> and p_{min} 
+      1) Assume probabilities to follow Zipf's law, specifying p<sub>max</sub> and p<sub>min</sub>
       2) Assume histogram of probabilities to behave like a bell curve, specifying the mean and variance       
 
 Using this information, a report for sample size determination is created using the [functions](/src/BioCCP.jl) described above. The report contains the following sections:
