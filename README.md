@@ -26,10 +26,12 @@ Given the inputs:
 - total number of modules in the design space, 
 - the number of modules per design, 
 - the number of complete sets of modules to collect, and
-- probability distribution of the modules (custom or by assuming a specific distribution)*
-   - custom
+- probability distribution of the modules (custom or by assuming a specific distribution)
+   - *When exact probabilities are known:* A custom module probability/abundance vector 
+   - *When probabilities unknown:
+      - A max 
 
-the functions mentioned above are employed to create report for sample size determination, containing the following sections
+Using this information, a report for sample size determination is created using the functions described above. The report contains the following sections:
 - Module probabilities
 - Minimum sample size required
 - Success probability
