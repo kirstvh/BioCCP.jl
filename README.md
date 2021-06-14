@@ -29,13 +29,13 @@ Launch directly form your browser: [![Binder](https://mybinder.org/badge_logo.sv
 
 #### Execute functions in Julia
 
-(1) Install [Julia](https://julialang.org/downloads/) 
+(1) [Install Julia](https://julialang.org/downloads/) 
 
-(2) Install BioCCP in the Julia REPL (hit ] to enter package mode)
+(2) Install BioCCP in the Julia REPL (hit ] to enter package mode):
 
     ] add https://github.com/kirstvh/BioCCP
 
-(3) For using the [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl)
+(3) For using the [Pluto notebook](BioCCP/notebook/BioCCP_Interactive_Notebook.jl):
 
  In the Julia REPL, hit the following command to install the additional packages [Pluto](https://github.com/fonsp/Pluto.jl), [PlutoUI](https://github.com/fonsp/PlutoUI.jl) and [Plots](https://github.com/JuliaPlots/Plots.jl) 
   
