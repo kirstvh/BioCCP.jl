@@ -12,9 +12,9 @@ Function name    | Short description
 ---------------- | -----------------
 `expectation_minsamplesize`        | Calculated expectation of required number of designs to observe all modules at least *m* times
 `std_minsamplesize`      | Calculated standard deviation on required number of designs to observe all modules at least *m* times
-`success_probability`         | Calculates the chance that a given number of designs is less than or equal to the required number of designs to sea each module at least *m* times
+`success_probability`         | Calculates the probability that a given number of designs is less than or equal to the required number of designs to sea each module at least *m* times
 `expectation_fraction_collected` | Returns for a given sample size the expected fraction of modules in the design space observed
-`prob_occurence_module` | Calculates for a module with specified module probability *p*, the chance that the module has occured *j* times when a given number of designs has been collected
+`prob_occurence_module` | Calculates for a module with specified module probability *p*, the probability that the module has occured *j* times when a given number of designs has been collected
  
 
 For more info about the implementation of the functions, please consult the docs.
