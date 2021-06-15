@@ -33,8 +33,9 @@ Probability distribution of the modules *p<sub>vec</sub>*   (\*) |
 >  (\*) 
 >  *When exact probabilities are known*, define your custom module probability/abundance vector or load them in the notebook from an external file.
 >  *When probabilities and/or their distribution are unknown*, you can either:
- > >  1) Assume the module probabilities to follow *Zipf's law*, specifying p<sub>max</sub> and p<sub>min</sub>, or
-  > > 2) Assume the histogram of the module probabilities to behave like a *bell curve*, specifying the mean and variance       
+ > >  1) Assume the probabilities of all modules to be equal (uniform distribution), or
+ > >  2) Assume the module probabilities to follow *Zipf's law*, specifying p<sub>max</sub> and p<sub>min</sub>, or
+ > >  3) Assume the histogram of the module probabilities to behave like a *bell curve*, specifying the mean and variance       
 
 Using the inputs, a report for sample size determination is created using the [functions](/src/BioCCP.jl) described above. The report contains the following sections:
 
