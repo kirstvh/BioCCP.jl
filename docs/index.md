@@ -26,10 +26,6 @@ julia&gt; prob_occurence_module(p, t, j)
 0.25651562069968376</code></pre> 
 
 
-## References
-- Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp.* ESAIM: Probability and Statistics, 20, 367-399.
-- Boneh, A., & Hofri, M. (1997). *The coupon-collector problem revisited—a survey of engineering problems and computational methods.* Stochastic Models, 13(1), 39-66.
-
-
+ 
 
 
