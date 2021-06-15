@@ -42,9 +42,9 @@ Using the inputs, a report for sample size determination is created using the [f
 Report section    |   Short description       
 ---------------- |  -----------------           
 Module probabilities       |     This section shows a plot with the probability of each module in the design space during library generation.   
-Minimum sample size required      |     This part displays the expectation of the required number of designs **E**[*T*] and the standard deviation on this quantity **std**[*T*].         
-Success probability      |    x     
-Expected saturation      |    x     
+Minimum sample size required      |     This part displays the expectation of the required number of designs **E**[*T*] and the standard deviation **std**[*T*].         
+Success probability      |    In this section, the report calculates the probability *F(t)* that the required number of designs *T* is smaller than or equal to a given sample size *t*. Moreover, a curve describing the success probability in function of sample size is available to determine a minimum sample size according to a probability cut-off.  
+Expected saturation      |    Here,      
 Occurence of a specific module      |      x   
 
 
