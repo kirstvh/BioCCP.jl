@@ -23,7 +23,7 @@ julia&gt; expectation_fraction_collected(n, t; p_vec = ones(n), r = 1, normalize
 julia&gt; t = 500
 julia&gt; t = 2
 julia&gt; prob_occurence_module(p, t, j)
-0.25651562069968376</code></pre></div></section></article><h2 id="References"><a class="docs-heading-anchor" href="#References">References</a><a id="References-1"></a><a class="docs-heading-anchor-permalink" href="#References" title="Permalink"></a></h2><ul><li>Doumas, A. V., &amp; Papanicolaou, V. G. (2016). <em>The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp.</em> ESAIM: Probability and Statistics, 20, 367-399.</li><li>Boneh, A., &amp; Hofri, M. (1997). <em>The coupon-collector problem revisited—a survey of engineering problems and computational methods.</em> Stochastic Models, 13(1), 39-66.</li></ul></article><nav class="docs-footer"><p class="footer-message"></footer></div></div></div></body></html>
+0.25651562069968376</code></pre></div></section></article><nav class="docs-footer"><p class="footer-message"></footer></div></div></div></body></html>
 
 
 
