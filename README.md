@@ -23,7 +23,7 @@ For more info about the implementation of the functions, please consult the docs
 
 The Pluto notebook provides an interactive illustration of all functions in BioCCP and assembles a report for your specific design set-up. 
 
-Inputs for generating the report:    | 
+Inputs for generating the report    | 
 ---------------- | 
 Total number of modules in the design space *n*       |  
 The number of modules per design *r*     |  
@@ -42,7 +42,7 @@ Using the inputs, a report for sample size determination is created using the [f
 Report section    |   Short description       
 ---------------- |  -----------------           
 Module probabilities       |     This section shows a plot with the probability of each module in the design space during library generation.   
-Minimum sample size required      |         
+Minimum sample size required      |     This part displays the expectation of the required number of designs **E**[*T*] and the standard deviation on this quantity **std**[*T*].         
 Success probability      |    x     
 Expected saturation      |    x     
 Occurence of a specific module      |      x   
