@@ -28,9 +28,9 @@ Inputs for generating the report:    |
 Total number of modules in the design space *n*       |  
 The number of modules per design *r*     |  
 The number of complete sets of modules to collect *m*        | 
-Probability distribution of the modules *p<sub>vec</sub>* /* |  
+Probability distribution of the modules *p<sub>vec</sub>* \* |  
 
-> /* *When exact probabilities are known*, define your custom module probability/abundance vector or load them in the notebook from an external file.
+> \* *When exact probabilities are known*, define your custom module probability/abundance vector or load them in the notebook from an external file.
 >
 > *When probabilities and/or their distribution are unknown*, you can either:
  > >  1) Assume the module probabilities to follow *Zipf's law*, specifying p<sub>max</sub> and p<sub>min</sub>, or
