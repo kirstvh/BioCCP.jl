@@ -23,7 +23,8 @@ julia&gt; expectation_fraction_collected(n, t; p_vec = ones(n), r = 1, normalize
 julia&gt; t = 500
 julia&gt; t = 2
 julia&gt; prob_occurence_module(p, t, j)
-0.25651562069968376</code></pre></div></section></article> 
+0.25651562069968376</code></pre></div></section><nav class="docs-footer"><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Tuesday 15 June 2021 12:31">Tuesday 15 June 2021</span>. Using Julia version 1.5.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+
 
 
 
