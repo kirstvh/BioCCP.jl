@@ -10,8 +10,8 @@ BioCCP contains functions for calculating minimum sample sizes and related stati
 
 Function name    | Short description
 ---------------- | -----------------
-`expectation_minsamplesize`        | Calculated expectation of required number of designs to observe all modules at least *m* times
-`std_minsamplesize`      | Calculated standard deviation on required number of designs to observe all modules at least *m* times
+`expectation_minsamplesize`        | Calculates expectation of required number of designs to observe all modules at least *m* times
+`std_minsamplesize`      | Calculates standard deviation on required number of designs to observe all modules at least *m* times
 `success_probability`         | Calculates the probability that a given number of designs is less than or equal to the required number of designs to sea each module at least *m* times
 `expectation_fraction_collected` | Returns for a given sample size the expected fraction of modules in the design space observed
 `prob_occurence_module` | Calculates for a module with specified module probability *p*, the probability that the module has occured *j* times when a given number of designs has been collected
@@ -43,8 +43,8 @@ Using the inputs, a report for sample size determination is created using the [f
 
 Report section    |   Short description       
 ---------------- |  -----------------           
-Module probabilities       |     x   
-Minimum sample size required      |      x   
+Module probabilities       |     This section shows a plot with the probability of each module in the design space during library generation.   
+Minimum sample size required      |         
 Success probability      |    x     
 Expected saturation      |    x     
 Occurence of a specific module      |      x   
