@@ -8,6 +8,8 @@ BioCCP.jl applies the Coupon Collector's Problem to **combinatorial biotechnolog
 For a specific combinatorial design set-up of interest, a report with results regarding minimum sample sizes can be easily retrieved by using the provided Pluto notebook.
 
 ## Functions
+@contents
+
 ```@docs
 expectation_minsamplesize
 std_minsamplesize
