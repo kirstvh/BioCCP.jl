@@ -23,7 +23,7 @@ julia&gt; expectation_fraction_collected(n, t; p_vec = ones(n), r = 1, normalize
 julia&gt; t = 500
 julia&gt; t = 2
 julia&gt; prob_occurence_module(p, t, j)
-0.25651562069968376</code></pre></div></section></article><nav class="docs-footer"><p class="footer-message"></footer></div></div></div></body></html>
+0.25651562069968376</code></pre></div></section></article> 
 
 
 
