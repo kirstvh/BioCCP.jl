@@ -56,13 +56,13 @@ Launch the Pluto notebook directly from your browser using Binder (no installati
 
 #### Execute functions in Julia
 
-&emsp; **(1)** \hspace [Install Julia](https://julialang.org/downloads/) 
+&emsp; **(1)** &emsp; [Install Julia](https://julialang.org/downloads/) 
 
-**(2)** Install BioCCP in the Julia REPL (hit ] to enter package mode):
+&emsp; **(2)** &emsp; Install BioCCP in the Julia REPL (hit ] to enter package mode):
 
     ] add https://github.com/kirstvh/BioCCP
 
-**(3)** For using the [Pluto notebook](BioCCP/notebooks/BioCCP_Interactive_Notebook.jl):
+&emsp; **(3)** &emsp; For using the [Pluto notebook](BioCCP/notebooks/BioCCP_Interactive_Notebook.jl):
 
  In the Julia REPL, hit the following command to install the additional packages [Pluto](https://github.com/fonsp/Pluto.jl), [PlutoUI](https://github.com/fonsp/PlutoUI.jl) and [Plots](https://github.com/JuliaPlots/Plots.jl) 
   
