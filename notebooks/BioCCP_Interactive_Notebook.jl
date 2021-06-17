@@ -158,14 +158,16 @@ end
 # ╔═╡ d877bd4c-497d-46d1-9c58-b6fe26933bfc
 begin
 	if show_modprobs == "🔻 SHOW "  && distribution == "Bell curve"
-md"""To generate module probabilities that form a bell curve around the module probability $(µ/sum(p_vec_unnorm)), we follow the percentiles of normal distribution, which states, that for a normal distribution, 68% of the values lies in the interval [μ - σ, μ + σ], 13.5% of the values falls into the range [μ + σ, μ + 2σ], 13.5% of the values lies in [μ - 2σ, μ - σ] , ... with as a result:
--  $(n_perc_1+n_perc_rest) probabilities of $(µ/sum(p_vec_unnorm))
--  $(n_perc_2) probabilities of $((μ+1.5*σ)/sum(p_vec_unnorm))
--  $(n_perc_2) probabilities of $((μ-1.5*σ)/sum(p_vec_unnorm))
--  $(n_perc_3) probabilities of $((μ+2.5*σ)/sum(p_vec_unnorm))
--  $(n_perc_3) probabilities of $((μ-2.5*σ)/sum(p_vec_unnorm))
--  $(n_perc_4) probabilities of $((μ+3.5*σ)/sum(p_vec_unnorm))
--  $(n_perc_4) probabilities of $((μ-3.5*σ)/sum(p_vec_unnorm)) """
+md"""For $n_string modules that have a mean abundance of $mu and a standard deviation on the abundance of $sigma, the mean module probability is $(µ/sum(p_vec_unnorm)) in order to obtain a valid probability distribution.
+
+To generate module probabilities that form a bell curve around the module probability $(µ/sum(p_vec_unnorm)), we follow the percentiles of normal distribution, which states, that for a normal distribution, 68% of the values lies in the interval [μ - σ, μ + σ], 13.5% of the values falls into the range [μ + σ, μ + 2σ], 13.5% of the values lies in [μ - 2σ, μ - σ] , ... with as a result:
+-  $(n_perc_1+n_perc_rest) modules with a probability of $(µ/sum(p_vec_unnorm))
+-  $(n_perc_2)  modules with a probability of $((μ+1.5*σ)/sum(p_vec_unnorm))
+-  $(n_perc_2)  modules with a probability of $((μ-1.5*σ)/sum(p_vec_unnorm))
+-  $(n_perc_3)  modules with a probability of $((μ+2.5*σ)/sum(p_vec_unnorm))
+-  $(n_perc_3)  modules with a probability of $((μ-2.5*σ)/sum(p_vec_unnorm))
+-  $(n_perc_4)  modules with a probability of $((μ+3.5*σ)/sum(p_vec_unnorm))
+-  $(n_perc_4)  modules with a probability of $((μ-3.5*σ)/sum(p_vec_unnorm)) """
 	end	
 end
 
