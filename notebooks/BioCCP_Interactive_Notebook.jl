@@ -443,10 +443,10 @@ if show_occ == "🔻 SHOW "
 # 	p = p_vec[module_]
 # 	p = maximum(p_vec) 
 	ed = Int(floor(sample_size_3*p))
-	j = 0:1:8
+	j = 0:1:minimum([20, 2*ed])
 			
 	x  = prob_occurence_module.(p, sample_size_3, j)
-	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurences in sample", ylabel="probability p", title="Chance on № of occurences for specific module")
+	 plot(j,x, seriestype=[:line, :scatter], label="", xlabel="№ occurences in sample", ylabel="probability p", title="Chance on № of occurences for specific module")
 	
 		else
 		rank = parse(Int64, rank_string)
@@ -456,10 +456,10 @@ if show_occ == "🔻 SHOW "
 # 	p = p_vec[module_]
 # 	p = maximum(p_vec) 
 			ed = Int(floor(sample_size_4*p))
-	j = 0:1:ed*2
+	j = 0:1:minimum([20, 2*ed])
 			
 	x  = prob_occurence_module.(p, sample_size_4, j)
-	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurences in sample", ylabel="probability p", title="Chance on № of occurences for specific module", size=((550,300)))	
+	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurences in sample", ylabel="probability p", title="Chance on № of occurences for specific module", size=((550,300)), label="")	
 			
 		end
 	end
