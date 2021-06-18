@@ -188,7 +188,7 @@ end
 # ╔═╡ caf67b2f-cc2f-4d0d-b619-6e1969fabc1a
 md""" **💻 Expected minimum sample size**                                                                                                             $(@bind show_E Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 SHOW ")) 
 \
-*The number of designs required to observe each module at least $m times in the sampled set of designs.* """  
+*The expected minimum number of designs to observe each module at least $m times in the sampled set of designs.* """  
 
 # ╔═╡ 6f14a72c-51d3-4759-bb8b-10db1dc260f0
 begin
@@ -341,20 +341,20 @@ if show_success == "🔻 SHOW "
 if sample_size_1 < E
 	compare = "smaller"
 		if sample_size_1 <= n/r
-			print_sentence = "P(required sample size ≤ $sample_size_1) = 0.
+			print_sentence = "P(minimum sample size ≤ $sample_size_1) = 0.
                                                                                         🚨 Enter a sample size that is larger than (№ modules ∈ design space)/(№ modules/design)  to obtain an upperbound probability > 0 🚨"
 		else
 	prob_chebyshev = chebyshev_onesided_smaller(sample_size_1, E, sd)
-	print_sentence = "P(required sample size ≤ $sample_size_1) ≤ $prob_chebyshev. "
+	print_sentence = "P(minimum sample size ≤ $sample_size_1) ≤ $prob_chebyshev. "
 		end
 		
 elseif sample_size_1 > E
 	compare = "greater"
 	prob_chebyshev = chebyshev_onesided_larger(sample_size_1, E, sd)
-	print_sentence = "P(required sample size ≥ $sample_size_1) ≤ $prob_chebyshev. "	
+	print_sentence = "P(minimum sample size ≥ $sample_size_1) ≤ $prob_chebyshev. "	
 		
 	elseif sample_size_1==E
-		print_sentence = "P(required sample size ≤ $sample_size_1 OR required sample size ≥ $sample_size_1) ≤ 1."
+		print_sentence = "P(minimum sample size ≤ $sample_size_1 OR minimum sample size ≥ $sample_size_1) ≤ 1."
 		
 end
 
