@@ -445,7 +445,7 @@ if show_occ == "🔻 SHOW "
 	ed = Int(floor(sample_size_3*p))
 	j = 0:1:minimum([20, 2*ed])
 			
-	x  = prob_occurence_module.(p, sample_size_3, j)
+	x  = prob_occurrence_module.(p, sample_size_3, j)
 	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability p", title="Chance on № of occurrences for specific module")
 	
 		else
@@ -458,7 +458,7 @@ if show_occ == "🔻 SHOW "
 			ed = Int(floor(sample_size_4*p))
 	j = 0:1:minimum([20, 2*ed])
 			
-	x  = prob_occurence_module.(p, sample_size_4, j)
+	x  = prob_occurrence_module.(p, sample_size_4, j)
 	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability p", title="Chance on № of occurrences for specific module", size=((550,300)))	
 			
 		end
