@@ -49,7 +49,7 @@ begin
 	end
 		if ps == "Unequal"	
 	md""" 	                         ↳     Specify distribution:                         
-	$(@bind distribution Select(["Bell curve", "Zipf law", "Custom vector"], default = " "))"""
+	$(@bind distribution Select(["Bell curve", "Zipf's law", "Custom vector"], default = " "))"""
 		end	
 end
 
@@ -65,7 +65,7 @@ end
 
 # ╔═╡ e3b4c2d8-b78c-467e-a863-5eecb8ec58dc
 begin
-	if distribution == "Zipf law"
+	if distribution == "Zipf's law"
 		md"""                                       pₘₐₓ/pₘᵢₙ:   $(@bind pmaxpmin_string TextField(default = "4")) 
                                             """
 			end
@@ -129,7 +129,7 @@ begin
 			p_vec = abundances ./ sum(abundances)
 		end
 		
-		if distribution == "Zipf law"
+		if distribution == "Zipf's law"
 			ratio = parse(Float64, pmaxpmin_string)
 			α = exp(log(ratio)/(n-1))
 			p_vec = collect(α.^-(1:n))
@@ -412,7 +412,7 @@ md""" **💻 Occurrence of a specific module**           �
 *How many times one can expect to have collected a specific module in a sample of a given size.*"""
 
 # ╔═╡ ec2a065f-0dc7-44d4-a18b-6c6a228b3ffc
-if show_occ == "🔻 SHOW " && distribution != "Zipf law"
+if show_occ == "🔻 SHOW " && distribution != "Zipf's law"
 	md"""    👉 Enter the probability of the module of interest: $(@bind p_string TextField(default="0.005"))\
 	    👉 Enter the sample size of interest:                $(@bind sample_size_3_string TextField(default="500"))
 	""" 	
@@ -422,7 +422,7 @@ end
 # ipv probabiliteit --> rank i: sorteer modules
 
 # ╔═╡ 0e39a993-bb2f-4897-bfe2-5128ec62bef9
-if show_occ == "🔻 SHOW " && distribution == "Zipf law"
+if show_occ == "🔻 SHOW " && distribution == "Zipf's law"
 	md"""    👉 Enter the rank of the module of interest:        $(@bind rank_string TextField(default="5"))\
 	    👉 Enter the sample size of interest:                $(@bind sample_size_4_string TextField(default="500"))
 	""" 	
@@ -436,7 +436,7 @@ begin
 
 	
 if show_occ == "🔻 SHOW " 
-	if distribution != "Zipf law"
+	if distribution != "Zipf's law"
 	p = parse(Float64, p_string)
 	sample_size_3 = parse(Int64, sample_size_3_string)
  	# module_ = 1
