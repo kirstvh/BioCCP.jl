@@ -24,7 +24,7 @@ For more info about the implementation of the functions, please consult the [doc
 The Pluto notebook provides an interactive illustration of all functions in BioCCP and assembles a report for your specific design set-up. 
 
 Inputs for generating the report    | 
----------------- | 
+---------------- | -----------------
  *n*       |  Total number of modules in the design space
 The number of modules per design *r*     |  
 The number of complete sets of modules to collect *m*        | 
