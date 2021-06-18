@@ -58,8 +58,8 @@ end
 # ╔═╡ b17f3b8a-61ee-4563-97cd-19ff049a8e1e
 begin
 	if distribution == "Bell curve"					
-			md"""                                          μ:  $(@bind mu TextField(default = "10")) 
-                                            σ:  $(@bind              sigma TextField(default = "2")) """
+			md"""                                          pₘₐₓ/pₘᵢₙ:  $(@bind pmaxpmin_str TextField(default = "4")) 
+                                            """
 			end
 end
 
@@ -106,16 +106,19 @@ begin
 		
 	elseif ps == "Unequal"
 		if distribution == "Bell curve"
-			μ = parse(Int64, mu)
-			σ = parse(Int64, sigma)
+			ratio = parse(Float64, pmaxpmin_str)
+			ab1 = 1
+			ab2 = ratio*ab1
+			μ = (ab1+ab2)/2
+			σ = (ab2-ab1)/6
 			
 			#create fixed distribution of abundances according to percentiles of bell curve
 			n_perc_1 = Int(floor(n*0.34)); 
 			n_perc_2 = Int(floor(n*0.135));
 			n_perc_3 = Int(floor(n*0.0215));
-			n_perc_4 = Int(floor(n*0.0013));
-			n_perc_rest = n - 2*n_perc_1 - 2*n_perc_2 - 2*n_perc_3 - 2*n_perc_4;
-			p_vec_unnorm = vcat(fill(μ,2*n_perc_1+n_perc_rest), fill(μ+1.5*σ, n_perc_2), fill(μ-1.5*σ, n_perc_2), fill(μ+2.5*σ, n_perc_3), fill(μ-2.5*σ, n_perc_3), fill(μ+3.5*σ, n_perc_4), fill(μ-3.5*σ, n_perc_4) )
+			#n_perc_4 = Int(floor(n*0.0013));
+			n_perc_rest = n - 2*n_perc_1 - 2*n_perc_2 - 2*n_perc_3 ;
+			p_vec_unnorm = vcat(fill(μ,2*n_perc_1+n_perc_rest), fill(μ+1.5*σ, n_perc_2), fill(μ-1.5*σ, n_perc_2), fill(μ+3*σ, n_perc_3), fill(μ-3*σ, n_perc_3) )
 		
 			# normalize sum to 1
 			p_vec = sort(p_vec_unnorm ./ sum(p_vec_unnorm))
@@ -145,28 +148,35 @@ end
 # ╔═╡ 87c3f5cd-79bf-4ad8-b7f8-3e98ec548a9f
 begin
 	if show_modprobs == "🔻 SHOW "  && distribution == "Bell curve"
-		histogram(p_vec_unnorm, normalize=:probability,  bar_edges=true,  size = (650, 300), orientation=:v, bar_position=:stack)
+		histogram(p_vec, normalize=:probability,  bar_edges=false,  size = (650, 340), orientation=:v, bins=[(μ -  3.2*σ)/sum(p_vec_unnorm), (μ - 2*σ)/sum(p_vec_unnorm), (μ-σ)/sum(p_vec_unnorm), (μ + σ)/sum(p_vec_unnorm), (μ + 2*σ)/sum(p_vec_unnorm), (μ +  3.2*σ)/sum(p_vec_unnorm)])
 		# if distribution == "Normally distributed"
 		# 	plot!(x->pdf(Normal(μ, σ), x), xlim=xlims())
 		# 	xlabel!("Abundance"); ylabel!("probability"); title!("Distribution of module abundances")
 		# end
-		xlabel!("Abundance"); ylabel!("Relative frequency"); title!("Distribution of module abundances")
+		xlabel!("Probability"); ylabel!("Relative frequency"); title!("Distribution of module probabilities")
 	end	
 end
 
 # ╔═╡ d877bd4c-497d-46d1-9c58-b6fe26933bfc
 begin
 	if show_modprobs == "🔻 SHOW "  && distribution == "Bell curve"
-md"""For $n_string modules that have a mean abundance of $mu and a standard deviation on the abundance of $sigma, the mean module probability is $(µ/sum(p_vec_unnorm)) in order to obtain a valid probability distribution.
+md"""For $n_string modules of which the probabilities form a bell curve with ratio pₘₐₓ/pₘᵢₙ = $pmaxpmin_str , we follow the percentiles of a normal distribution to generate the probability vector.
 
-To generate module probabilities that form a bell curve around the module probability $(µ/sum(p_vec_unnorm)), we follow the percentiles of normal distribution, which states, that for a normal distribution, 68% of the values lies in the interval [μ - σ, μ + σ], 13.5% of the values falls into the range [μ + σ, μ + 2σ], 13.5% of the values lies in [μ - 2σ, μ - σ] , ... with as a result:
+We consider μ to be the mean module probability and σ to be the standard deviation of the module probabilities.
+		
+According to the percentiles
+- 68% of the module probabilities lies in the interval [μ - σ, μ + σ], 
+- 95% of falls into the range [μ - 2σ, μ + 2σ] and 
+- 99.7% lies in [μ - 3σ, μ +3σ]. 
+		
+We use the ratio pₘₐₓ/pₘᵢₙ to fix the width of the interval [μ - 3σ, μ +3σ]. (We assume that pₘₐₓ = μ +3σ and pₘᵢₙ = μ - 3σ and calculate μ and σ from this assumption). In addition, we make sure the sum of the probability vector sums up to 1.
+		
+As a result, we get:
 -  $(n_perc_1+n_perc_rest) modules with a probability of $(µ/sum(p_vec_unnorm))
 -  $(n_perc_2)  modules with a probability of $((μ+1.5*σ)/sum(p_vec_unnorm))
 -  $(n_perc_2)  modules with a probability of $((μ-1.5*σ)/sum(p_vec_unnorm))
 -  $(n_perc_3)  modules with a probability of $((μ+2.5*σ)/sum(p_vec_unnorm))
--  $(n_perc_3)  modules with a probability of $((μ-2.5*σ)/sum(p_vec_unnorm))
--  $(n_perc_4)  modules with a probability of $((μ+3.5*σ)/sum(p_vec_unnorm))
--  $(n_perc_4)  modules with a probability of $((μ-3.5*σ)/sum(p_vec_unnorm)) """
+-  $(n_perc_3)  modules with a probability of $((μ-2.5*σ)/sum(p_vec_unnorm))"""
 	end	
 end
 
@@ -490,7 +500,7 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─f6ebf9fb-0a29-4cb4-a544-6c6e32bedcc4
 # ╟─87c3f5cd-79bf-4ad8-b7f8-3e98ec548a9f
 # ╟─d877bd4c-497d-46d1-9c58-b6fe26933bfc
-# ╠═d4a9da7a-f455-426b-aecd-227c25e1d4e8
+# ╟─d4a9da7a-f455-426b-aecd-227c25e1d4e8
 # ╟─f098570d-799b-47e2-b692-476a4d95825b
 # ╟─caf67b2f-cc2f-4d0d-b619-6e1969fabc1a
 # ╟─6f14a72c-51d3-4759-bb8b-10db1dc260f0
