@@ -66,8 +66,8 @@ end
 # ╔═╡ e3b4c2d8-b78c-467e-a863-5eecb8ec58dc
 begin
 	if distribution == "Zipf law"
-		md"""                                       pₘₐₓ:   $(@bind pmax_string TextField(default = "0.01")) 
-                                           pₘᵢₙ:    $(@bind              pmin_string TextField(default = "0.005")) """
+		md"""                                       pₘₐₓ/pₘᵢₙ:   $(@bind pmaxpmin_string TextField(default = "4")) 
+                                            """
 			end
 
 end
@@ -127,11 +127,10 @@ begin
 		end
 		
 		if distribution == "Zipf law"
-			pmin = parse(Float64, pmin_string)
-			pmax = parse(Float64, pmax_string)
-			α = exp(log(pmax/pmin)/(n-1))
-			C = pmax*α
-			p_vec = collect(C*α.^-(1:n))
+			ratio = parse(Float64, pmaxpmin_string)
+			α = exp(log(ratio)/(n-1))
+			p_vec = collect(α.^-(1:n))
+			p_vec = p_vec ./ sum(p_vec)
 		end
 	end
 	
@@ -433,6 +432,7 @@ if show_occ == "🔻 SHOW "
  	# module_ = 1
 # 	p = p_vec[module_]
 # 	p = maximum(p_vec) 
+	ed = Int(floor(sample_size_3*p))
 	j = 0:1:8
 			
 	x  = prob_occurence_module.(p, sample_size_3, j)
@@ -440,12 +440,13 @@ if show_occ == "🔻 SHOW "
 	
 		else
 		rank = parse(Int64, rank_string)
-			p = C*α^-rank
+		p = p_vec[rank]
 	sample_size_4 = parse(Int64, sample_size_4_string)
  	# module_ = 1
 # 	p = p_vec[module_]
 # 	p = maximum(p_vec) 
-	j = 0:1:8
+			ed = Int(floor(sample_size_4*p))
+	j = 0:1:ed*2
 			
 	x  = prob_occurence_module.(p, sample_size_4, j)
 	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurences in sample", ylabel="probability p", title="Chance on № of occurences for specific module", size=((550,300)))	
@@ -457,12 +458,7 @@ end
 # ╔═╡ 595423df-728b-43b1-ade4-176785c54be3
 begin
 	if show_occ == "🔻 SHOW " 
-		if distribution != "Zipf law"
-			ed = floor(sample_size_3*p)
-		else
-			ed = floor(sample_size_4*p)
-		end
-	
+		
 	md""" 	            ↳ `Expected times observed:`	≈ **$ed**
 		"""
 	end
@@ -494,7 +490,7 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─f6ebf9fb-0a29-4cb4-a544-6c6e32bedcc4
 # ╟─87c3f5cd-79bf-4ad8-b7f8-3e98ec548a9f
 # ╟─d877bd4c-497d-46d1-9c58-b6fe26933bfc
-# ╟─d4a9da7a-f455-426b-aecd-227c25e1d4e8
+# ╠═d4a9da7a-f455-426b-aecd-227c25e1d4e8
 # ╟─f098570d-799b-47e2-b692-476a4d95825b
 # ╟─caf67b2f-cc2f-4d0d-b619-6e1969fabc1a
 # ╟─6f14a72c-51d3-4759-bb8b-10db1dc260f0
