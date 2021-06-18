@@ -510,15 +510,15 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─ca5a4cef-df67-4a5e-8a86-75a9fe8c6f37
 # ╟─24f7aae7-d37a-4db5-ace0-c910b178da88
 # ╟─37f951ee-885c-4bbe-a05f-7c5e48ff4b6b
-# ╠═dc696281-7a5b-4568-a4c2-8dde90af43f0
+# ╟─dc696281-7a5b-4568-a4c2-8dde90af43f0
 # ╟─eb92ff7c-0140-468c-8b32-f15d1cf15913
 # ╟─f0eaf96b-0bc0-4194-9a36-886cb1d66e00
 # ╟─0099145a-5460-4549-9513-054bc1b04eea
 # ╟─7968de5e-5ae8-4ab4-b089-c3d33475af2f
-# ╠═f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
+# ╟─f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
 # ╟─ec2a065f-0dc7-44d4-a18b-6c6a228b3ffc
 # ╟─0e39a993-bb2f-4897-bfe2-5128ec62bef9
-# ╠═6acb0a97-6469-499f-a5cf-6335d6aa909a
-# ╠═595423df-728b-43b1-ade4-176785c54be3
+# ╟─6acb0a97-6469-499f-a5cf-6335d6aa909a
+# ╟─595423df-728b-43b1-ade4-176785c54be3
 # ╟─fbffaab6-3154-49df-a226-d5810d0b7c38
 # ╟─1f48143a-2152-4bb9-a765-a25e70c281a3
