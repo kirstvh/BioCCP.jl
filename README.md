@@ -10,11 +10,11 @@ BioCCP contains functions for calculating minimum sample sizes and related stati
 
 Function name    | Short description
 ---------------- | -----------------
-`expectation_minsamplesize`        | Calculates expected minimum number of designs to observe all modules at least *m* times
-`std_minsamplesize`      | Calculates standard deviation on minimum number of designs to observe all modules at least *m* times
-`success_probability`         | Calculates the probability that a given number of designs is less than or equal to the minimum number of designs to see each module at least *m* times
+`expectation_minsamplesize`        | Calculates the expected minimum number of designs to observe all modules  
+`std_minsamplesize`      | Calculates standard deviation on minimum number of designs 
+`success_probability`         | Calculates the probability that the minimum number of designs T is smaller than or equal to a given sample size t  
 `expectation_fraction_collected` | Returns for a given sample size the fraction of the available modules that is expected to be observed
-`prob_occurence_module` | Calculates for a module with specified module probability *p*, the probability that the module has occured *j* times when a given number of designs has been collected
+`prob_occurrence_module` | Calculates for a module with specified module probability *p*, the probability that the module has occurred *j* times when a given number of designs has been collected
  
 
 For more info about the implementation of the functions, please consult the [docs](https://kirstvh.github.io/BioCCP/).
@@ -48,7 +48,7 @@ Module probabilities       |     This section shows a plot with the probability 
 Expected minimum sample size      |     This part displays the expected minimum number of designs *E[T]* and the standard deviation *std[T]*.         
 Success probability      |    In this section, the report calculates the probability *F(t)* that the minimum number of designs *T* is smaller than or equal to a given sample size *t*. Moreover, a curve describing the success probability *F(t)* in function of an increasing sample size *t* is available, to determine a minimum sample size according to a probability cut-off.  
 Expected saturation      |    Here, the fraction of the modules in the design space that is expected to be observed is computed for a given sample size *t*. A saturation curve, displaying the expected fraction of modules observed in function of increasing sample size, is provided.
-Number of occurence of a specific module      |      In this last part, you can specify the probability *p<sub>j</sub>* of the module of interest together with a particular sample size, to calculate a curve showing the probability for a module to occur *k* times (in function of *k*).   
+Number of occurrence of a specific module      |      In this last part, you can specify the probability *p<sub>j</sub>* of the module of interest together with a particular sample size, to calculate a curve showing the probability for a module to occur *k* times (in function of *k*).   
 
 
 ## Getting started
