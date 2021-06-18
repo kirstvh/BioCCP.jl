@@ -13,7 +13,7 @@ expectation_minsamplesize
 std_minsamplesize
 success_probability
 expectation_fraction_collected
-prob_occurence_module
+prob_occurrence_module
 ```
 
 

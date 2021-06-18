@@ -3,7 +3,7 @@ module BioCCP
 #using 
 
 # export all functions that are relevant for the user
-export expectation_minsamplesize, std_minsamplesize, success_probability, expectation_fraction_collected, prob_occurence_module
+export expectation_minsamplesize, std_minsamplesize, success_probability, expectation_fraction_collected, prob_occurrence_module
 
 
 """
@@ -211,16 +211,16 @@ function expectation_fraction_collected(n, t; p_vec = ones(n), r = 1, normalize=
 end
 
 """
-    prob_occurence_module(p, t, j)
+    prob_occurrence_module(p, t, j)
 
 Calculates probability that specific module with module probability `p` 
-has occured `j` times after collecting `t` designs.
+has occurred `j` times after collecting `t` designs.
 
 Sampling of modules are assumed to be independent Poisson processes.
 
 - `p`: module probaility
 - `t`: sample size/number of designs 
-- `j`: number of occurence 
+- `j`: number of occurrence 
 
 References:
 - Boneh, A., & Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66.
@@ -231,11 +231,11 @@ References:
 julia> p = 0.005
 julia> t = 500
 julia> t = 2
-julia> prob_occurence_module(p, t, j)
+julia> prob_occurrence_module(p, t, j)
 0.25651562069968376
 ```
 """
-function prob_occurence_module(p, t, j)
+function prob_occurrence_module(p, t, j)
 	return (exp(-1*(p*t))*(p*t)^j)/factorial(j) 
 end
 
