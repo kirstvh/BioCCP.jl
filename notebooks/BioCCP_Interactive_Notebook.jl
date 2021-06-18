@@ -182,7 +182,7 @@ end
 
 # ╔═╡ f098570d-799b-47e2-b692-476a4d95825b
 if show_modprobs == "🔻 SHOW " 
-md"Each biological design in the design space is built by choosing $r module(s) out of a set of $n_string modules according to the module probabilities visualized above."
+md"Each biological design in the design space is built by choosing $r module(s) (with replacement) out of a set of $n_string modules according to the module probabilities visualized above."
 end
 
 # ╔═╡ caf67b2f-cc2f-4d0d-b619-6e1969fabc1a
