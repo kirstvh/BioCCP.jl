@@ -17,9 +17,9 @@ end
 using BioCCP, Plots, PlutoUI
 
 # ╔═╡ 4d246460-af05-11eb-382b-590e60ba61f5
-md"## The Coupon Collector's Problem in Combinatorial Biotechnology
+md"## Collecting Coupons in combinatorial biotechnology
 
-This notebook provides functions and visualizations to determine minimum sample sizes for biotechnological experiments based on the mathematical framework of the Coupon Collector's Problem (implemented formulas based on [^1], [^2]).
+This notebook provides functions and visualizations to determine expected minimum sample sizes for biotechnological experiments based on the mathematical framework of the Coupon Collector Problem (implemented formulas based on [^1], [^2]).
 
 "
 
@@ -32,9 +32,9 @@ md"""
  
 👇 **COMPLETE THE FIELDS BELOW** 👇
 
-№ modules ∈ design space:                       $(@bind n_string TextField(default = "100")) \
+№ modules in design space:                       $(@bind n_string TextField(default = "100")) \
 	
-№ modules / design:                              $(@bind r NumberField(1:20))\
+№ modules per design:                            $(@bind r NumberField(1:20))\
 № complete sets of modules to collect:               $(@bind m NumberField(1:20))\
 	
 Abundances of modules during library generation:       $(@bind ps Select(["Equal", "Unequal"], default = "Equal"))"""
@@ -93,7 +93,7 @@ md"""
  
 🎯 **REPORT**  🎯
 
-**💻 Module probabilities**             $(@bind show_modprobs Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE ") )  \
+**💻 Module probabilities**                         $(@bind show_modprobs Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE ") )  \
 *How the abundances of the modules are distributed during combinatorial library generation.*
 """
 
@@ -186,7 +186,7 @@ md"Each biological design in the design space is built by choosing $r module(s) 
 end
 
 # ╔═╡ caf67b2f-cc2f-4d0d-b619-6e1969fabc1a
-md""" **💻 Minimum sample size required**     $(@bind show_E Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 SHOW ")) 
+md""" **💻 Minimum sample size required**                 $(@bind show_E Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 SHOW ")) 
 \
 *The number of designs required to observe each module at least $m times in the sampled set of designs.* """  
 
@@ -197,9 +197,9 @@ begin
 		sd = Int(std_minsamplesize(n; p_vec = p_vec, m=m, r = r))
 		
 			md""" 
-     `Expected minimum sample size   E[Tₚ]`     = **$E designs**\
+     `Expected minimum sample size`     = **$E designs**\
 		
-     `Standard deviation             sd[Tₚ]`      = **$sd designs**  	"""
+     `Standard deviation             `                           = **$sd designs**  	"""
 	end
 	# begin
 		
@@ -268,9 +268,9 @@ begin
 end
 
 # ╔═╡ 22fe8006-0e81-4e0a-a460-28610a55cd97
-md""" **💻 Success probability**               $(@bind show_success Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE ") )\
+md""" **💻 Success probability**                        $(@bind show_success Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE ") )\
 
- + *The probability that all modules are observed for a given sample size.* """
+ + *The probability that the minimum number of designs T is smaller than or equal to a given sample size t.* """
 
 # ╔═╡ db4371e4-7f86-4db3-b076-12f6cd220b89
 begin
@@ -289,7 +289,7 @@ begin
 	p_success = success_probability(n, sample_size_1; p_vec = p_vec, m = m, r = r)
 	
 	md""" 
-              ↳ `Succes probability F(Tₚ)`  = **$p_success**\
+              ↳ `Success probability F(t)`  = **$p_success**\
 	"""
 	end
 end
@@ -310,7 +310,7 @@ sample_size_initial = 5
 		
 	sample_sizes = 0:10:sample_size_initial
 	successes = success_probability.(n, sample_sizes; p_vec = p_vec, r = r, m = m)
-plot(sample_sizes, successes, title = "Success probability in function of sample", xlabel = "sample size s", ylabel= "P(s ≤ Sₘᵢₙ)", label = "", legend=:bottomright, size=(600,300), seriestype=:scatter )
+plot(sample_sizes, successes, title = "Success probability in function of sample size", xlabel = "sample size s", ylabel= "P(s ≤ Sₘᵢₙ)", label = "", legend=:bottomright, size=(600,300), seriestype=:scatter )
 		end
 	 
 end
@@ -358,14 +358,14 @@ elseif sample_size_1 > E
 		
 end
 
-	md"""+  *Upperbound probability according to Chebychev's inequality.*:
+	md"""+  *Upper bound on probability that minimum sample size is smaller than given sample size t, according to Chebychev's inequality*:
 	              $print_sentence"""
 	end
 end
 
 # ╔═╡ dc696281-7a5b-4568-a4c2-8dde90af43f0
-md""" **💻 Expected saturation**                $(@bind show_satur Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE "))\
-*The expected fraction of total number of modules observed after collecting a giving number of designs.*"""
+md""" **💻 Expected fraction of total number of modules observed**     $(@bind show_satur Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE "))\
+*The expected fraction of the total number of available modules observed after collecting a given number of designs.*"""
 
 # ╔═╡ eb92ff7c-0140-468c-8b32-f15d1cf15913
 if show_satur == "🔻 SHOW " 
@@ -379,7 +379,7 @@ begin
 	sample_size_2 = parse(Int64, sample_size_2_string)
 	E_fraction = expectation_fraction_collected(n, sample_size_2; p_vec = p_vec, r = r)
 	
-	md""" 	            ↳ `Expected fraction observed:`	= **$E_fraction**
+	md""" 	            ↳ `Expected fraction observed`	= **$E_fraction**
 	"""	
 	end
 end
@@ -408,7 +408,7 @@ end
 end
 
 # ╔═╡ f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
-md""" **💻 Occurence of a specific module**        $(@bind show_occ Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE "))\
+md""" **💻 Occurence of a specific module**                    $(@bind show_occ Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE "))\
 *How many times one can expect to have collected a specific module in a sample of a given size.*"""
 
 # ╔═╡ ec2a065f-0dc7-44d4-a18b-6c6a228b3ffc
@@ -469,7 +469,7 @@ end
 begin
 	if show_occ == "🔻 SHOW " 
 		
-	md""" 	            ↳ `Expected times observed:`	≈ **$ed**
+	md""" 	            ↳ `Expected number of times observed `	≈ **$ed**
 		"""
 	end
 end
@@ -488,10 +488,10 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 
 
 # ╔═╡ Cell order:
-# ╟─4d246460-af05-11eb-382b-590e60ba61f5
+# ╠═4d246460-af05-11eb-382b-590e60ba61f5
 # ╟─a2fd6000-1450-4dfe-9426-5303ae64bfb3
 # ╠═2d3ad982-ef1f-45ae-b247-9679c0faa853
-# ╟─a8c81622-194a-443a-891b-bfbabffccff1
+# ╠═a8c81622-194a-443a-891b-bfbabffccff1
 # ╟─45507d48-d75d-41c9-a018-299e209f900e
 # ╟─b17f3b8a-61ee-4563-97cd-19ff049a8e1e
 # ╟─e3b4c2d8-b78c-467e-a863-5eecb8ec58dc
@@ -510,7 +510,7 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─ca5a4cef-df67-4a5e-8a86-75a9fe8c6f37
 # ╟─24f7aae7-d37a-4db5-ace0-c910b178da88
 # ╟─37f951ee-885c-4bbe-a05f-7c5e48ff4b6b
-# ╟─dc696281-7a5b-4568-a4c2-8dde90af43f0
+# ╠═dc696281-7a5b-4568-a4c2-8dde90af43f0
 # ╟─eb92ff7c-0140-468c-8b32-f15d1cf15913
 # ╟─f0eaf96b-0bc0-4194-9a36-886cb1d66e00
 # ╟─0099145a-5460-4549-9513-054bc1b04eea
