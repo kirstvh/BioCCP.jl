@@ -25,7 +25,7 @@ The Pluto notebook provides an interactive illustration of all functions in BioC
 
 Inputs for generating the report    | 
 ---------------- | 
-Total number of modules in the design space *n*       |  
+ *n*       |  Total number of modules in the design space
 The number of modules per design *r*     |  
 The number of complete sets of modules to collect *m*        | 
 Probability distribution of the modules *p<sub>vec</sub>*   (\*) |  
