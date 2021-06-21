@@ -13,7 +13,7 @@ Function name    | Short description
 `expectation_minsamplesize`        | Calculates the expected minimum number of designs to observe all modules at least *m* times  
 `std_minsamplesize`      | Calculates standard deviation on the minimum number of designs 
 `success_probability`         | Calculates the probability that the minimum number of designs *T* is smaller than or equal to a given sample size *t*  
-`expectation_fraction_collected` | Returns the expected fraction of the total number of modules that is observed for a given sample size
+`expectation_fraction_collected` | Returns the fraction of the total number of modules in the design space that is expected to be observed for a given sample size *t*
 `prob_occurrence_module` | Calculates for a module with specified module probability *p*, the probability that the module has occurred *k* times when a given number of designs has been collected
  
 
@@ -37,8 +37,8 @@ Symbol    | Short description
 >  *When exact probabilities are known*, define your custom module probability/abundance vector or load them in the notebook from an external file.
 >  *When probabilities and/or their distribution are unknown*, you can either:
  > >  1) Assume the probabilities of all modules to be equal (uniform distribution), or
- > >  2) Assume the module probabilities to follow *Zipf's law*, specifying p<sub>max</sub>/p<sub>min</sub>, or
- > >  3) Assume the histogram of the module probabilities to behave like a *bell curve*, specifying the mean and variance       
+ > >  2) Assume the module probabilities to follow *Zipf's law*, specifying the ratio p<sub>max</sub>/p<sub>min</sub>, or
+ > >  3) Assume the histogram of the module probabilities to behave like a *bell curve*, specifying the ratio p<sub>max</sub>/p<sub>min</sub>   
 
 Using the inputs, a report for sample size determination is created using the [functions](https://kirstvh.github.io/BioCCP/) described above. The report contains the following sections:
 
@@ -48,7 +48,7 @@ Module probabilities       |     This section shows a plot with the probability 
 Expected minimum sample size      |     This part displays the expected minimum number of designs **E**_[T]_ and the standard deviation.         
 Success probability      |    In this section, the report calculates the probability *F(t)* that the minimum number of designs *T* is smaller than or equal to a given sample size *t*. Moreover, a curve describing the success probability *F(t)* in function of an increasing sample size *t* is available, to determine a minimum sample size according to a probability cut-off.  
 Expected observed fraction of the total number of modules        |    Here, the fraction of the total number of modules in the design space that is expected to be observed is computed for a given sample size *t*. A saturation curve, displaying the expected fraction of modules observed in function of increasing sample size, is provided.
-Number of occurrence of a specific module      |      In this last part, you can specify the probability *p<sub>j</sub>* of the module of interest together with a particular sample size, to calculate a curve showing the probability for a module to occur *k* times (in function of *k*).   
+Number of occurrence of a specific module      |      In this last part, you can specify the probability *p<sub>j</sub>* of a module of interest together with a particular sample size, to calculate a curve showing the probability for a module to occur *k* times (in function of *k*).   
 
 
 ## Getting started
@@ -75,10 +75,10 @@ Launch the Pluto notebook directly from your browser using Binder (no installati
 
     using Pluto; Pluto.run()
     
-&emsp;&emsp; Open the [notebook file](/notebooks/BioCCP_Interactive_Notebook.jl).
+&emsp;&emsp; Finally, open the [notebook file](/notebooks/BioCCP_Interactive_Notebook.jl).
 
 ## References
-Implementation of formula's was based on:
+The implementation of the formula's was based on the references below:
 
 > Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp.* ESAIM: Probability and Statistics, 20, 367-399. doi: 	https://doi.org/10.1051/ps/2016016
 
