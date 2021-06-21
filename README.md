@@ -10,10 +10,10 @@ BioCCP contains functions for calculating (expected) minimum sample sizes and re
 
 Function name    | Short description
 ---------------- | -----------------
-`expectation_minsamplesize`        | Calculates the expected minimum number of designs to observe all modules  
-`std_minsamplesize`      | Calculates standard deviation on minimum number of designs 
+`expectation_minsamplesize`        | Calculates the expected minimum number of designs to observe all modules at least *m* times  
+`std_minsamplesize`      | Calculates standard deviation on the minimum number of designs 
 `success_probability`         | Calculates the probability that the minimum number of designs *T* is smaller than or equal to a given sample size *t*  
-`expectation_fraction_collected` | Returns for a given sample size the fraction of the available modules that is expected to be observed
+`expectation_fraction_collected` | Returns the expected fraction of the total number of modules that is observed for a given sample size
 `prob_occurrence_module` | Calculates for a module with specified module probability *p*, the probability that the module has occurred *k* times when a given number of designs has been collected
  
 
@@ -30,14 +30,14 @@ Symbol    | Short description
 ---------------- | -----------------
  *n*       |  Total number of modules in the design space
 *r*     |  The number of modules per design 
- *m*        | The number of times each module has to be observed (default = 1)
+ *m*        | The number of times each module has to be observed (default = 1) in the sampled set of designs
  *p<sub>vec</sub>*   (\*) |  Probability distribution of the modules 
 
 >  (\*) 
 >  *When exact probabilities are known*, define your custom module probability/abundance vector or load them in the notebook from an external file.
 >  *When probabilities and/or their distribution are unknown*, you can either:
  > >  1) Assume the probabilities of all modules to be equal (uniform distribution), or
- > >  2) Assume the module probabilities to follow *Zipf's law*, specifying p<sub>max</sub> and p<sub>min</sub>, or
+ > >  2) Assume the module probabilities to follow *Zipf's law*, specifying p<sub>max</sub>/p<sub>min</sub>, or
  > >  3) Assume the histogram of the module probabilities to behave like a *bell curve*, specifying the mean and variance       
 
 Using the inputs, a report for sample size determination is created using the [functions](https://kirstvh.github.io/BioCCP/) described above. The report contains the following sections:
