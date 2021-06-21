@@ -6,7 +6,7 @@ During the **combinatorial engineering of biosystems** such as proteins, genetic
 
 
 ## Functions
-BioCCP contains functions for calculating minimum sample sizes and related statistics:
+BioCCP contains functions for calculating (expected) minimum sample sizes and related statistics:
 
 Function name    | Short description
 ---------------- | -----------------
