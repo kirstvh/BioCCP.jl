@@ -3,7 +3,7 @@
  
 BioCCP.jl applies the Coupon Collector Problem to **combinatorial biotechnology**, in particular to aid **minimum sample size** determination of screening experiments. 
 
-**Modular designs** are considered, created by randomly combining `r` modules from a set of `n`available modules. The module probabilities during the generation of the designs are specified by a probability/abundance vector `p_vec`. Depending on how many complete sets of modules one wants to observe, parameter `m` can be increased from its default value of 1 to a higher value. 
+**Modular designs** are considered, created by randomly combining `r` modules from a set of `n`available modules (sampling with replacement). The module probabilities during the generation of the designs are specified by a probability/abundance vector `p_vec`. Depending on how many complete sets of modules one wants to observe, parameter `m` can be increased from its default value of 1 to a higher value. 
 
 For a specific combinatorial design set-up of interest, a report with results regarding minimum sample sizes can be easily retrieved by using the provided Pluto notebook.
 
