@@ -1,7 +1,7 @@
 # BioCCP
 ## Intro
  
-BioCCP.jl applies the Coupon Collector's Problem to **combinatorial biotechnology**, in particular to aid **minimum sample size** determination of screening experiments. 
+BioCCP.jl applies the Coupon Collector Problem to **combinatorial biotechnology**, in particular to aid **minimum sample size** determination of screening experiments. 
 
 **Modular designs** are considered, created by randomly combining `r` modules from a set of `n`available modules. The module probabilities during the generation of the designs are specified by a probability/abundance vector `p_vec`. Depending on how many complete sets of modules one wants to observe, parameter `m` can be increased from its default value of 1 to a higher value. 
 
