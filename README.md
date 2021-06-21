@@ -78,7 +78,7 @@ Launch the Pluto notebook directly from your browser using Binder (no installati
 &emsp;&emsp; Finally, open the [notebook file](/notebooks/BioCCP_Interactive_Notebook.jl).
 
 ## References
-The implementation of the formula's was based on the references below:
+The implementation of formulas was based on the references below:
 
 > Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp.* ESAIM: Probability and Statistics, 20, 367-399. doi: 	https://doi.org/10.1051/ps/2016016
 
