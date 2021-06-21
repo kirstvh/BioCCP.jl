@@ -10,15 +10,15 @@ export expectation_minsamplesize, std_minsamplesize, success_probability, expect
     exp_ccdf(n, T; p_vec = ones(n), m = 1, r = 1, normalize = true)
 
 Calculates `1 - F(t)`, which is the complement of the success probability
-`F(t) = P(T < t)` (= probability that that required
+`F(t) = P(T ≤ t)` (= probability that the expected minimum
   number of designs T is smaller than `t` in order to 
-  see each module at least `m` times.). This function
+  see each module at least `m` times). This function
   serves as the integrand for calculating `E[T]`.
  
 - `n`: number of modules in the design space
-- `p_vec`: vector with the probabilities/relative abundances of the different coupons
+- `p_vec`: vector with the probabilities/abundances of the different modules in the design space during library generation
 - `T`: number of designs
-- `m`: number of complete sets of modules that need to be collected 
+- `m`: number of times each module has to observed in the sampled set of designs
 - `r`: number of modules per design
 - normalize: if true, normalize `p_vec`
 
@@ -91,12 +91,11 @@ end
 """
     expectation_minsamplesize(n; p_vec = ones(n), m = 1, r = 1, normalize = true)
 
-Calculates the expected number of designs needed `E[T]`, 
-the minimum sample size to observe each module at least `m` times.
+Calculates the expected minimum number of designs  `E[T]` to observe each module at least `m` times.
 
 - `n`: number of modules in the design space
 - `p_vec`: vector with the probabilities or abundances of the different modules
-- `m`: number of complete sets of modules that need to be collected 
+- `m`: number of times each module has to be observed in the sampled set of designs 
 - `r`: number of modules per design
 - normalize: if true, normalize `p_vec`
 
@@ -122,8 +121,7 @@ end
 """
     std_minsamplesize(n; p_vec = ones(n), m = 1, r = 1, normalize = true)
 
-Calculates the standard deviation on the number of designs needed `std[T]`, 
-the standard deviation on the minimum sample size to observe each module at least `m` times.
+Calculates the standard deviation on the minimum number of designs to observe each module at least `m` times.
     
 - `n`: number of modules in the design space
 - `p_vec`: vector with the probabilities or abundances of the different modules
@@ -150,8 +148,8 @@ end
 """
     success_probability(n, t; p_vec = ones(n), m = 1, r = 1, normalize = true)
 
-Calculates the success probability `F(t) = P(T < t)` or the chance that 
-the required number of designs to see each module at least `m` times
+Calculates the success probability `F(t) = P(T ≤ t)` or the probability that 
+the minimum number of designs `T` to see each module at least `m` times
 is smaller than `t`.
 
 - `n`: number of modules in design space
@@ -181,11 +179,11 @@ end
 """
     expectation_fraction_collected(n, t; p_vec = ones(n), r = 1, normalize=true) 
 
-Calculates the expected fraction of all modules observed
-after collecting `t`designs.
+Calculates the fraction of all modules that is expected to be observed
+after collecting `t` designs.
 
 - `n`: number of modules in design space
-- `t`: sample size/number of designs for which to calculate the expected fraction of modules observed
+- `t`: sample size/number of designs 
 - `p_vec`: vector with the probabilities or abundances of the different modules 
 - `r`: number of modules per design
 - normalize: if true, normalize `p_vec`
@@ -216,7 +214,7 @@ end
 Calculates probability that specific module with module probability `p` 
 has occurred `j` times after collecting `t` designs.
 
-Sampling of modules are assumed to be independent Poisson processes.
+Sampling processes of individual modules are assumed to be independent Poisson processes.
 
 - `p`: module probaility
 - `t`: sample size/number of designs 
