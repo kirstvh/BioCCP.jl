@@ -212,13 +212,13 @@ end
     prob_occurrence_module(p, t, j)
 
 Calculates probability that specific module with module probability `p` 
-has occurred `j` times after collecting `t` designs.
+has occurred `k` times after collecting `t` designs.
 
 Sampling processes of individual modules are assumed to be independent Poisson processes.
 
 - `p`: module probaility
 - `t`: sample size/number of designs 
-- `j`: number of occurrence 
+- `k`: number of occurrence 
 
 References:
 - Boneh, A., & Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66.
@@ -228,13 +228,13 @@ References:
 ```julia-repl
 julia> p = 0.005
 julia> t = 500
-julia> t = 2
-julia> prob_occurrence_module(p, t, j)
+julia> k = 2
+julia> prob_occurrence_module(p, t, k)
 0.25651562069968376
 ```
 """
-function prob_occurrence_module(p, t, j)
-	return (exp(-1*(p*t))*(p*t)^j)/factorial(j) 
+function prob_occurrence_module(p, t, k)
+	return (exp(-1*(p*t))*(p*t)^k)/factorial(k) 
 end
 
 end
