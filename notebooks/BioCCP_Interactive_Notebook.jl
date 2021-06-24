@@ -321,16 +321,6 @@ end
 # ╔═╡ 37f951ee-885c-4bbe-a05f-7c5e48ff4b6b
 begin
 	#following one-sided version of Chebyshev's inequality.
-	
-	function chebyshev(X, μ, σ)
-    X_μ = X - μ
-    k = abs(X_μ)/σ
-#     if k <= 1 
-#         print(k)
-#     end
-    upperbound_prob  = 1/(k^2)
-    
-	end
 	 
 	function chebyshev_onesided_larger(X, μ, σ)
 		X_μ = X - μ
@@ -344,8 +334,7 @@ if show_success == "🔻 SHOW "
 if sample_size_1 < E
 	compare = "smaller"
 		if sample_size_1 <= n/r
-			print_sentence = "P(minimum sample size ≤ $sample_size_1) = 0.
-                                                                                        🚨 Enter a sample size that is larger than (№ modules ∈ design space)/(№ modules/design)  to obtain an upperbound probability > 0 🚨"
+			print_sentence = "P(minimum sample size ≤ $sample_size_1) = 0."        
 		else
 	prob_chebyshev = chebyshev_onesided_smaller(sample_size_1, E, sd)
 	print_sentence = "P(minimum sample size ≤ $sample_size_1) ≤ $prob_chebyshev. "
@@ -386,6 +375,9 @@ begin
 	"""	
 	end
 end
+
+# ╔═╡ 6f839ee1-e980-48f1-a215-f2d040b51823
+
 
 # ╔═╡ 0099145a-5460-4549-9513-054bc1b04eea
 if  show_satur == "🔻 SHOW " 
@@ -517,6 +509,7 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─dc696281-7a5b-4568-a4c2-8dde90af43f0
 # ╟─eb92ff7c-0140-468c-8b32-f15d1cf15913
 # ╟─f0eaf96b-0bc0-4194-9a36-886cb1d66e00
+# ╟─6f839ee1-e980-48f1-a215-f2d040b51823
 # ╟─0099145a-5460-4549-9513-054bc1b04eea
 # ╟─7968de5e-5ae8-4ab4-b089-c3d33475af2f
 # ╟─f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
