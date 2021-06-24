@@ -267,6 +267,9 @@ begin
 	# #end
 end
 
+# ╔═╡ 3c07dd11-5be7-4ec7-992e-38dd07260d71
+
+
 # ╔═╡ 22fe8006-0e81-4e0a-a460-28610a55cd97
 md""" **💻 Success probability**                                                                                                                  $(@bind show_success Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE ") )\
 
@@ -350,10 +353,14 @@ elseif sample_size_1 > E
 		
 end
 
-	md"""+  *Upper bound on probability that minimum sample size is smaller than given sample size t, according to Chebychev's inequality*:
-	              $print_sentence"""
+	md"""*Upper bound on probability that minimum sample size is smaller than given sample size t, according to Chebychev's inequality*:
+	                                                                                                                                            
+		$print_sentence"""
 	end
 end
+
+# ╔═╡ ca33610c-1be9-4c01-b0b7-ce4b2f7896df
+
 
 # ╔═╡ dc696281-7a5b-4568-a4c2-8dde90af43f0
 md""" **💻 Expected observed fraction of the total number of modules**                 $(@bind show_satur Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE "))\
@@ -401,6 +408,9 @@ global sample_size_initial_frac = 5
 	    ylabel= "E[fraction observed]", label = "", size=(700,400))
 end
 end
+
+# ╔═╡ 84a2a4de-0667-4120-919a-06e2119112c0
+
 
 # ╔═╡ f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
 md""" **💻 Occurrence of a specific module**                                                                                                       $(@bind show_occ Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE "))\
@@ -499,6 +509,7 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─f098570d-799b-47e2-b692-476a4d95825b
 # ╟─caf67b2f-cc2f-4d0d-b619-6e1969fabc1a
 # ╟─6f14a72c-51d3-4759-bb8b-10db1dc260f0
+# ╟─3c07dd11-5be7-4ec7-992e-38dd07260d71
 # ╟─22fe8006-0e81-4e0a-a460-28610a55cd97
 # ╟─db4371e4-7f86-4db3-b076-12f6cd220b89
 # ╟─317995ed-bdf4-4f78-bd66-a39ffd1dc452
@@ -506,12 +517,14 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─ca5a4cef-df67-4a5e-8a86-75a9fe8c6f37
 # ╟─24f7aae7-d37a-4db5-ace0-c910b178da88
 # ╟─37f951ee-885c-4bbe-a05f-7c5e48ff4b6b
+# ╟─ca33610c-1be9-4c01-b0b7-ce4b2f7896df
 # ╟─dc696281-7a5b-4568-a4c2-8dde90af43f0
 # ╟─eb92ff7c-0140-468c-8b32-f15d1cf15913
 # ╟─f0eaf96b-0bc0-4194-9a36-886cb1d66e00
 # ╟─6f839ee1-e980-48f1-a215-f2d040b51823
 # ╟─0099145a-5460-4549-9513-054bc1b04eea
 # ╟─7968de5e-5ae8-4ab4-b089-c3d33475af2f
+# ╟─84a2a4de-0667-4120-919a-06e2119112c0
 # ╟─f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
 # ╟─ec2a065f-0dc7-44d4-a18b-6c6a228b3ffc
 # ╟─0e39a993-bb2f-4897-bfe2-5128ec62bef9
