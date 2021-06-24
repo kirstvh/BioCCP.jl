@@ -270,7 +270,7 @@ end
 # ╔═╡ 22fe8006-0e81-4e0a-a460-28610a55cd97
 md""" **💻 Success probability**                                                                                                                  $(@bind show_success Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE ") )\
 
- + *The probability that the minimum number of designs T is smaller than or equal to a given sample size t.* """
+*The probability that the minimum number of designs T is smaller than or equal to a given sample size t.* """
 
 # ╔═╡ db4371e4-7f86-4db3-b076-12f6cd220b89
 begin
@@ -294,9 +294,12 @@ begin
 	end
 end
 
+# ╔═╡ 9c36cfea-91dd-4bf7-b4f1-b34bce20cb9c
+
+
 # ╔═╡ ca5a4cef-df67-4a5e-8a86-75a9fe8c6f37
 if show_success == "🔻 SHOW " 
-	md" + *A curve describing the success probability in function of sample size.*"
+	md"*A curve describing the success probability in function of sample size.*"
 end
 
 # ╔═╡ 24f7aae7-d37a-4db5-ace0-c910b178da88
@@ -305,10 +308,10 @@ if show_success == "🔻 SHOW "
 	
 sample_size_initial = 5
 	while (1 - success_probability(n, sample_size_initial; p_vec = p_vec, r = r, m = m)) > 0.0005
-		global sample_size_initial += 100
+		global sample_size_initial += n/10
 	end
 		
-	sample_sizes = 0:10:sample_size_initial
+	sample_sizes = 0: n/10 :sample_size_initial
 	successes = success_probability.(n, sample_sizes; p_vec = p_vec, r = r, m = m)
 plot(sample_sizes, successes, title = "Success probability in function of sample size", xlabel = "sample size s", ylabel= "P(s ≤ Sₘᵢₙ)", label = "", legend=:bottomright, size=(600,300), seriestype=:scatter )
 		end
@@ -394,16 +397,16 @@ begin
 	if show_satur == "🔻 SHOW " 
 global sample_size_initial_frac = 5
 		while (1 - expectation_fraction_collected(n, sample_size_initial_frac; p_vec = p_vec, r = r)) > 0.0005
-		global	 sample_size_initial_frac += 100
+		global	 sample_size_initial_frac += n/10
 		end
 	
-	sample_sizes_frac = 0:5: sample_size_initial_frac
+	sample_sizes_frac = 0: n/10 : sample_size_initial_frac
 	
 	fracs = expectation_fraction_collected.(n, sample_sizes_frac; p_vec = p_vec, r = r)
 	
 	plot(sample_sizes_frac, fracs, title = "Expected fraction of modules observed", 
 	    xlabel = "sample size", seriestype=:scatter, 
-	    ylabel= "E[fraction observed]", label = "", size=(700,300))
+	    ylabel= "E[fraction observed]", label = "", size=(700,400))
 end
 end
 
@@ -507,6 +510,7 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─22fe8006-0e81-4e0a-a460-28610a55cd97
 # ╟─db4371e4-7f86-4db3-b076-12f6cd220b89
 # ╟─317995ed-bdf4-4f78-bd66-a39ffd1dc452
+# ╟─9c36cfea-91dd-4bf7-b4f1-b34bce20cb9c
 # ╟─ca5a4cef-df67-4a5e-8a86-75a9fe8c6f37
 # ╟─24f7aae7-d37a-4db5-ace0-c910b178da88
 # ╟─37f951ee-885c-4bbe-a05f-7c5e48ff4b6b
