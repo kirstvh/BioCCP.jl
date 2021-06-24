@@ -316,7 +316,7 @@ sample_size_initial = 5
 		
 	sample_sizes = 0: n/10 :sample_size_initial
 	successes = success_probability.(n, sample_sizes; p_vec = p_vec, r = r, m = m)
-plot(sample_sizes, successes, title = "Success probability in function of sample size", xlabel = "sample size s", ylabel= "P(s ≤ Sₘᵢₙ)", label = "", legend=:bottomright, size=(600,300), seriestype=:scatter )
+plot(sample_sizes, successes, title = "Success probability in function of sample size", xlabel = "sample size s", ylabel= "P(s ≤ Sₘᵢₙ)", label = "", legend=:bottomright, size=(600,400), seriestype=:scatter )
 		end
 	 
 end
