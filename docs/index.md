@@ -20,11 +20,25 @@ For a specific combinatorial design set-up of interest, a report with results re
 julia&gt; expectation_minsamplesize(n; p = ones(n)/n, m = 1, r = 1, normalize = true)
 519.0</code>
 
+<style>
+  .bottom-three {
+     margin-bottom: 3cm;
+  }
+</style>
+
 </pre></div></section></article><article class="docstring"><header><a class="docstring-binding" id="BioCCP.std_minsamplesize" href="#BioCCP.std_minsamplesize"><code><strong>BioCCP.std_minsamplesize</strong></code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">std_minsamplesize(n; p = ones(n)/n, m = 1, r = 1, normalize = true)</code></pre><p>Calculates the standard deviation on the minimum number of designs to observe each module at least <code>m</code> times.</p><ul><li><code>n</code>: number of modules in the design space</li><li><code>p</code>: vector with the probabilities or abundances of the different modules</li><li><code>m</code>: number of times each module has to be observed in the sampled set of designs </li><li><code>r</code>: number of modules per design</li><li>normalize: if true, normalize <code>p</code></li></ul>
  
  <pre><code class="language-julia-repl">julia&gt; n = 100
 julia&gt; std_minsamplesize(n; p = ones(n)/n, m = 1, r = 1, normalize = true)
-126.0</code></pre></div></section></article><article class="docstring"><header><a class="docstring-binding" id="BioCCP.success_probability" href="#BioCCP.success_probability"><code><strong>BioCCP.success_probability</strong></code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">success_probability(n, t; p = ones(n)/n, m = 1, r = 1, normalize = true)</code></pre><p>Calculates the success probability <code>F(t) = P(T ≤ t)</code> or the probability that the minimum number of designs <code>T</code> to see each module at least <code>m</code> times is smaller than or equal to <code>t</code>.</p><ul><li><code>n</code>: number of modules in design space</li><li><code>t</code>: sample size or number of designs for which to calculate the success probability </li><li><code>p</code>: vector with the probabilities or abundances of the different modules</li><li><code>m</code>: number of times each module has to be observed in the sampled set of designs </li><li><code>r</code>: number of modules per design</li><li>normalize: if true, normalize <code>p</code></li></ul>
+126.0</code>
+
+<style>
+  .bottom-three {
+     margin-bottom: 3cm;
+  }
+</style>
+
+</pre></div></section></article><article class="docstring"><header><a class="docstring-binding" id="BioCCP.success_probability" href="#BioCCP.success_probability"><code><strong>BioCCP.success_probability</strong></code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">success_probability(n, t; p = ones(n)/n, m = 1, r = 1, normalize = true)</code></pre><p>Calculates the success probability <code>F(t) = P(T ≤ t)</code> or the probability that the minimum number of designs <code>T</code> to see each module at least <code>m</code> times is smaller than or equal to <code>t</code>.</p><ul><li><code>n</code>: number of modules in design space</li><li><code>t</code>: sample size or number of designs for which to calculate the success probability </li><li><code>p</code>: vector with the probabilities or abundances of the different modules</li><li><code>m</code>: number of times each module has to be observed in the sampled set of designs </li><li><code>r</code>: number of modules per design</li><li>normalize: if true, normalize <code>p</code></li></ul>
  <pre><code class="language-julia-repl">julia&gt; n = 100
 julia&gt; t = 600
 julia&gt; success_probability(n, t; p = ones(n)/n, m = 1, r = 1, normalize = true)
