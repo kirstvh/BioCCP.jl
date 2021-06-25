@@ -7,6 +7,8 @@ BioCCP.jl applies the Coupon Collector Problem to **combinatorial biotechnology*
 
 For a specific combinatorial design set-up of interest, a report with results regarding (expected) minimum sample sizes can be easily retrieved by using the provided Pluto notebook.
 
+References: [1] Boneh, A., &amp; Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66., [2] Doumas, A. V., &amp; Papanicolaou, V. G. (2016). The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp. ESAIM: Probability and Statistics, 20, 367-399.
+
 ## Functions
 
 <html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/></head><body><div id="documenter"><nav class="docs-sidebar">  <article class="docstring"><header><a class="docstring-binding" id="BioCCP.expectation_minsamplesize" href="#BioCCP.expectation_minsamplesize"><code><strong>BioCCP.expectation_minsamplesize</strong></code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">expectation_minsamplesize(n; p = ones(n)/n, m = 1, r = 1, normalize = true)</code></pre><p>Calculates the expected minimum number of designs <code>E[T]</code>  to observe each module at least <code>m</code> times.</p><ul><li><code>n</code>: number of modules in the design space</li><li><code>p</code>: vector with the probabilities or abundances of the different modules</li><li><code>m</code>: number of times each module has to be observed in the sampled set of designs </li><li><code>r</code>: number of modules per design</li><li>normalize: if true, normalize <code>p</code></li></ul>
