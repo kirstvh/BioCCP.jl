@@ -14,6 +14,8 @@ For a specific combinatorial design set-up of interest, a report with results re
 julia&gt; expectation_minsamplesize(n; p = ones(n)/n, m = 1, r = 1, normalize = true)
 519.0</code></pre>
 
+ <p><small>References</small></p><ul><li>Boneh, A., &amp; Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66.</li></ul><p>
+ 
 <p><small>References: Doumas, A. V., &amp; Papanicolaou, V. G. (2016). The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp. ESAIM: Probability and Statistics, 20, 367-399; Boneh, A., &amp; Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66.</small></p>
 
 
