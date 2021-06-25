@@ -451,7 +451,7 @@ if show_occ == "🔻 SHOW "
 	j = 0:1:minimum([20, 2*ed])
 			
 	x  = prob_occurrence_module.(p, sample_size_3, j)
-	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability p", title="Probability on № of occurrences for specific module")
+	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability p", title="Probability on № of occurrences for specific module", label="")
 	
 		else
 		rank = parse(Int64, rank_string)
@@ -464,7 +464,7 @@ if show_occ == "🔻 SHOW "
 	j = 0:1:minimum([20, 2*ed])
 			
 	x  = prob_occurrence_module.(p, sample_size_4, j)
-	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability p", title="Probability on № of occurrences for specific module", size=((550,300)))	
+	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability p", title="Probability on № of occurrences for specific module", size=((600,300)), label="")	
 			
 		end
 	end
