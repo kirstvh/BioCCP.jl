@@ -30,7 +30,7 @@ Symbol    | Short description
  *n*       |  Total number of modules in the design space
 *r*     |  The number of modules per design 
  *m*        | The number of times each module has to be observed (default = 1) in the sampled set of designs
- *p<sub>vec</sub>*   (\*) |  Probability distribution of the modules 
+ *p*   (\*) |  Probability distribution of the modules 
 
 >  (\*) 
 >  *When exact probabilities are known*, define your custom module probability/abundance vector or load them in the notebook from an external file.
