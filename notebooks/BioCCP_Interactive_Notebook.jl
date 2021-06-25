@@ -140,7 +140,7 @@ begin
 	if show_modprobs == "🔻 SHOW "   
 	
 	scatter(p_vec, title = "Probability mass function", ylabel = "module probability pⱼ", xlabel = "module j", label="", size = (700, 400))
-	ylims!((0,maximum(p_vec) + maximum(p_vec)-minimum(p_vec) ))
+	ylims!((0, 1.1*(maximum(p_vec) + maximum(p_vec)-minimum(p_vec)) ))
 
 	end	
 end
