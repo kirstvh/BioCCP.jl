@@ -102,7 +102,7 @@ begin
 
 	if ps == "Equal"
 	 	
-		p_vec = ones(n)./sum(ones(n));
+		p = ones(n)./sum(ones(n));
 		
 	elseif ps == "Unequal"
 		if distribution == "Bell curve"
@@ -118,29 +118,29 @@ begin
 			n_perc_3 = Int(floor(n*0.0215));
 			#n_perc_4 = Int(floor(n*0.0013));
 			n_perc_rest = n - 2*n_perc_1 - 2*n_perc_2 - 2*n_perc_3 ;
-			p_vec_unnorm = vcat(fill(μ,2*n_perc_1+n_perc_rest), fill(μ+1.5*σ, n_perc_2), fill(μ-1.5*σ, n_perc_2), fill(μ+3*σ, n_perc_3), fill(μ-3*σ, n_perc_3) )
+			p_unnorm = vcat(fill(μ,2*n_perc_1+n_perc_rest), fill(μ+1.5*σ, n_perc_2), fill(μ-1.5*σ, n_perc_2), fill(μ+3*σ, n_perc_3), fill(μ-3*σ, n_perc_3) )
 		
 			# normalize sum to 1
-			p_vec = sort(p_vec_unnorm ./ sum(p_vec_unnorm))
+			p = sort(p_unnorm ./ sum(p_unnorm))
 		end
 		
 		if distribution == "Custom vector"
-			p_vec_unnorm = abundances
-			p_vec = abundances ./ sum(abundances)
+			p_unnorm = abundances
+			p = abundances ./ sum(abundances)
 		end
 		
 		if distribution == "Zipf's law"
 			ratio = parse(Float64, pmaxpmin_string)
 			α = exp(log(ratio)/(n-1))
-			p_vec = collect(α.^-(1:n))
-			p_vec = p_vec ./ sum(p_vec)
+			p = collect(α.^-(1:n))
+			p = p ./ sum(p)
 		end
 	end
 	
 	if show_modprobs == "🔻 SHOW "   
 	
-	scatter(p_vec, title = "Probability mass function", ylabel = "module probability pⱼ", xlabel = "module j", label="", size = (700, 400))
-	ylims!((0, 1.1*(maximum(p_vec) + maximum(p_vec)-minimum(p_vec)) ), titlefont=font(10), xguidefont=font(9), yguidefont=font(9))
+	scatter(p, title = "Probability mass function", ylabel = "module probability pⱼ", xlabel = "module j", label="", size = (700, 400))
+	ylims!((0, 1.1*(maximum(p) + maximum(p)-minimum(p))), titlefont=font(10), xguidefont=font(9), yguidefont=font(9))
 
 	end	
 end
@@ -148,7 +148,7 @@ end
 # ╔═╡ 87c3f5cd-79bf-4ad8-b7f8-3e98ec548a9f
 begin
 	if show_modprobs == "🔻 SHOW "  && distribution == "Bell curve"
-		histogram(p_vec, normalize=:probability,  bar_edges=false,  size = (650, 340), orientation=:v, bins=[(μ -  3.2*σ)/sum(p_vec_unnorm), (μ - 2*σ)/sum(p_vec_unnorm), (μ-σ)/sum(p_vec_unnorm), (μ + σ)/sum(p_vec_unnorm), (μ + 2*σ)/sum(p_vec_unnorm), (μ +  3.2*σ)/sum(p_vec_unnorm)])
+		histogram(p, normalize=:probability,  bar_edges=false,  size = (650, 340), orientation=:v, bins=[(μ -  3.2*σ)/sum(p_unnorm), (μ - 2*σ)/sum(p_unnorm), (μ-σ)/sum(p_unnorm), (μ + σ)/sum(p_unnorm), (μ + 2*σ)/sum(p_unnorm), (μ +  3.2*σ)/sum(p_unnorm)])
 		# if distribution == "Normally distributed"
 		# 	plot!(x->pdf(Normal(μ, σ), x), xlim=xlims())
 		# 	xlabel!("Abundance"); ylabel!("probability"); title!("Distribution of module abundances")
@@ -172,11 +172,11 @@ According to the percentiles
 We use the ratio pₘₐₓ/pₘᵢₙ to fix the width of the interval [μ - 3σ, μ +3σ]. (We assume that pₘₐₓ = μ +3σ and pₘᵢₙ = μ - 3σ and calculate μ and σ from this assumption). In addition, we make sure the sum of the probability vector sums up to 1.
 		
 As a result, we get:
--  $(n_perc_1+n_perc_rest) modules with a probability of $(µ/sum(p_vec_unnorm))
--  $(n_perc_2)  modules with a probability of $((μ+1.5*σ)/sum(p_vec_unnorm))
--  $(n_perc_2)  modules with a probability of $((μ-1.5*σ)/sum(p_vec_unnorm))
--  $(n_perc_3)  modules with a probability of $((μ+2.5*σ)/sum(p_vec_unnorm))
--  $(n_perc_3)  modules with a probability of $((μ-2.5*σ)/sum(p_vec_unnorm))"""
+-  $(n_perc_1+n_perc_rest) modules with a probability of $(µ/sum(p_unnorm))
+-  $(n_perc_2)  modules with a probability of $((μ+1.5*σ)/sum(p_unnorm))
+-  $(n_perc_2)  modules with a probability of $((μ-1.5*σ)/sum(p_unnorm))
+-  $(n_perc_3)  modules with a probability of $((μ+2.5*σ)/sum(p_unnorm))
+-  $(n_perc_3)  modules with a probability of $((μ-2.5*σ)/sum(p_unnorm))"""
 	end	
 end
 
@@ -196,78 +196,14 @@ md""" **💻 Expected minimum sample size**            �
 # ╔═╡ 6f14a72c-51d3-4759-bb8b-10db1dc260f0
 begin
 	if show_E == "🔻 SHOW "   
-		E = Int(expectation_minsamplesize(n; p_vec = p_vec, m=m, r = r))
-		sd = Int(std_minsamplesize(n; p_vec = p_vec, m=m, r = r))
+		E = Int(expectation_minsamplesize(n; p = p, m=m, r = r))
+		sd = Int(std_minsamplesize(n; p = p, m=m, r = r))
 		
 			md""" 
      `Expected minimum sample size`     = **$E designs**\
 		
      `Standard deviation             `                           = **$sd designs**  	"""
 	end
-	# begin
-		
-	# 	#E_vec = []
-	# 	#sd_vec = []
-			 
-	# 	#if ps == "Unequal" && probs_unequal_norm
-	# 			#iter = 10
-	# 			#for i in 1:iter
-	# 				#p_vec_i = rand(Normal(μ,  σ), n)
-	# 				#p_vec_i = p_vec_i ./ sum(p_vec_i)
-	# 				#E_i = expectation_minsamplesize(n; p_vec = p_vec_i, m=m, q = q)
-	# 				#sd_i = std_minsamplesize(n; p_vec = p_vec_i, m=m, q=q)
-	# 				#push!(E_vec, E_i)
-	# 				#push!(sd_vec, sd_i)
-	# 			#end
-	# 			#E = Int(ceil(mean(E_vec)))
-	# 			#sd = Int(ceil(mean(sd_vec)))
-	# 			#E_CI_lhs = Int(ceil( E - quantile(Normal(), 1-0.05/2)*sd/sqrt(iter)))
-	# 			#E_CI_rhs = Int(ceil(E + quantile(Normal(), 1-0.05/2)*sd/sqrt(iter)))
-	# 			#sd_CI_lhs = Int(ceil( sd - quantile(Normal(), 1-0.05/2)*sd/sqrt(iter)))
-	# 			#sd_CI_rhs = Int(ceil(sd + quantile(Normal(), 1-0.05/2)*sd/sqrt(iter)))
-				
-			
-	# 		#md""" 
-	# 		#``` 
-	# 		#Expected minimum sample size E[Tp]
-	# 		#```		 	
-	# 		#= **$E designs**    -------- 95% CI :  [$E_CI_lhs, $E_CI_rhs]
-		
-	# 		#``` 
-	# 		#Standard deviation sd[Tp]  
-	# 		#```	
-		
-	# 		#= **$sd designs**   -------- 95% CI :  [$sd_CI_lhs, $sd_CI_rhs]
-		
-	# 		#---------------
-	# 		#"""
-		
-	# 		#else
-	
-	# #	E = expectation_minsamplesize(n; p_vec = p_vec, m=m, q = q)
-	# #	sd = std_minsamplesize(n; p_vec = p_vec, m=m, q=q)
-			
-			
-	# #		md""" 
-	# #		``` 
-	# #		Expected minimum sample size E[Tp]
-	# #		```		 	
-	# #		= **$E designs**    
-		
-	# #		``` 
-	# #		Standard deviation sd[Tp]  
-	# #		```	
-		
-	# #		= **$sd designs**   
-		
-	# #		---------------
-	# #		"""
-				 
-	# 		#end
-			
-			
-		 
-	# #end
 end
 
 # ╔═╡ 3c07dd11-5be7-4ec7-992e-38dd07260d71
@@ -292,7 +228,7 @@ begin
 	if show_success == "🔻 SHOW " 
 	sample_size_1 = parse(Int64, sample_size_1_string);
 	
-	p_success = success_probability(n, sample_size_1; p_vec = p_vec, m = m, r = r)
+	p_success = success_probability(n, sample_size_1; p = p, m = m, r = r)
 	
 	md""" 
               ↳ `Success probability F(t)`  = **$p_success**\
@@ -316,12 +252,12 @@ begin
 if show_success == "🔻 SHOW " 
 	
 sample_size_initial = 5
-	while (1 - success_probability(n, sample_size_initial; p_vec = p_vec, r = r, m = m)) > 0.0005
+	while (1 - success_probability(n, sample_size_initial; p = p, r = r, m = m)) > 0.0005
 		global sample_size_initial += n/10
 	end
 		
 	sample_sizes = 0: n/10 :sample_size_initial
-	successes = success_probability.(n, sample_sizes; p_vec = p_vec, r = r, m = m)
+	successes = success_probability.(n, sample_sizes; p = p, r = r, m = m)
 plot(sample_sizes, successes, title = "Success probability in function of sample size", xlabel = "sample size s", ylabel= "P(s ≤ Sₘᵢₙ)", label = "", legend=:bottomright, size=(600,400), seriestype=:scatter, titlefont=font(10), xguidefont=font(9), yguidefont=font(9))
 		end
 	 
@@ -382,7 +318,7 @@ end
 begin
 	if show_satur == "🔻 SHOW " 
 	sample_size_2 = parse(Int64, sample_size_2_string)
-	E_fraction = expectation_fraction_collected(n, sample_size_2; p_vec = p_vec, r = r)
+	E_fraction = expectation_fraction_collected(n, sample_size_2; p = p, r = r)
 	
 	md""" 	            ↳ `Expected fraction observed`	= **$E_fraction**
 	"""	
@@ -401,13 +337,13 @@ md""" *A curve describing the expected fraction of modules observed in function 
 begin
 	if show_satur == "🔻 SHOW " 
 global sample_size_initial_frac = 5
-		while (1 - expectation_fraction_collected(n, sample_size_initial_frac; p_vec = p_vec, r = r)) > 0.0005
+		while (1 - expectation_fraction_collected(n, sample_size_initial_frac; p = p, r = r)) > 0.0005
 		global	 sample_size_initial_frac += n/10
 		end
 	
 	sample_sizes_frac = 0: n/10 : sample_size_initial_frac
 	
-	fracs = expectation_fraction_collected.(n, sample_sizes_frac; p_vec = p_vec, r = r)
+	fracs = expectation_fraction_collected.(n, sample_sizes_frac; p = p, r = r)
 	
 	plot(sample_sizes_frac, fracs, title = "Expected observed fraction of the total number of modules", 
 	    xlabel = "sample size", seriestype=:scatter, 
@@ -451,31 +387,22 @@ begin
 	
 if show_occ == "🔻 SHOW " 
 	if distribution != "Zipf's law"
-	p = parse(Float64, p_string)
-	sample_size_3 = parse(Int64, sample_size_3_string)
- 	# module_ = 1
-# 	p = p_vec[module_]
-# 	p = maximum(p_vec) 
-	ed = Int(floor(sample_size_3*p))
-	j = 0:1:minimum([20, 2*ed])
-			
-	x  = prob_occurrence_module.(p, sample_size_3, j)
-	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability p", title="Probability on № of occurrences for specific module", label="", size=((600,300)), titlefont=font(10),xguidefont=font(9), yguidefont=font(9))
+		pᵢ = parse(Float64, p_string)
+		sample_size_3 = parse(Int64, sample_size_3_string)
+		ed = Int(floor(sample_size_3*pᵢ))
+		j = 0:1:minimum([20, 2*ed])	
+		x  = prob_occurrence_module.(pᵢ, sample_size_3, j)
+		plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability", title="Probability on № of occurrences for specific module", label="", size=((600,300)), titlefont=font(10),xguidefont=font(9), yguidefont=font(9))
 	
-		else
+	else
 		rank = parse(Int64, rank_string)
-		p = p_vec[rank]
-	sample_size_4 = parse(Int64, sample_size_4_string)
- 	# module_ = 1
-# 	p = p_vec[module_]
-# 	p = maximum(p_vec) 
-			ed = Int(floor(sample_size_4*p))
-	j = 0:1:minimum([20, 2*ed])
-			
-	x  = prob_occurrence_module.(p, sample_size_4, j)
-	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability p", title="Probability on № of occurrences for specific module", size=((600,300)), label="", titlefont=font(10), xguidefont=font(9), yguidefont=font(9))	
-			
-		end
+		pᵢ = p[rank]
+		sample_size_4 = parse(Int64, sample_size_4_string) 
+		ed = Int(floor(sample_size_4*pᵢ))
+		j = 0:1:minimum([20, 2*ed])
+		x  = prob_occurrence_module.(pᵢ, sample_size_4, j)
+	 	plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability", title="Probability on № of occurrences for specific module", size=((600,300)), label="", titlefont=font(10), xguidefont=font(9), yguidefont=font(9))			
+	end
 	end
 end
 
