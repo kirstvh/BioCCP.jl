@@ -19,7 +19,7 @@ using BioCCP, Plots, PlutoUI
 # ╔═╡ 4d246460-af05-11eb-382b-590e60ba61f5
 md"## Collecting Coupons in combinatorial biotechnology
 
-This notebook provides functions and visualizations to determine expected minimum sample sizes for biotechnological experiments based on the mathematical framework of the Coupon Collector Problem (implemented formulas based on [^1], [^2]).
+This notebook provides functions and visualizations to determine expected minimum sample sizes for biotechnological experiments based on the mathematical framework of the Coupon Collector Problem (references see [^1], [^2]).
 
 "
 
@@ -363,8 +363,8 @@ end
 
 
 # ╔═╡ dc696281-7a5b-4568-a4c2-8dde90af43f0
-md""" **💻 Expected observed fraction of the total number of modules**                 $(@bind show_satur Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE "))\
-*The expected fraction of the total number of available modules observed after collecting a given number of designs.*"""
+md""" **💻 Expected observed fraction of the total number of modules**                $(@bind show_satur Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE "))\
+*The fraction of the total number of available modules that is expected to be observed after collecting a given number of designs.*"""
 
 # ╔═╡ eb92ff7c-0140-468c-8b32-f15d1cf15913
 if show_satur == "🔻 SHOW " 
@@ -403,7 +403,7 @@ global sample_size_initial_frac = 5
 	
 	fracs = expectation_fraction_collected.(n, sample_sizes_frac; p_vec = p_vec, r = r)
 	
-	plot(sample_sizes_frac, fracs, title = "Expected fraction of modules observed", 
+	plot(sample_sizes_frac, fracs, title = "Expected observed fraction of the total number of modules", 
 	    xlabel = "sample size", seriestype=:scatter, 
 	    ylabel= "E[fraction observed]", label = "", size=(700,400))
 end
@@ -451,7 +451,7 @@ if show_occ == "🔻 SHOW "
 	j = 0:1:minimum([20, 2*ed])
 			
 	x  = prob_occurrence_module.(p, sample_size_3, j)
-	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability p", title="Chance on № of occurrences for specific module")
+	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability p", title="Probability on № of occurrences for specific module")
 	
 		else
 		rank = parse(Int64, rank_string)
@@ -464,7 +464,7 @@ if show_occ == "🔻 SHOW "
 	j = 0:1:minimum([20, 2*ed])
 			
 	x  = prob_occurrence_module.(p, sample_size_4, j)
-	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability p", title="Chance on № of occurrences for specific module", size=((550,300)))	
+	 plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability p", title="Probability on № of occurrences for specific module", size=((550,300)))	
 			
 		end
 	end
