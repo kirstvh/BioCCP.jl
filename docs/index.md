@@ -7,7 +7,7 @@ BioCCP.jl applies the Coupon Collector Problem to **combinatorial biotechnology*
 
 For a specific combinatorial design set-up of interest, a report with results regarding (expected) minimum sample sizes can be easily retrieved by using the provided Pluto notebook.
 
-References: [1] Boneh, A., &amp; Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66., [2] Doumas, A. V., &amp; Papanicolaou, V. G. (2016). The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp. ESAIM: Probability and Statistics, 20, 367-399.
+<small>References: [1] Boneh, A., &amp; Hofri, M. (1997). The coupon-collector problem revisited—a survey of engineering problems and computational methods. Stochastic Models, 13(1), 39-66., [2] Doumas, A. V., &amp; Papanicolaou, V. G. (2016). The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp. ESAIM: Probability and Statistics, 20, 367-399.</small>
 
 ## Functions
 
