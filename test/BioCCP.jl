@@ -33,18 +33,27 @@ using BioCCP
         @test success_probability(n, t; p = p_uniform) isa Float64
         @test success_probability(n, t; p = p_uniform) > success_probability(n, t; p = p_zipf)
         @test success_probability(n, t; p = p_uniform, m = 1) > success_probability(n, t; p = p_uniform, m = 2)
+        @test all(success_probability(n, t; p = p_uniform) .< success_probability.(n, [t+10, t+100, t+1000]; p = p_uniform))
+        @test all(success_probability.(n, [0, 10, 100, 1000, 10000]) .<= 1)
+        @test all(success_probability.(n, [0, 10, 100, 1000, 10000]) .>= 0)
+
     end
 
     @testset "Expected fraction collected" begin
         @test expectation_fraction_collected(n, t; p = p_uniform) isa Float64
         @test expectation_fraction_collected(n, t; p = p_uniform) > expectation_fraction_collected(n, t; p = p_zipf)
         @test all(expectation_fraction_collected(n, t; p = p_uniform) .< expectation_fraction_collected.(n, [t+10, t+100, t+1000]; p = p_uniform))
+        @test all(expectation_fraction_collected.(n, [0, 10, 100, 1000, 10000]) .<= 1)
+        @test all(expectation_fraction_collected.(n, [0, 10, 100, 1000, 10000]) .>= 0)
+
     end
 
     k = 2
     pᵢ = 0.005
 
     @testset "Probability occurence" begin
-        @test prob_occurrence_module(pi, t, k) isa Float64
+        @test prob_occurrence_module(pᵢ, t, k) isa Float64
+        @test all(prob_occurrence_module.(pᵢ, [0, 10, 100, 1000, 10000], k) .>= 0)
+        @test all(prob_occurrence_module.(pᵢ, [0, 10, 100, 1000, 10000], k) .<= 1)
     end
 end
