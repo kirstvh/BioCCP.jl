@@ -5,6 +5,9 @@ During the **combinatorial engineering of biosystems** such as proteins, genetic
 
 ![](https://github.com/kirstvh/BioCCP/blob/main/BioCCP_img.png)
 
+<p align="left">
+  <img url="https://github.com/kirstvh/BioCCP/blob/main/BioCCP_img.png" width="250"/>
+</p>
 
 ## Functions
 BioCCP contains functions for calculating (expected) minimum sample sizes and related statistics:
