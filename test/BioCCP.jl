@@ -16,11 +16,13 @@ using BioCCP
     @testset "Expectation" begin
         @test expectation_minsamplesize(n; p = p_uniform) isa Int64
         @test expectation_minsamplesize(n; p = p_uniform) < expectation_minsamplesize(n; p = p_zipf)
+        @test expectation_minsamplesize(n; p = p_uniform, m = 1) < expectation_minsamplesize(n; p = p_uniform, m = 2)
     end
 
     @testset "Standard deviation" begin
         @test std_minsamplesize(n; p = p_uniform) isa Int64
         @test std_minsamplesize(n; p = p_uniform) < std_minsamplesize(n; p = p_zipf)
+        @test std_minsamplesize(n; p = p_uniform, m = 1) < std_minsamplesize(n; p = p_uniform, m = 2)
     end 
 
     t = 500
@@ -28,11 +30,13 @@ using BioCCP
     @testset "Success probability" begin
         @test success_probability(n, t; p = p_uniform) isa Float64
         @test success_probability(n, t; p = p_uniform) > success_probability(n, t; p = p_zipf)
+        @test success_probability(n, t; p = p_uniform, m = 1) > success_probability(n, t; p = p_uniform, m = 2)
     end
 
     @testset "Expected fraction collected" begin
         @test expectation_fraction_collected(n, t; p = p_uniform) isa Float64
         @test expectation_fraction_collected(n, t; p = p_uniform) > expectation_fraction_collected(n, t; p = p_zipf)
+        @test all(expectation_fraction_collected(n, t; p = p_uniform) .< expectation_fraction_collected.(n, [t+10, t+100, t+1000]; p = p_uniform))
     end
 
     k = 2
