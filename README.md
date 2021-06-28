@@ -14,7 +14,7 @@ Function name    | Short description
 `success_probability`         | Calculates the probability that the minimum number of designs *T* is smaller than or equal to a given sample size *t*  
 `expectation_fraction_collected` | Returns the fraction of the total number of modules in the design space that is expected to be observed for a given sample size *t*
 `prob_occurrence_module` | Calculates for a module with specified module probability *p*, the probability that the module has occurred *k* times when a given number of designs has been collected
- 
+
 
 For more info about the implementation of the functions, please consult the [docs](https://kirstvh.github.io/BioCCP/) or [source code](/src/BioCCP.jl).
 
@@ -38,6 +38,9 @@ Symbol    | Short description
  > >  1) Assume the probabilities of all modules to be equal (uniform distribution), or
  > >  2) Assume the module probabilities to follow *Zipf's law*, specifying the ratio p<sub>max</sub>/p<sub>min</sub>, or
  > >  3) Assume the histogram of the module probabilities to behave like a *bell curve*, specifying the ratio p<sub>max</sub>/p<sub>min</sub>   
+
+![](https://github.com/kirstvh/BioCCP/blob/main/BioCCP_img.png)
+
 
 Using the inputs, a report for sample size determination is created using the [functions](https://kirstvh.github.io/BioCCP/) described above. The report contains the following sections:
 
