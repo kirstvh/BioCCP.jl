@@ -99,7 +99,11 @@ md"""
 
 # ╔═╡ d4a9da7a-f455-426b-aecd-227c25e1d4e8
 begin
-
+	
+function p_power(n, k)
+    p = (1:n) .^ -k
+    return p ./ sum(p)
+end
 	if ps == "Equal"
 	 	
 		p = ones(n)./sum(ones(n));
@@ -131,8 +135,7 @@ begin
 		
 		if distribution == "Zipf's law"
 			ratio = parse(Float64, pmaxpmin_string)
-			α = exp(log(ratio)/(n-1))
-			p = collect(α.^-(1:n))
+			p = p_power(n, log(ratio)/log(n))
 			p = p ./ sum(p)
 		end
 	end
