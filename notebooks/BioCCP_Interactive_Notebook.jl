@@ -19,7 +19,7 @@ using BioCCP, Plots, PlutoUI
 # ╔═╡ 4d246460-af05-11eb-382b-590e60ba61f5
 md"## Collecting Coupons in combinatorial biotechnology
 
-This notebook provides functions and visualizations to determine expected minimum sample sizes for biotechnological experiments based on the mathematical framework of the Coupon Collector Problem (references see [^1], [^2]).
+This notebook provides functions and corresponding visualizations to determine expected minimum sample sizes for combinatorial biotechnology experiments, based on the mathematical framework of the Coupon Collector Problem (references see [^1], [^2]).
 
 "
 
@@ -56,7 +56,7 @@ end
 begin
 md""" 
  
-№ times of you want to observe each module:         $(@bind m NumberField(1:20))\
+№ times you want to observe each module:         $(@bind m NumberField(1:20))\
 	                                            = 	   *How many times do you want to observe each                                                of the available modules in the total set of                                               designs?*
  """
 	
