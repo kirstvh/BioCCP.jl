@@ -116,7 +116,7 @@ References:
 ```julia-repl
 julia> n = 100
 julia> expectation_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
-519.0
+519
 ```
 """
 function expectation_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
@@ -149,7 +149,7 @@ Calculates the standard deviation on the minimum number of designs to observe ea
 ```julia-repl
 julia> n = 100
 julia> std_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
-126.0
+126
 ```
 """
 function std_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
