@@ -56,7 +56,7 @@ end
 begin
 md""" 
  
-№ times you want to observe each module:         $(@bind m NumberField(1:20))\
+№ times you want to observe each module:            $(@bind m NumberField(1:20))\
 	                                            = 	   *How many times do you want to observe each                                                of the available modules in the total set of                                               designs?*
  """
 	
