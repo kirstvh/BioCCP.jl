@@ -121,6 +121,14 @@ julia> expectation_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
 """
 function expectation_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
     @assert length(p) == n
+    @assert n > 0
+    @assert n isa Int64
+    @assert all(p .>= 0)
+    @assert all(p .<= 1)
+    @assert m > 0
+    @assert m isa Int64
+    @assert r > 0
+    @assert r isa Int64
     E = approximate_moment(n, exp_ccdf; p=p, q=1, m=m, r=r, normalize=normalize)
     return Int(ceil(E))
 end
@@ -146,6 +154,13 @@ julia> std_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
 """
 function std_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
     @assert length(p) == n
+    @assert n > 0
+    @assert n isa Int64
+    @assert all(p .>= 0)
+    @assert m > 0
+    @assert m isa Int64
+    @assert r > 0
+    @assert r isa Int64
     M1 = approximate_moment(n, exp_ccdf; p=p, q=1, m=m, r=r,  normalize=normalize)
     M2 = approximate_moment(n, exp_ccdf; p=p, q=2, m=m, r=r, normalize=normalize)
     var = M2 - M1 - M1^2
@@ -179,6 +194,16 @@ julia> success_probability(n, t; p=ones(n)/n, m=1, r=1, normalize=true)
 ```
 """
 function success_probability(n, t; p=ones(n)/n, m=1, r=1, normalize=true)   
+    @assert length(p) == n
+    @assert n > 0
+    @assert n isa Int64
+    @assert all(p .>= 0)
+    @assert t >= 0
+    @assert t isa Int64
+    @assert m > 0
+    @assert m isa Int64
+    @assert r > 0
+    @assert r isa Int64
     P_success = 1 - exp_ccdf(n, t; p=p, m=m, r=r, normalize=normalize) 
     return P_success
 end
@@ -208,6 +233,14 @@ julia> expectation_fraction_collected(n, t; p=ones(n)/n, r=1, normalize=true)
 ```
 """
 function expectation_fraction_collected(n, t; p=ones(n)/n, r=1, normalize=true)
+    @assert length(p) == n
+    @assert n > 0
+    @assert n isa Int64
+    @assert all(p .>= 0)
+    @assert t >= 0
+    @assert t isa Int64
+    @assert r > 0
+    @assert r isa Int64
     if normalize
         p = p./sum(p)
     end
@@ -241,6 +274,11 @@ julia> prob_occurrence_module(pᵢ, t, k)
 ```
 """
 function prob_occurrence_module(pᵢ, t, k)
+    @assert pᵢ > 0 && pᵢ <= 1
+    @assert t >= 0
+    @assert t isa Int64
+    @assert k > 0
+    @assert k isa Int64
 	return (exp(-1*(pᵢ*t))*(pᵢ*t)^k)/factorial(k) 
 end
 
