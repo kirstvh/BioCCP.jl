@@ -122,7 +122,7 @@ julia> expectation_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
 function expectation_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
     @assert length(p) == n
     E = approximate_moment(n, exp_ccdf; p=p, q=1, m=m, r=r, normalize=normalize)
-    return ceil(E)
+    return Int(ceil(E))
 end
 
 """
@@ -149,7 +149,7 @@ function std_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
     M1 = approximate_moment(n, exp_ccdf; p=p, q=1, m=m, r=r,  normalize=normalize)
     M2 = approximate_moment(n, exp_ccdf; p=p, q=2, m=m, r=r, normalize=normalize)
     var = M2 - M1 - M1^2
-    return ceil(sqrt(var))
+    return Int(ceil(sqrt(var)))
 end
 
 """

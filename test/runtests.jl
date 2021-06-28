@@ -1,4 +1,4 @@
-using Test
+using Test, BioCCP
 
 include("BioCCP.jl")
 
