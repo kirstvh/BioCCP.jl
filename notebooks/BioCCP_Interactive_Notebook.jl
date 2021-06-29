@@ -267,20 +267,17 @@ if show_success == "🔻 SHOW "
 	md"*A curve describing the success probability in function of sample size.*"
 end
 
-# ╔═╡ c39c60d6-7637-409a-bb54-dfbdbd5f3724
-
-
 # ╔═╡ 24f7aae7-d37a-4db5-ace0-c910b178da88
 begin
 if show_success == "🔻 SHOW " 
 	
-sample_size_initial = 5
-	while (1 - success_probability(n, sample_size_initial; p = p, r = r, m = m)) > 0.0005
-		global sample_size_initial += n/10
+sample_size_initial = Int(5)
+	while (1 - success_probability(n, Int(sample_size_initial); p = p, r = r, m = m)) > 0.0005
+		global sample_size_initial += ceil(n/10)
 	end
 		
-	sample_sizes = 0: n/10 :sample_size_initial
-	successes = success_probability.(n, sample_sizes; p = p, r = r, m = m)
+	sample_sizes = Int.(0: ceil(n/10) :sample_size_initial)
+	successes = success_probability.(n, (sample_sizes); p = p, r = r, m = m)
 plot(sample_sizes, successes, title = "Success probability in function of sample size", xlabel = "sample size s", ylabel= "P(s ≤ Sₘᵢₙ)", label = "", legend=:bottomright, size=(600,400), seriestype=:scatter, titlefont=font(10), xguidefont=font(9), yguidefont=font(9))
 		end
 	 
@@ -359,12 +356,12 @@ md""" *A curve describing the expected fraction of modules observed in function 
 # ╔═╡ 7968de5e-5ae8-4ab4-b089-c3d33475af2f
 begin
 	if show_satur == "🔻 SHOW " 
-global sample_size_initial_frac = 5
+global sample_size_initial_frac = Int(5)
 		while (1 - expectation_fraction_collected(n, sample_size_initial_frac; p = p, r = r)) > 0.0005
-		global	 sample_size_initial_frac += n/10
+		global	 sample_size_initial_frac += Int(ceil(n/10))
 		end
 	
-	sample_sizes_frac = 0: n/10 : sample_size_initial_frac
+	sample_sizes_frac = Int.(0: n/10 : sample_size_initial_frac)
 	
 	fracs = expectation_fraction_collected.(n, sample_sizes_frac; p = p, r = r)
 	
@@ -478,7 +475,6 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─317995ed-bdf4-4f78-bd66-a39ffd1dc452
 # ╟─5b559573-9e55-4618-9b9d-f6d4f5aeb5a5
 # ╟─ca5a4cef-df67-4a5e-8a86-75a9fe8c6f37
-# ╟─c39c60d6-7637-409a-bb54-dfbdbd5f3724
 # ╟─24f7aae7-d37a-4db5-ace0-c910b178da88
 # ╟─37f951ee-885c-4bbe-a05f-7c5e48ff4b6b
 # ╟─ca33610c-1be9-4c01-b0b7-ce4b2f7896df
