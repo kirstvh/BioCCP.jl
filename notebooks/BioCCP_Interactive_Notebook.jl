@@ -33,33 +33,20 @@ md"""
 👇 **COMPLETE THE FIELDS BELOW** 👇\
 *First, fill in the input parameters of your problem setting. Then, click outside the text field to update the report.*
 
-№ modules in design space:                       $(@bind n_string TextField(default = "100")) \
-	
-                                            =   *How many different modules or building                                                 blocks are available to construct designs?*
- """
+№ modules in design space:                       $(@bind n_string TextField(default = "100"))                                                                                                                              =   *How many different modules 		or building                                                 blocks are available 		to construct designs?*"""
 	
 end
 
 # ╔═╡ 2c86cbeb-8313-495a-8de1-43dd11d86258
 begin
-md""" 
- 
- 
-	
-№ modules per design:                            $(@bind r NumberField(1:20))\
-	
-                                            =    *How many modules are combined in a single                                               design?*
- """
-	
+md""" № modules per design:                            $(@bind r NumberField(1:20))                                                                                  =   *How many modules are combined in a single                                               design?*"""	
 end
 
 # ╔═╡ ff2de850-c03b-4866-85cc-07405013dea1
 begin
 md""" 
  
-№ times you want to observe each module:            $(@bind m NumberField(1:20))\
-	                                            = 	   *How many times do you want to observe each                                                of the available modules in the total set of                                               designs?*
- """
+№ times you want to observe each module:            $(@bind m NumberField(1:20))                                                                                  =   *How many times do you want to observe each                                                of the available modules in the total set of                                               designs?* """
 	
 end
 
@@ -68,7 +55,7 @@ begin
 md""" 
  
  
-Abundances of modules during library generation:       $(@bind ps Select(["Equal", "Unequal"], default = "Equal"))                                             =    *How are the abundances of the modules                                               distributed during combinatorial generation of                                                the designs? Is each module equally likely to                                                   be included in a design?*"""                    
+Abundances of modules during library generation:       $(@bind ps Select(["Equal", "Unequal"], default = "Equal"))                                                    =    *How are the abundances of the modules                                               distributed during combinatorial generation of                                                the designs? Is each module equally likely to                                                    be included in a design?*"""                    
 	
 end
 
@@ -79,26 +66,28 @@ begin
 		distribution = "Equal"
 	end
 		if ps == "Unequal"	
-	md""" 	                         ↳     Specify distribution:                         
-	$(@bind distribution Select(["Bell curve", "Zipf's law", "Custom vector"], default = " "))"""
+	md""" 	↳     Specify distribution:                         
+	                                                              $(@bind distribution Select(["Bell curve", "Zipf's law", "Custom vector"], default = " "))        """
 		end	
 end
 
 # bell curve ipv normale distrbution, neem quantielen, niet samplen, vaste uitkomst
 
-# ╔═╡ b17f3b8a-61ee-4563-97cd-19ff049a8e1e
+# ╔═╡ 9248311f-2888-49ca-b30c-b3be77b491f6
 begin
-	if distribution == "Bell curve"					
-			md"""                                          pₘₐₓ/pₘᵢₙ:  $(@bind pmaxpmin_str TextField(default = "4")) 
-                                            """
-			end
+	if ps == "Unequal"	
+		md"""
+- *If the exact module probabilities are known, choose "Custom vector".* 
+- *Otherwise, select:*
+  - *"Zipf's law" (when you expect a small number of modules occur quite often, and a very large number of modules occur at the statistical equivalent of zero, but, they do occur.)* 
+  - *"Bell curve" (when you expect a large number of modules to occur at an average probability and a smaller number of modules to occur with a small or large probability)* """
+	end
 end
 
 # ╔═╡ e3b4c2d8-b78c-467e-a863-5eecb8ec58dc
 begin
-	if distribution == "Zipf's law"
-		md"""                                       pₘₐₓ/pₘᵢₙ:   $(@bind pmaxpmin_string TextField(default = "4")) 
-                                            """
+	if distribution == "Zipf's law" || distribution == "Bell curve"	
+		md"""                         ↳     Specify pₘₐₓ/pₘᵢₙ:   $(@bind pmaxpmin_string TextField(default = "4"))"""
 			end
 
 end
@@ -115,7 +104,7 @@ begin
 	# load your custom probability vector!
 	# see for example XLSX package
 	if distribution == "Custom vector"
-		abundances = rand(200:1:400, n)
+		abundances = rand(200:1:1000, n)
 	end
 end
 
@@ -141,7 +130,7 @@ end
 		
 	elseif ps == "Unequal"
 		if distribution == "Bell curve"
-			ratio = parse(Float64, pmaxpmin_str)
+			ratio = parse(Float64, pmaxpmin_string)
 			ab1 = 1
 			ab2 = ratio*ab1
 			μ = (ab1+ab2)/2
@@ -194,7 +183,7 @@ end
 # ╔═╡ d877bd4c-497d-46d1-9c58-b6fe26933bfc
 begin
 	if show_modprobs == "🔻 SHOW "  && distribution == "Bell curve"
-md"""For $n_string modules of which the probabilities form a bell curve with ratio pₘₐₓ/pₘᵢₙ = $pmaxpmin_str , we follow the percentiles of a normal distribution to generate the probability vector.
+md"""For $n_string modules of which the probabilities form a bell curve with ratio pₘₐₓ/pₘᵢₙ = $pmaxpmin_string , we follow the percentiles of a normal distribution to generate the probability vector.
 
 We consider μ to be the mean module probability and σ to be the standard deviation of the module probabilities.
 		
@@ -471,7 +460,7 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─ff2de850-c03b-4866-85cc-07405013dea1
 # ╟─8b684e79-15a8-494c-a58a-811e5d91280a
 # ╟─45507d48-d75d-41c9-a018-299e209f900e
-# ╟─b17f3b8a-61ee-4563-97cd-19ff049a8e1e
+# ╟─9248311f-2888-49ca-b30c-b3be77b491f6
 # ╟─e3b4c2d8-b78c-467e-a863-5eecb8ec58dc
 # ╟─2639e3fb-ccbb-44de-bd15-1c5dbf6c1539
 # ╟─44d4dfee-3073-49aa-867c-3abea10e6e37
