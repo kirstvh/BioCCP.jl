@@ -171,7 +171,7 @@ end
 # ╔═╡ 87c3f5cd-79bf-4ad8-b7f8-3e98ec548a9f
 begin
 	if show_modprobs == "🔻 SHOW "  && distribution == "Bell curve"
-		histogram(p, normalize=:probability,  bar_edges=false,  size = (650, 340), orientation=:v, bins=[(μ -  3.2*σ)/sum(p_unnorm), (μ - 2*σ)/sum(p_unnorm), (μ-σ)/sum(p_unnorm), (μ + σ)/sum(p_unnorm), (μ + 2*σ)/sum(p_unnorm), (μ +  3.2*σ)/sum(p_unnorm)], titlefont=font(10), xguidefont=font(9), yguidefont=font(9))
+		histogram(p, normalize=:probability,  bar_edges=false,  size = (500, 250), orientation=:v, bins=[(μ -  3.2*σ)/sum(p_unnorm), (μ - 2*σ)/sum(p_unnorm), (μ-σ)/sum(p_unnorm), (μ + σ)/sum(p_unnorm), (μ + 2*σ)/sum(p_unnorm), (μ +  3.2*σ)/sum(p_unnorm)], titlefont=font(10), xguidefont=font(9), yguidefont=font(9), label="")
 		# if distribution == "Normally distributed"
 		# 	plot!(x->pdf(Normal(μ, σ), x), xlim=xlims())
 		# 	xlabel!("Abundance"); ylabel!("probability"); title!("Distribution of module abundances")
