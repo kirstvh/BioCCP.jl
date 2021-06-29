@@ -277,7 +277,7 @@ function prob_occurrence_module(pᵢ, t, k)
     @assert pᵢ > 0 && pᵢ <= 1
     @assert t >= 0
     @assert t isa Int64
-    @assert k > 0
+    @assert k >= 0
     @assert k isa Int64
 	return (exp(-1*(pᵢ*t))*(pᵢ*t)^k)/factorial(k) 
 end
