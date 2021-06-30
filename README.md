@@ -21,7 +21,7 @@ Function name    | Short description
 `prob_occurrence_module` | Calculates for a module with specified module probability *p*, the probability that the module has occurred *k* times when a given number of designs has been collected
 
 
-For more info about the implementation of the functions, please consult the [docs](https://kirstvh.github.io/BioCCP/) or [source code](/src/BioCCP.jl).
+For more info about the implementation of the functions, please consult the [docs](https://kirstvh.github.io/BioCCP.jl/) or [source code](/src/BioCCP.jl).
 
 ## Pluto notebook
 
