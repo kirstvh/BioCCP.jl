@@ -312,7 +312,7 @@ begin
 if show_success == "🔻 SHOW " 
 	
 sample_size_initial = Int(5)
-	while (1 - success_probability(n, Int(sample_size_initial*ϵ); 
+	while (1 - success_probability(n, Int(ceil((sample_size_initial*ϵ))); 
 					p = p, r = r, m = m)) > 0.0005
 		global sample_size_initial += ceil(n/10)
 	end
