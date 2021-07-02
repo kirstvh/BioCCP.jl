@@ -54,16 +54,6 @@ md"""
 	
 end
 
-# ╔═╡ 94174047-2ac8-49e2-8e50-f04700d5071b
-begin
-md"""🔹 **Efficiency library generation** (`ϵ`):                      $(@bind ϵ_percent TextField(default="100"))%\
-	
-                                                 =    *Are there inefficiencies when generating                                                      the designs, causing some designs to consist                                                       of less than r modules?*"""	
-end
-
-# ╔═╡ 408b2ae7-fa7c-48da-8aed-c4fed9d85c7a
-ϵ = parse(Float64, ϵ_percent)/100;
-
 # ╔═╡ ff2de850-c03b-4866-85cc-07405013dea1
 begin
 md""" 
@@ -289,7 +279,7 @@ end
 begin
 	if show_success == "🔻 SHOW " 
 	sample_size_1 = parse(Int64, sample_size_1_string);	
-	p_success = success_probability(n, Int(ceil.(sample_size_1*ϵ)); p = p, m = m, r = r)
+	p_success = success_probability(n, Int(ceil.(sample_size_1)); p = p, m = m, r = r)
 	
 	md""" 
               ↳ `Success probability F(t)`  = **$p_success**\
@@ -310,13 +300,13 @@ begin
 if show_success == "🔻 SHOW " 
 	
 sample_size_initial = Int(5)
-	while (1 - success_probability(n, Int(ceil((sample_size_initial*ϵ))); 
+	while (1 - success_probability(n, Int(ceil((sample_size_initial))); 
 					p = p, r = r, m = m)) > 0.0005
 		global sample_size_initial += ceil(n/10)
 	end
 		
 	sample_sizes = Int.(0: ceil(n/10) :sample_size_initial)
-	successes = success_probability.(n, Int.(ceil.(sample_sizes*ϵ)); 
+	successes = success_probability.(n, Int.(ceil.(sample_sizes)); 
 			p = p, r = r, m = m)
 	plot(sample_sizes, successes, 
 			title = "Success probability in function of sample size", 
@@ -345,13 +335,13 @@ if sample_size_1 < E
 		if sample_size_1 <= n/r
 			print_sentence = "P(minimum sample size ≤ $sample_size_1) = 0."        
 		else
-	prob_chebyshev = chebyshev_onesided_smaller(sample_size_1*ϵ, E, sd)
+	prob_chebyshev = chebyshev_onesided_smaller(sample_size_1, E, sd)
 	print_sentence = "P(minimum sample size ≤ $sample_size_1) ≤ $prob_chebyshev. "
 		end
 		
 elseif sample_size_1 > E
 	compare = "greater"
-	prob_chebyshev = chebyshev_onesided_larger(sample_size_1*ϵ, E, sd)
+	prob_chebyshev = chebyshev_onesided_larger(sample_size_1, E, sd)
 	print_sentence = "P(minimum sample size ≥ $sample_size_1) ≤ $prob_chebyshev. "	
 		
 	elseif sample_size_1==E
@@ -382,7 +372,7 @@ end
 begin
 	if show_satur == "🔻 SHOW " 
 	sample_size_2 = parse(Int64, sample_size_2_string)
-	E_fraction = expectation_fraction_collected(n, Int(ceil(sample_size_2*ϵ)); p = p, r = r)
+	E_fraction = expectation_fraction_collected(n, Int(ceil(sample_size_2)); p = p, r = r)
 	
 	md""" 	            ↳ `Expected fraction observed`	= **$E_fraction**
 	"""	
@@ -402,12 +392,12 @@ begin
 	if show_satur == "🔻 SHOW " 
 		global sample_size_initial_frac = Int(5)
 		while (1 - expectation_fraction_collected(n, 
-					Int(ceil(sample_size_initial_frac*ϵ)); p = p, r = r)) > 0.0005
+					Int(ceil(sample_size_initial_frac)); p = p, r = r)) > 0.0005
 			global	 sample_size_initial_frac += Int(ceil(n/10))
 		end
 	
 	sample_sizes_frac = Int.(0: n/10 : sample_size_initial_frac)	
-	fracs = expectation_fraction_collected.(n, Int.(ceil.(sample_sizes_frac*ϵ)); 
+	fracs = expectation_fraction_collected.(n, Int.(ceil.(sample_sizes_frac)); 
 			p = p, r = r)
 	
 	plot(sample_sizes_frac, fracs, 
@@ -457,16 +447,16 @@ if show_occ == "🔻 SHOW "
 	if distribution != "Zipf's law"
 		pᵢ = parse(Float64, p_string)
 		sample_size_3 = parse(Int64, sample_size_3_string)
-		ed = Int(floor(sample_size_3*ϵ*pᵢ))
+		ed = Int(floor(sample_size_3*pᵢ))
 		j = 0:1:minimum([20, 5*ed])	
-		x  = prob_occurrence_module.(pᵢ, Int(ceil(sample_size_3*ϵ)), j)
+		x  = prob_occurrence_module.(pᵢ, Int(ceil(sample_size_3)), j)
 		plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability", title="Probability on № of occurrences for specific module", label="", size=((600,300)), titlefont=font(10),xguidefont=font(9), yguidefont=font(9))
 	
 	else
 		rank = parse(Int64, rank_string)
 		pᵢ = p[rank]
 		sample_size_4 = parse(Int64, sample_size_4_string) 
-		ed = Int(floor(sample_size_4*ϵ*pᵢ))
+		ed = Int(floor(sample_size_4*pᵢ))
 		j = 0:1:minimum([20, 5*ed])
 		x  = prob_occurrence_module.(pᵢ, Int(ceil(sample_size_4)), j)
 	 	plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability", title="Probability on № of occurrences for specific module", size=((600,300)), label="", titlefont=font(10), xguidefont=font(9), yguidefont=font(9))			
@@ -503,8 +493,6 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─9e6f350b-5eb0-4582-9ae3-2f28f8f5aa99
 # ╟─a8c81622-194a-443a-891b-bfbabffccff1
 # ╟─2c86cbeb-8313-495a-8de1-43dd11d86258
-# ╟─94174047-2ac8-49e2-8e50-f04700d5071b
-# ╟─408b2ae7-fa7c-48da-8aed-c4fed9d85c7a
 # ╟─ff2de850-c03b-4866-85cc-07405013dea1
 # ╟─8b684e79-15a8-494c-a58a-811e5d91280a
 # ╟─45507d48-d75d-41c9-a018-299e209f900e
