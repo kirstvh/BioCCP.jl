@@ -482,7 +482,7 @@ begin
 			xlabel = "sample size", seriestype=:scatter, 
 			ylabel= "E[fraction observed]", 
 			label = "", size=(700,400), 
-			titlefont=font(10))
+			titlefont=font(10), xguidefont=font(9), yguidefont=font(9))
 end
 end
 
