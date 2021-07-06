@@ -150,7 +150,7 @@ if ps == "Unequal"
 md"""
     *If the exact module probabilities are known, choose "Custom vector".* 
  *Otherwise, select:*
-  - *"Zipf's law" (when you expect a small number of modules occur quite often, and a very large number of modules occur at the statistical equivalent of zero, but, they do occur.)* 
+  - *"Zipf's law" (when you expect a small number of modules to occur quite often, and a very large number of modules to occur at the statistical equivalent of zero, but, they do occur.)* 
   - *"Bell curve" (when you expect a large number of modules to occur at an average probability and a smaller number of modules to occur with a small or large probability)* """
 end
 
@@ -521,7 +521,7 @@ if show_occ == "🔻 SHOW "
 	else
 		rank = parse(Int64, rank_string)
 		pᵢ = p[rank]
-		ed = Int(floor(sample_size_4*pᵢ))
+		ed = Int(floor(sample_size_3*pᵢ))
 		j = collect(0:1:minimum([20, 5*ed]))
 		x  = prob_occurrence_module.(pᵢ, Int(ceil(sample_size_3)), j)
 	 	plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability", title="Probability on № of occurrences for specific module", size=((600,300)), label="", titlefont=font(10), xguidefont=font(9), yguidefont=font(9))			
