@@ -326,14 +326,19 @@ md""" **💻 Success probability**               �
 # ╔═╡ db4371e4-7f86-4db3-b076-12f6cd220b89
 begin
 	if show_success == "🔻 SHOW " 
-		md"""    👉 Enter your sample size of interest: $(@bind sample_size_1_string TextField(default="500"))""" 
+		sample_size_95 = Int(1)
+		while (0.95 - success_probability(n, Int(ceil((sample_size_95))); 
+					p = p, r = r, m = m)) > 0.00005
+		global sample_size_95 += Int(ceil(n/10))
+	end
+		md"""    👉 Enter your sample size of interest: $(@bind sample_size_1_string TextField(default=string(sample_size_95)))""" 
 		
 	end
-	#genereer tabel + download knop
 end
 
 # ╔═╡ 317995ed-bdf4-4f78-bd66-a39ffd1dc452
 begin
+	
 	if show_success == "🔻 SHOW " 
 	sample_size_1 = parse(Int64, sample_size_1_string);	
 	p_success = success_probability(n, Int(ceil.(sample_size_1)); p = p, m = m, r = r)
@@ -356,7 +361,7 @@ end
 begin
 if show_success == "🔻 SHOW " 
 	
-sample_size_initial = Int(5)
+	sample_size_initial = Int(5)
 	while (1 - success_probability(n, Int(ceil((sample_size_initial))); 
 					p = p, r = r, m = m)) > 0.0005
 		global sample_size_initial += ceil(n/10)
