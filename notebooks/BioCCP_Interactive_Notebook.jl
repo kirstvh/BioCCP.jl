@@ -392,7 +392,9 @@ sample_size_initial = Int(5)
 end
 
 # ╔═╡ 6d9ecb9d-6656-4bb2-ae58-caddd173adbc
-DownloadButton(string("sample_size,", tocsv(sample_sizes), "\n", "success_probability,", tocsv(successes)), "successprobability_$date.csv")
+if show_success == "🔻 SHOW " 
+	DownloadButton(string("sample_size,", tocsv(sample_sizes), "\n", "success_probability,", tocsv(successes)), "successprobability_$date.csv")
+end
 
 # ╔═╡ 37f951ee-885c-4bbe-a05f-7c5e48ff4b6b
 begin
@@ -487,7 +489,9 @@ end
 end
 
 # ╔═╡ 84a2a4de-0667-4120-919a-06e2119112c0
-DownloadButton(string("sample_size,", tocsv(sample_sizes_frac), "\n", "expected_observed_fraction,", tocsv(fracs)), "expectedobservedfraction_$date.csv")
+if show_satur == "🔻 SHOW " 
+	DownloadButton(string("sample_size,", tocsv(sample_sizes_frac), "\n", "expected_observed_fraction,", tocsv(fracs)), "expectedobservedfraction_$date.csv")
+end
 
 # ╔═╡ f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
 md""" **💻 Occurrence of a specific module**                                                                                                       $(@bind show_occ Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE "))\
@@ -515,16 +519,14 @@ end
 
 
 # ╔═╡ 6acb0a97-6469-499f-a5cf-6335d6aa909a
-begin
-
-	
+begin	
 if show_occ == "🔻 SHOW " 
 	sample_size_3 = parse(Int64, sample_size_3_string)
 	if distribution != "Zipf's law"
 		pᵢ = parse(Float64, p_string)
 		
 		ed = Int(floor(sample_size_3*pᵢ))
-		j = 0:1:minimum([20, 5*ed])	
+		j = collect(0:1:minimum([20, 5*ed]))
 		x  = prob_occurrence_module.(pᵢ, Int(ceil(sample_size_3)), j)
 		plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability", title="Probability on № of occurrences for specific module", label="", size=((600,300)), titlefont=font(10),xguidefont=font(9), yguidefont=font(9))
 	
@@ -532,7 +534,7 @@ if show_occ == "🔻 SHOW "
 		rank = parse(Int64, rank_string)
 		pᵢ = p[rank]
 		ed = Int(floor(sample_size_4*pᵢ))
-		j = 0:1:minimum([20, 5*ed])
+		j = collect(0:1:minimum([20, 5*ed]))
 		x  = prob_occurrence_module.(pᵢ, Int(ceil(sample_size_3)), j)
 	 	plot(j,x, seriestype=[:line, :scatter], xlabel="№ occurrences in sample", ylabel="probability", title="Probability on № of occurrences for specific module", size=((600,300)), label="", titlefont=font(10), xguidefont=font(9), yguidefont=font(9))			
 	end
@@ -549,7 +551,9 @@ begin
 end
 
 # ╔═╡ 1d17eed5-ed16-4e8a-8a81-6405ec89e739
-DownloadButton(string("number_of_occurence,", tocsv(sample_sizes_frac), "\n", "probability,", tocsv(fracs)), "occurrencemodule_$date.csv")
+if show_occ == "🔻 SHOW " 
+	DownloadButton(string("number_of_occurence,", tocsv(j), "\n", "probability,", tocsv(x)), "occurrencemodule_$date.csv")
+end
 
 # ╔═╡ fbffaab6-3154-49df-a226-d5810d0b7c38
 md"""## References"""
