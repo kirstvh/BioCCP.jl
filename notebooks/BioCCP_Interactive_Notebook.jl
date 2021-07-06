@@ -140,30 +140,24 @@ begin
 	end
 		if ps == "Unequal"	
 	md""" ↳     **Specify distribution**:                                                                           
-	      $(@bind distribution Select(["Bell curve", "Zipf's law", "Custom vector"], default = " ")) $(@bind help_p_unequal Button("❓"))"""
+	      $(@bind distribution Select(["Bell curve", "Zipf's law", "Custom vector"], default = " "))"""
 		end	
 end
 
 # ╔═╡ 9248311f-2888-49ca-b30c-b3be77b491f6
-begin
-	help_p_unequal
-	if ps == "Unequal"
-	switch_p_unequal = rem(length(vec_p_unequal), 2)
-	push!(vec_p_unequal, 1)
-	if switch_p_unequal == 1
-		md"""
+if ps == "Unequal"
+
+md"""
     *If the exact module probabilities are known, choose "Custom vector".* 
  *Otherwise, select:*
   - *"Zipf's law" (when you expect a small number of modules occur quite often, and a very large number of modules occur at the statistical equivalent of zero, but, they do occur.)* 
   - *"Bell curve" (when you expect a large number of modules to occur at an average probability and a smaller number of modules to occur with a small or large probability)* """
-	end
-	end
 end
 
 # ╔═╡ e3b4c2d8-b78c-467e-a863-5eecb8ec58dc
 begin
 	if distribution == "Zipf's law" || distribution == "Bell curve"	
-		md"""                          ↳     **Specify pₘₐₓ/pₘᵢₙ**:         $(@bind pmaxpmin_string TextField(default = "4"))"""
+		md"""                          ↳     **Specify pₘₐₓ/pₘᵢₙ**:         $(@bind pmaxpmin_string TextField(default = "4"))                                                 =    *The ratio of the largest and smallest                                                   module probability*"""
 			end
 
 end
@@ -208,14 +202,6 @@ md"""
 **💻 Module probabilities**                                                                                                                       $(@bind show_modprobs Select(["🔻 SHOW ", "🔺 HIDE "], default="🔺 HIDE ") )  \
 *How the abundances of the modules are distributed during combinatorial library generation.*
 """
-
-# ╔═╡ d877bd4c-497d-46d1-9c58-b6fe26933bfc
-begin
-	vec_p_normal = []
-	if show_modprobs == "🔻 SHOW "  && distribution == "Bell curve"
-md"""For $n_string modules of which the probabilities form a bell curve with ratio pₘₐₓ/pₘᵢₙ = $pmaxpmin_string , we follow the percentiles of a normal distribution to generate the probability vector ( $(@bind help_p_normal Button("❓")) )."""
-	end	
-end
 
 # ╔═╡ d4a9da7a-f455-426b-aecd-227c25e1d4e8
 begin
@@ -280,14 +266,12 @@ begin
 	end	
 end
 
-# ╔═╡ e33b7fc8-c045-4728-adaa-70596c49f0d3
+# ╔═╡ d877bd4c-497d-46d1-9c58-b6fe26933bfc
 begin
-	help_p_normal
 	if show_modprobs == "🔻 SHOW "  && distribution == "Bell curve"
-	switch_p_normal = rem(length(vec_p_normal), 2)
-	push!(vec_p_normal, 1)
-	if switch_p_normal == 1
-		md"""We consider μ to be the mean module probability and σ to be the standard deviation of the module probabilities.
+md"""For $n_string modules of which the probabilities form a bell curve with ratio pₘₐₓ/pₘᵢₙ = $pmaxpmin_string , we follow the percentiles of a normal distribution to generate the probability vector ( $(@bind help_p_normal Button("❓")) ).
+
+We consider μ to be the mean module probability and σ to be the standard deviation of the module probabilities.
 		
 According to the percentiles
 - 68% of the module probabilities lies in the interval [μ - σ, μ + σ], 
@@ -301,9 +285,8 @@ As a result, we get:
 -  $(n_perc_2)  modules with a probability of $((μ+1.5*σ)/sum(p_unnorm))
 -  $(n_perc_2)  modules with a probability of $((μ-1.5*σ)/sum(p_unnorm))
 -  $(n_perc_3)  modules with a probability of $((μ+2.5*σ)/sum(p_unnorm))
--  $(n_perc_3)  modules with a probability of $((μ-2.5*σ)/sum(p_unnorm)) """
-	end
-	end
+-  $(n_perc_3)  modules with a probability of $((μ-2.5*σ)/sum(p_unnorm))"""
+	end	
 end
 
 # ╔═╡ f098570d-799b-47e2-b692-476a4d95825b
@@ -594,7 +577,6 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─f6ebf9fb-0a29-4cb4-a544-6c6e32bedcc4
 # ╟─87c3f5cd-79bf-4ad8-b7f8-3e98ec548a9f
 # ╟─d877bd4c-497d-46d1-9c58-b6fe26933bfc
-# ╟─e33b7fc8-c045-4728-adaa-70596c49f0d3
 # ╟─d4a9da7a-f455-426b-aecd-227c25e1d4e8
 # ╟─f098570d-799b-47e2-b692-476a4d95825b
 # ╟─2926cbcc-23ff-49cd-a952-b6e188d1d838
