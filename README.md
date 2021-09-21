@@ -45,7 +45,7 @@ Symbol    | Short description
  > >  3) Assume the histogram of the module probabilities to behave like a *bell curve*, specifying the ratio p<sub>max</sub>/p<sub>min</sub>   
 
 
-Using the inputs, a report for sample size determination is created using the [functions](https://kirstvh.github.io/BioCCP/) described above. The report contains the following sections:
+Using the inputs, a report for sample size determination is created using the [functions](https://kirstvh.github.io/BioCCP.jl/) described above. The report contains the following sections:
 
 Report section    |   Short description       
 ---------------- |  -----------------           
