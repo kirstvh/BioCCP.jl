@@ -82,6 +82,9 @@ Launch the Pluto notebook directly from your browser using Binder (no installati
     
 &emsp;&emsp; Finally, open the [notebook file](/notebooks/BioCCP_Interactive_Notebook.jl).
 
+## Case study
+Via the following Binder link, a notebook can be accessed that illustrates the use of the BioCCP.jl package on real biological case studies: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/PlutoNotebooks/main?urlpath=pluto/open?path=/home/jovyan/notebooks/BioCCP_Case_Study.jl).
+
 ## References
 The implementation of formulas was based on the references below:
 
