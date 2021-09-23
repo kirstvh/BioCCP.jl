@@ -149,7 +149,7 @@ julia> std_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
 126
 ```
 """
-function std_minsamplesize(n::Integer; p=ones(n)/n, m::Integer=1, r::Integer=1, normalize=true)
+function std_minsamplesize(n::Integer; p=ones(n)/n, m::Integer=1, r=1, normalize=true)
     @assert length(p) == n
     @assert n > 0
     @assert all(p .>= 0)
@@ -199,7 +199,7 @@ function success_probability(n::Integer, t::Integer; p=ones(n)/n, m::Integer=1, 
 end
 
 """
-    expectation_fraction_collected(n::Integer, t::Integer; p=ones(n)/n, r::Integer=1, normalize=true) 
+    expectation_fraction_collected(n::Integer, t::Integer; p=ones(n)/n, r=1, normalize=true) 
 
 Calculates the fraction of all modules that is expected to be observed
 after collecting `t` designs.
@@ -222,7 +222,7 @@ julia> expectation_fraction_collected(n, t; p=ones(n)/n, r=1, normalize=true)
 0.8660203251420364
 ```
 """
-function expectation_fraction_collected(n::Integer, t::Integer; p=ones(n)/n, r::Integer=1, normalize=true)
+function expectation_fraction_collected(n::Integer, t::Integer; p=ones(n)/n, r=1, normalize=true)
     @assert length(p) == n
     @assert n > 0
     @assert all(p .>= 0)
