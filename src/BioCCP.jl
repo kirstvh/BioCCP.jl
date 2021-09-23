@@ -85,7 +85,7 @@ function approximate_moment(n, fun; p=ones(n)/n, q=1, m=1, r=1,
     @assert length(p) == n
     a = 0; b = 0
     while fun(n, b; p=p, m=m, r=r, normalize=normalize) > 0.00001
-        b += 5
+        b += max(Int(ceil(n/10)), 5)
     end
     δ = (b-a)/steps; t = a:δ:b
     #integration exp_ccdf, see paper References [1]
