@@ -4,7 +4,7 @@
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ 8f64106b-72d6-488f-9f0f-5d13e2cbe6a8
+# ╔═╡ 666850df-859e-489c-b92b-c63b6260c190
 import Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP.jl")
 
 # ╔═╡ e1a7f2da-a38b-4b3c-a238-076769e46408
@@ -63170,13 +63170,13 @@ $$P(k) = \frac{λ^k . e^{-λ}}{k!}$$"
 poisson(k, λ) =  λ^k * exp(-λ) / factorial(k)
 
 # ╔═╡ 69fe641d-afb9-45dc-9aa0-436177b02ac3
-p_0gRNA = poisson(0, λ) #the probability that a cancer cell has 0 integrated gRNA constructs
+p_0gRNA = poisson(0, λ) # the probability that a cancer cell has 0 integrated gRNA constructs
 
 # ╔═╡ e88e908f-be65-488f-a0dd-718a091f9d5c
-p_1gRNA = poisson(1, λ) #the probability that a cancer cell has 1 integrated gRNA construct
+p_1gRNA = poisson(1, λ) # the probability that a cancer cell has 1 integrated gRNA construct
 
 # ╔═╡ 480d6282-ce97-4127-957d-d0b9fd37a7e4
-p_2gRNA = poisson(2, λ) #the probability that a cancer cell has 2 integrated gRNA constructs
+p_2gRNA = poisson(2, λ) # the probability that a cancer cell has 2 integrated gRNA constructs
 
 # ╔═╡ 55e0b804-a3ee-4667-8367-38b1b20b0096
 md"
@@ -63194,7 +63194,7 @@ md"With this information, we can calculate the **average number of gRNA integran
 
 # ╔═╡ fa7b1373-006c-48e8-917b-c750bce86e09
 r = sum([k*poisson(k, λ)/Pₛᵤᵣᵥᵢᵥₐₗ for k in 1:20]) 
-#calculation of expected value: summation over number of integrated constructs multiplied by its probability (normalized by percentage of cells that survived)
+# calculation of expected value: summation over number of integrated constructs multiplied by its probability (normalized by percentage of cells that survived)
 
 # ╔═╡ b4cc09e0-2a6a-4ab6-8153-cbc817dede2e
 md"#### Statistics for determining a minimum sample size using BioCCP.jl
@@ -63210,6 +63210,30 @@ expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = m)
 # ╔═╡ b8fe484e-1189-4fd0-85b9-715e084d65da
 std_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = m)
 
+# ╔═╡ ecf6292c-7cdd-4886-8a59-be8e4f2751b7
+md"In the study of Chen *et al.*, 3 × 10⁷ cells are injected into the flanks of mice. This exceeds the expected minimum sample size to observe each gRNA at least once. Let's investigate whether this sample size covers 2 complete sets of gRNAs."
+
+# ╔═╡ 7087616e-2c36-4e50-b496-e3c282979b66
+expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 2)
+
+# ╔═╡ c9759dda-7c03-4970-9b1c-9c3cf51acbd6
+expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 2) <= 3*10^7
+
+# ╔═╡ c9a5ae62-adb0-4f37-ba5a-78ccd2c8f159
+expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 3)
+
+# ╔═╡ 78a7242e-9398-4a26-b93a-69ccbed70381
+expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 3) <= 3*10^7
+
+# ╔═╡ aa11752d-7740-4c38-b7ee-ed5fe1b3fda3
+expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 4)
+
+# ╔═╡ f8322936-8e95-4c66-9fac-a79930359af0
+expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 5)
+
+# ╔═╡ 4b4c6a86-d317-4d6c-be0d-1c9c805ecfe4
+expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 10)
+
 # ╔═╡ 7b43e546-07f0-45ce-9d2a-52894adad822
 md"The **success probability curve**, describing the probability that the minimum number of cells that should be sampled to observe all gRNAs at least $m time(s) is smaller than or equal to a given sample size  on the x-axis:"
 
@@ -63217,20 +63241,20 @@ md"The **success probability curve**, describing the probability that the minimu
 begin
 	sample_size_initial = 10^5
 		while (1 - success_probability(n_gRNAs, sample_size_initial; p = p_gRNA, r = r, m = m)) > 0.0005
-			global sample_size_initial += n_gRNAs/10
+			global sample_size_initial += Int(ceil(n_gRNAs/10))
 		end
 			
-		sample_sizes = ceil.(0:n_gRNAs*3:sample_size_initial)
-		successes = success_probability.(n_gRNAs, ceil.(sample_sizes); p = p_gRNA, r = r, m = m)
+		sample_sizes = Int.(ceil.(0:n_gRNAs*3:sample_size_initial))
+		successes = success_probability.(n_gRNAs, sample_sizes; p = p_gRNA, r = r, m = m)
 	plot(sample_sizes, successes, title = "Success probability to sample each gRNA at least $m time 
 		in function of sample size", xlabel = "number of cells sampled", ylabel= "success probability", label = "", legend=:bottomright, size=(600,400), seriestype=:scatter, titlefont=font(10),xguidefont=font(9), yguidefont=font(9))
 end
 
 # ╔═╡ 60c3ce0d-85be-42f0-a869-1895abc096f3
-md"When the number of cells is equal to 1.1*10⁷, the probability that all gRNAs will be represented in the genome-wide screening experiment at least once, is:"
+md"When the number of cells is equal to 1.1 x 10⁷, the probability that all gRNAs will be represented in the genome-wide screening experiment at least once, is:"
 
 # ╔═╡ 7eb18559-e2c0-4c34-a2b2-4e3c3ab831a6
-success_probability(63090, 1.1e7; p = p_gRNA, r = r, m = m)
+success_probability(63090, 11*10^6; p = p_gRNA, r = 1, m = m)
 
 # ╔═╡ dc696281-7a5b-4568-a4c2-8dde90af43f0
 md"The **fraction of the total number of available gRNAs that is expected to be observed** after injecting a given number of cells, is displayed by the curve below:"
@@ -63239,10 +63263,10 @@ md"The **fraction of the total number of available gRNAs that is expected to be 
 begin
 global sample_size_initial_frac = 10000
 		while (1 - expectation_fraction_collected(n_gRNAs, sample_size_initial_frac; p=p_gRNA, r = r)) > 0.000005
-		global	 sample_size_initial_frac += n_gRNAs/10
+		global	 sample_size_initial_frac += Int(ceil(n_gRNAs/10))
 		end
 	
-	sample_sizes_frac = collect(0 : n_gRNAs/5 : sample_size_initial_frac)
+	sample_sizes_frac = Int.(ceil.(collect(0 : n_gRNAs/5 : sample_size_initial_frac)))
 	fracs = expectation_fraction_collected.(n_gRNAs, sample_sizes_frac; p=p_gRNA, r = r)
 	
 	plot(sample_sizes_frac, fracs, 
@@ -63258,13 +63282,13 @@ end
 md"When 50000 cells are injected, it is expected that, on average, approximately 53% of the gRNAs is represented:"
 
 # ╔═╡ f0eaf96b-0bc0-4194-9a36-886cb1d66e00
-expectation_fraction_collected(n_gRNAs, 5e4; p = p_gRNA, r = r)
+expectation_fraction_collected(n_gRNAs, 5*10^4; p = p_gRNA, r = r)
 
 # ╔═╡ 667fc6a8-b3ff-464d-903c-e215e7d2f472
 pᵢ_gRNA = p_gRNA[1]
 
 # ╔═╡ ead64d36-947a-4b9f-a0f7-a1821039f5b3
-n_cells = 3e6
+n_cells = 3*10^6
 
 # ╔═╡ f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
 md""" For the gRNA with the lowest abundance in the plasmid library, the probability that it is observed *k* times when injecting $n_cells cancer cells in the mice, can be described by the following curve:"""
@@ -63297,7 +63321,7 @@ md"""[^1]:  Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., .
 
 
 # ╔═╡ Cell order:
-# ╠═8f64106b-72d6-488f-9f0f-5d13e2cbe6a8
+# ╠═666850df-859e-489c-b92b-c63b6260c190
 # ╠═e1a7f2da-a38b-4b3c-a238-076769e46408
 # ╟─4d246460-af05-11eb-382b-590e60ba61f5
 # ╟─ad7e5e06-55b2-4752-9335-2364489932eb
@@ -63325,6 +63349,14 @@ md"""[^1]:  Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., .
 # ╠═0a99939a-4edb-488d-bbdf-4a425c808607
 # ╠═f35928d5-e8c2-4c9f-b4ba-9cb58eafb9e0
 # ╠═b8fe484e-1189-4fd0-85b9-715e084d65da
+# ╟─ecf6292c-7cdd-4886-8a59-be8e4f2751b7
+# ╠═7087616e-2c36-4e50-b496-e3c282979b66
+# ╠═c9759dda-7c03-4970-9b1c-9c3cf51acbd6
+# ╠═c9a5ae62-adb0-4f37-ba5a-78ccd2c8f159
+# ╠═78a7242e-9398-4a26-b93a-69ccbed70381
+# ╠═aa11752d-7740-4c38-b7ee-ed5fe1b3fda3
+# ╠═f8322936-8e95-4c66-9fac-a79930359af0
+# ╠═4b4c6a86-d317-4d6c-be0d-1c9c805ecfe4
 # ╟─7b43e546-07f0-45ce-9d2a-52894adad822
 # ╟─ca7ecf8b-634e-4fa5-aaa8-102fa488c7a1
 # ╟─60c3ce0d-85be-42f0-a869-1895abc096f3
