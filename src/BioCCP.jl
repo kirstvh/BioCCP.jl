@@ -120,7 +120,7 @@ julia> expectation_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
 519
 ```
 """
-function expectation_minsamplesize(n::Integer; p=ones(n)/n, m::Integer=1, r::Integer=1, normalize=true)
+function expectation_minsamplesize(n::Integer; p=ones(n)/n, m::Integer=1, r=1, normalize=true)
     @assert length(p) == n
     @assert n > 0
     @assert all(p .>= 0)
@@ -131,7 +131,7 @@ function expectation_minsamplesize(n::Integer; p=ones(n)/n, m::Integer=1, r::Int
 end
 
 """
-    std_minsamplesize(n::Integer; p=ones(n)/n, m::Integer=1, r::Integer=1, normalize=true)
+    std_minsamplesize(n::Integer; p=ones(n)/n, m::Integer=1, r=1, normalize=true)
 
 Calculates the standard deviation on the minimum number of designs to observe each module at least `m` times.
     
@@ -162,7 +162,7 @@ function std_minsamplesize(n::Integer; p=ones(n)/n, m::Integer=1, r::Integer=1, 
 end
 
 """
-    success_probability(n::Integer, t::Integer; p=ones(n)/n, m::Integer=1, r::Integer=1, normalize=true)
+    success_probability(n::Integer, t::Integer; p=ones(n)/n, m::Integer=1, r=1, normalize=true)
 
 Calculates the success probability `F(t) = P(T ≤ t)` or the probability that 
 the minimum number of designs `T` to see each module at least `m` times
@@ -187,7 +187,7 @@ julia> success_probability(n, t; p=ones(n)/n, m=1, r=1, normalize=true)
 0.7802171997092149
 ```
 """
-function success_probability(n::Integer, t::Integer; p=ones(n)/n, m::Integer=1, r::Integer=1, normalize=true)   
+function success_probability(n::Integer, t::Integer; p=ones(n)/n, m::Integer=1, r=1, normalize=true)   
     @assert length(p) == n
     @assert n > 0
     @assert all(p .>= 0)
