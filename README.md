@@ -6,7 +6,7 @@ During the **combinatorial engineering of biosystems** such as proteins, genetic
 ![](https://github.com/kirstvh/BioCCP/blob/main/BioCCP_img.png)
 
 <p align="left">
-  <img url="https://github.com/kirstvh/BioCCP/blob/main/BioCCP_img.png" width="250"/>
+  <img url="https://github.com/kirstvh/BioCCP.jl/main/BioCCP_img.png" width="250"/>
 </p>
 
 ## Functions
