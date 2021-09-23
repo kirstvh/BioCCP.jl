@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.14.8
+# v0.16.0
 
 using Markdown
 using InteractiveUtils
@@ -13,8 +13,11 @@ macro bind(def, element)
     end
 end
 
+# ╔═╡ bccc6db2-132b-4300-bf9f-f60260b7cff5
+import Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP.jl")
+
 # ╔═╡ 2d3ad982-ef1f-45ae-b247-9679c0faa853
-using BioCCP, Plots, PlutoUI
+using Plots, PlutoUI, BioCCP
 
 # ╔═╡ 38b4c196-4df3-4585-81f1-ea1156cd4777
 md"                                                             $(@bind date DateField())"
@@ -269,7 +272,7 @@ end
 # ╔═╡ d877bd4c-497d-46d1-9c58-b6fe26933bfc
 begin
 	if show_modprobs == "🔻 SHOW "  && distribution == "Bell curve"
-md"""For $n_string modules of which the probabilities form a bell curve with ratio pₘₐₓ/pₘᵢₙ = $pmaxpmin_string , we follow the percentiles of a normal distribution to generate the probability vector ( $(@bind help_p_normal Button("❓")) ).
+md"""For $n_string modules of which the probabilities form a bell curve with ratio pₘₐₓ/pₘᵢₙ = $pmaxpmin_string , we follow the percentiles of a normal distribution to generate the probability vector.
 
 We consider μ to be the mean module probability and σ to be the standard deviation of the module probabilities.
 		
@@ -560,6 +563,7 @@ md"""[^1]:  Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector�
 # ╟─38b4c196-4df3-4585-81f1-ea1156cd4777
 # ╟─4d246460-af05-11eb-382b-590e60ba61f5
 # ╟─a2fd6000-1450-4dfe-9426-5303ae64bfb3
+# ╠═bccc6db2-132b-4300-bf9f-f60260b7cff5
 # ╠═2d3ad982-ef1f-45ae-b247-9679c0faa853
 # ╟─9e6f350b-5eb0-4582-9ae3-2f28f8f5aa99
 # ╟─a8c81622-194a-443a-891b-bfbabffccff1
