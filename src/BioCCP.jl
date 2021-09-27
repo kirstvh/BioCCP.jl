@@ -82,7 +82,7 @@ steps=10000, normalize=true)
 ```
 """
 function approximate_moment(n, fun; p=ones(n)/n, q=1, m=1, r=1,
-	        steps=10000, normalize=true)
+	        steps=1000, normalize=true)
     @assert length(p) == n
     a = 0; b = n*log(n) 
     ϵ = 0.00001 # error tolerance
