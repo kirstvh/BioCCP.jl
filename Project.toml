@@ -2,3 +2,6 @@ name = "BioCCP"
 uuid = "79e6b149-e254-49fe-a721-3c4960de1574"
 authors = ["Kirsten Van Huffel <kirsten_vh@hotmail.com>"]
 version = "0.1.0"
+
+[deps]
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
