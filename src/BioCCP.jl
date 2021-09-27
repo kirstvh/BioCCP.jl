@@ -61,7 +61,7 @@ end
 
 """
     approximate_moment(n, fun; p=ones(n)/n, q=1, m=1, r=1,
-steps=10000, normalize=true)
+steps=1000, normalize=true)
 
 Calculates the q-th rising moment of `T[N]` (number of designs that are needed to collect
 all modules `m` times). Integral is approximated by the Riemann sum.
@@ -82,15 +82,22 @@ steps=10000, normalize=true)
 ```
 """
 function approximate_moment(n, fun; p=ones(n)/n, q=1, m=1, r=1,
-	        steps=10000, normalize=true)
+	        steps=500, normalize=true)
     @assert length(p) == n
-    a = 0; b = 0
-    while fun(n, b; p=p, m=m, r=r, normalize=normalize) > 0.00001
-        b += max(Int(ceil(n/10)), 5)
+    a = 0; b = n*log(n) 
+    ϵ = 0.001 # error tolerance
+    while fun(n, b; p=p, m=m, r=r, normalize=normalize) > ϵ
+        b += n
+    end
+    
+    # integration exp_ccdf, see paper References [1]
+    # build in adaptive integration (exp_ccdf is a very steep function): minimize function evaluation at constant function value, only evaluate function at steep part
+    a = deepcopy(b)
+    while fun(n, a; p=p, m=m, r=r, normalize=normalize) < 1 - ϵ
+	a += -n/10
     end
     δ = (b-a)/steps; t = a:δ:b
-    #integration exp_ccdf, see paper References [1]
-    qth_moment = q .* sum(δ .* fun.(n, t; p=p, m=m, r=r, normalize=normalize) .* t.^[q-1]) 
+    qth_moment = q * sum(δ .* 1 .* (0:δ:a-δ).^[q-1])  + q * sum(δ .* fun.(n, t; p=p, m=m, r=r, normalize=normalize) .* t.^[q-1]) 
     return qth_moment           
 end
 
@@ -237,7 +244,7 @@ function expectation_fraction_collected(n::Integer, t::Integer; p=ones(n)/n, r=1
 end
 
 """
-    prob_occurrence_module(pᵢ, t::Integer, k::Integer)
+    prob_occurrence_module(pᵢ, t::Integer, r, k::Integer)
 
 Calculates probability that specific module with module probability `pᵢ` 
 has occurred `k` times after collecting `t` designs.
