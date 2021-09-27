@@ -237,7 +237,7 @@ function expectation_fraction_collected(n::Integer, t::Integer; p=ones(n)/n, r=1
 end
 
 """
-    prob_occurrence_module(pᵢ, t::Integer, k::Integer)
+    prob_occurrence_module(pᵢ, t::Integer, r, k::Integer)
 
 Calculates probability that specific module with module probability `pᵢ` 
 has occurred `k` times after collecting `t` designs.
