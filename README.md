@@ -68,7 +68,7 @@ Launch the Pluto notebook directly from your browser using Binder (no installati
 
 &emsp; **(2)** &emsp; Install BioCCP in the Julia REPL (hit ] to enter package mode):
 
-    ] add https://github.com/kirstvh/BioCCP
+    using Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP")
 
 &emsp; **(3)** &emsp; For using the [Pluto notebook](/notebooks/BioCCP_Interactive_Notebook.jl):
 
