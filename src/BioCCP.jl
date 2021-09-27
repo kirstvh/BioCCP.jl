@@ -51,8 +51,7 @@ function exp_ccdf(n, t; p=ones(n)/n, m=1, r=1, normalize=true)
     for i in 1:n
           Sm = 0
         for j in 1:m
-	      Sm += ((p[i]*r*t)^(j-1))/factorial(j-1)
-#             Sm += ((p[i]*r*t)^(j-1))/factorial(big(j-1)) #formulas see paper reference [1]
+            Sm += ((p[i]*r*t)^(j-1))/factorial(big(j-1)) #formulas see paper reference [1]
         end 
         P_cdf *= (1 - Sm*exp(-p[i]*r*t))        
     end   
@@ -85,7 +84,7 @@ steps=10000, normalize=true)
 function approximate_moment(n, fun; p=ones(n)/n, q=1, m=1, r=1,
 	        steps=10000, normalize=true)
     @assert length(p) == n
-    a = 0; b = 0
+    a = 0; b = n*log(n) 
     while fun(n, b; p=p, m=m, r=r, normalize=normalize) > 0.00001
         b += max(Int(ceil(n/10)), 5)
     end
