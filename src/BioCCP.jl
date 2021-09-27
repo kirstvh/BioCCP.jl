@@ -257,7 +257,8 @@ References:
 julia> pᵢ = 0.005
 julia> t = 500
 julia> k = 2
-julia> prob_occurrence_module(pᵢ, t, k)
+julia> r = 1
+julia> prob_occurrence_module(pᵢ, t, r, k)
 0.25651562069968376
 ```
 """
