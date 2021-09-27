@@ -74,7 +74,7 @@ Launch the Pluto notebook directly from your browser using Binder (no installati
 
 &emsp;&emsp; In the Julia REPL, hit the following command to install the additional packages [Pluto](https://github.com/fonsp/Pluto.jl), [PlutoUI](https://github.com/fonsp/PlutoUI.jl) and [Plots](https://github.com/JuliaPlots/Plots.jl) :
   
-    ] add Pluto, PlutoUI, Plots
+    using Pkg; Pkg.add["Pluto", "PlutoUI", "Plots", "Distributions"]
 
 &emsp;&emsp; Then start Pluto in the Julia REPL:
 
