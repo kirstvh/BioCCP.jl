@@ -260,11 +260,12 @@ julia> prob_occurrence_module(pᵢ, t, k)
 0.25651562069968376
 ```
 """
-function prob_occurrence_module(pᵢ, t::Integer, k::Integer)
+function prob_occurrence_module(pᵢ, t::Integer, r, k::Integer)
     @assert pᵢ > 0 && pᵢ <= 1
     @assert t >= 0
+    @assert r >= 0
     @assert k >= 0
-	return (exp(-1*(pᵢ*t))*(pᵢ*t)^k)/factorial(k) 
+	return (exp(-1*(pᵢ*t*r))*(pᵢ*t*r)^k)/factorial(k) 
 end
 
 end
