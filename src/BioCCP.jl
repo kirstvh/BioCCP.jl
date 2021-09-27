@@ -85,12 +85,22 @@ function approximate_moment(n, fun; p=ones(n)/n, q=1, m=1, r=1,
 	        steps=10000, normalize=true)
     @assert length(p) == n
     a = 0; b = n*log(n) 
-    while fun(n, b; p=p, m=m, r=r, normalize=normalize) > 0.00001
-        b += max(Int(ceil(n/10)), 5)
+    ϵ = 0.00001 # error tolerance
+    while fun(n, b; p=p, m=m, r=r, normalize=normalize) > ϵ
+        b += n
     end
+    
+    # integration exp_ccdf, see paper References [1]
+    # build in adaptive integration (exp_ccdf is a very steep function): minimize function evaluation at constant function value, only evaluate function at steep part
+    a = deepcopy(b)
+    while fun(n, b₂; p=p, m=m, r=r, normalize=normalize) < 1 - ϵ
+	a += -n
+    end
+
     δ = (b-a)/steps; t = a:δ:b
-    #integration exp_ccdf, see paper References [1]
-    qth_moment = q .* sum(δ .* fun.(n, t; p=p, m=m, r=r, normalize=normalize) .* t.^[q-1]) 
+    qth_moment = q * sum(δ .* 1 .* (0:δ:a).^[q-1])  + q * sum(δ .* fun.(n, t; p=p, m=m, r=r, normalize=normalize) .* t.^[q-1]) 
+
+    qth_moment = q * (0:δ:a).^(q-1)  + q * sum(δ .* fun.(n, t; p=p, m=m, r=r, normalize=normalize) .* t.^[q-1]) 
     return qth_moment           
 end
 
