@@ -2,6 +2,7 @@ module BioCCP
 
  
 using Base: Integer
+using Distributions
 export expectation_minsamplesize, std_minsamplesize, success_probability, 
         expectation_fraction_collected, prob_occurrence_module
 
@@ -265,7 +266,8 @@ function prob_occurrence_module(pᵢ, t::Integer, r, k::Integer)
     @assert t >= 0
     @assert r >= 0
     @assert k >= 0
-	return (exp(-1*(pᵢ*t*r))*(pᵢ*t*r)^k)/factorial(k) 
+    poisson = Poisson(pᵢ * t * r)
+	return pdf(poisson, k)
 end
 
 end
