@@ -364,7 +364,7 @@ end
 begin
 	if show_success == "🔻 SHOW " 
 	sample_size_1 = parse(Int64, sample_size_1_string);
-	p_success = success_probability(n, sample_size_1; p = p_vec, m = m, r = r)
+	p_success = Float64(success_probability(n, sample_size_1; p = p_vec, m = m, r = r))
 	
 	md""" 
               ↳ `Success probability F(t)`  = **$p_success**\
@@ -519,9 +519,9 @@ if show_occ == "🔻 SHOW "
 
 	if distribution != "Zipf's law"
 		pᵢ = parse(Float64, p_string)
-		ed = Int(floor(sample_size_3*pᵢ))
-		j = collect(0:1:minimum([20, 4*ed]))
-		x  = prob_occurrence_module.(pᵢ, sample_size_3, j)
+		ed = Int(floor(sample_size_3*pᵢ*r))
+		j = collect(0:1:3*ed)
+		x  = prob_occurrence_module.(pᵢ, sample_size_3, r, j)
 			
 		plot(j,x, seriestype=[:scatter, :line], xlabel="occurrences in sample",
 				ylabel="probability", 
@@ -532,9 +532,9 @@ if show_occ == "🔻 SHOW "
 	else
 		rank = parse(Int64, rank_string)
 		pᵢ = p_vec[rank]	
-		ed = Int(floor(sample_size_3*pᵢ))
-		j = collect(0:1:minimum([20, 4*ed]))
-		x  = prob_occurrence_module.(pᵢ, sample_size_3, j)
+		ed = Int(floor(sample_size_3*pᵢ*r))
+		j = collect(0:1:3*ed)
+		x  = prob_occurrence_module.(pᵢ, sample_size_3, r, j)
 			
 		plot(j,x, seriestype=[:scatter, :line], xlabel="occurrences in sample",
 				ylabel="probabilityS", 

@@ -8,13 +8,17 @@ using InteractiveUtils
 import Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP.jl")
 
 # ╔═╡ e1a7f2da-a38b-4b3c-a238-076769e46408
-using Plots, PlutoUI, BioCCP
+using Plots, PlutoUI, Distributions, BioCCP
 
 # ╔═╡ 4d246460-af05-11eb-382b-590e60ba61f5
-md"## Case study
+md"## BioCCP Case studies
 
 
-In this notebook, the BioCCP.jl package will be applied onto a real biological problem. More specifically, we will illustrate how it can aid in determining an appropriate sample size in order to guarantee sufficient coverage of a CRISPR-Cas 9 guide RNA library. As a case study, we consider the paper 'Genome-wide CRISPR Screen in a Mouse Model of Tumor Growth and Metastasis' (Chen *et al*, 2015) [^1]. 
+In this notebook, the BioCCP.jl package will be applied onto a real biological problem. More specifically, we will 
+
+(1) illustrate how BioCCP can aid in determining an appropriate sample size in order to guarantee sufficient coverage of a CRISPR-Cas 9 guide RNA library. For this case study, we consider the paper 'Genome-wide CRISPR Screen in a Mouse Model of Tumor Growth and Metastasis' (Chen *et al.*, 2015) [^1]. 
+
+(2) show how BioCCP assists in sample determination for screening of modular proteins. For this case study, we will use the study 'Rapid and High-Throughput Evaluation of Diverse Configurations of Engineered Lysins Using the VersaTile Technique' (Duyvejonck *et al.*, 2021) [^2].
 
 "
 
@@ -63140,9 +63144,10 @@ md"which can be summarized in the following unimodal read distribution: "
 
 # ╔═╡ 94bcc8de-a0be-47ab-a03a-b04c351ad6f0
 begin
-	histogram(reads_gRNA,  bar_edges=false, bins=125,  size = (700, 320), orientation=:v, titlefont=font(10), xguidefont=font(9), yguidefont=font(9), label="")
-	  
-			xlabel!("Number of reads"); ylabel!("Frequency"); title!("Distribution of gRNA reads in plasmid pool")
+	histogram(reads_gRNA,  bar_edges=false, bins=100,  size = (700, 320), orientation=:v, titlefont=font(10), xguidefont=font(9), yguidefont=font(9), label="")
+	# using StatsPlots
+# density(reads_gRNA, label="") 
+			xlabel!("Number of reads"); ylabel!("Density"); title!("Distribution of gRNA reads in plasmid pool")
 end
 
 # ╔═╡ 364c38ca-8637-4d26-8d64-525222d24033
@@ -63166,17 +63171,17 @@ $$P(k) = \frac{λ^k . e^{-λ}}{k!}$$"
 # ╔═╡ 28dda5a1-546a-411f-9b8b-398e37195b13
 λ = MOI
 
-# ╔═╡ 827b42d9-9bf1-43a8-8440-47c36eedd5fc
-poisson(k, λ) =  λ^k * exp(-λ) / factorial(k)
+# ╔═╡ aad92f19-6935-4cbd-8e0f-d16a0d379386
+poisson = Poisson(λ)
 
 # ╔═╡ 69fe641d-afb9-45dc-9aa0-436177b02ac3
-p_0gRNA = poisson(0, λ) # the probability that a cancer cell has 0 integrated gRNA constructs
+p_0gRNA = pdf(poisson, 0) # the probability that a cancer cell has 0 integrated gRNA constructs
 
 # ╔═╡ e88e908f-be65-488f-a0dd-718a091f9d5c
-p_1gRNA = poisson(1, λ) # the probability that a cancer cell has 1 integrated gRNA construct
+p_1gRNA = pdf(poisson, 1) # the probability that a cancer cell has 1 integrated gRNA construct
 
 # ╔═╡ 480d6282-ce97-4127-957d-d0b9fd37a7e4
-p_2gRNA = poisson(2, λ) # the probability that a cancer cell has 2 integrated gRNA constructs
+p_2gRNA = pdf(poisson, 2) # the probability that a cancer cell has 2 integrated gRNA constructs
 
 # ╔═╡ 55e0b804-a3ee-4667-8367-38b1b20b0096
 md"
@@ -63187,13 +63192,13 @@ $$P_{survival} = P(k>0) = 1-P(k=0)$$
 "
 
 # ╔═╡ d021a50b-3bd1-4125-a939-1bba5eace898
-Pₛᵤᵣᵥᵢᵥₐₗ = 1 - poisson(0, λ)
+Pₛᵤᵣᵥᵢᵥₐₗ = 1 - pdf(poisson, 0)
 
 # ╔═╡ 2bedff06-473e-49c0-9d8c-a0cde03ad554
 md"With this information, we can calculate the **average number of gRNA integrands per cancer cell** *r*:"
 
 # ╔═╡ fa7b1373-006c-48e8-917b-c750bce86e09
-r = sum([k*poisson(k, λ)/Pₛᵤᵣᵥᵢᵥₐₗ for k in 1:20]) 
+r = sum([k*pdf(poisson, k)/Pₛᵤᵣᵥᵢᵥₐₗ for k in 1:20]) 
 # calculation of expected value: summation over number of integrated constructs multiplied by its probability (normalized by percentage of cells that survived)
 
 # ╔═╡ b4cc09e0-2a6a-4ab6-8153-cbc817dede2e
@@ -63210,29 +63215,11 @@ expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = m)
 # ╔═╡ b8fe484e-1189-4fd0-85b9-715e084d65da
 std_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = m)
 
-# ╔═╡ ecf6292c-7cdd-4886-8a59-be8e4f2751b7
-md"In the study of Chen *et al.*, 3 × 10⁷ cells are injected into the flanks of mice. This exceeds the expected minimum sample size to observe each gRNA at least once. Let's investigate whether this sample size covers 2 complete sets of gRNAs."
+# ╔═╡ 224d556c-cd9d-4c00-9cde-1c3df7cfcdef
+md"In the study of Chen *et al.*, 3 × 10⁷ cells are injected into the flanks of mice. This exceeds the expected minimum sample size to observe each gRNA at least once."
 
-# ╔═╡ 7087616e-2c36-4e50-b496-e3c282979b66
-expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 2)
-
-# ╔═╡ c9759dda-7c03-4970-9b1c-9c3cf51acbd6
-expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 2) <= 3*10^7
-
-# ╔═╡ c9a5ae62-adb0-4f37-ba5a-78ccd2c8f159
-expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 3)
-
-# ╔═╡ 78a7242e-9398-4a26-b93a-69ccbed70381
-expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 3) <= 3*10^7
-
-# ╔═╡ aa11752d-7740-4c38-b7ee-ed5fe1b3fda3
-expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 4)
-
-# ╔═╡ f8322936-8e95-4c66-9fac-a79930359af0
-expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 5)
-
-# ╔═╡ 4b4c6a86-d317-4d6c-be0d-1c9c805ecfe4
-expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = 10)
+# ╔═╡ aa29947a-4dcb-48d8-9ad0-3828f8d4b8d2
+sample_size_paper = 3*10^7
 
 # ╔═╡ 7b43e546-07f0-45ce-9d2a-52894adad822
 md"The **success probability curve**, describing the probability that the minimum number of cells that should be sampled to observe all gRNAs at least $m time(s) is smaller than or equal to a given sample size  on the x-axis:"
@@ -63251,10 +63238,40 @@ begin
 end
 
 # ╔═╡ 60c3ce0d-85be-42f0-a869-1895abc096f3
-md"When the number of cells is equal to 1.1 x 10⁷, the probability that all gRNAs will be represented in the genome-wide screening experiment at least once, is:"
+md"When the number of cells is equal to $sample_size_paper, the probability that all gRNAs will be represented in the genome-wide screening experiment at least once, is:"
 
 # ╔═╡ 7eb18559-e2c0-4c34-a2b2-4e3c3ab831a6
-success_probability(63090, 11*10^6; p = p_gRNA, r = 1, m = m)
+success_probability(63090, 3*10^7; p = p_gRNA, r = r, m = m)
+
+# ╔═╡ ecf6292c-7cdd-4886-8a59-be8e4f2751b7
+md"Let's investigate how many complete sets of gRNAs that are suffficiently covered by the sample size of the study by Chen *et al.*. Let's define sufficient coverage as a success probability of at least 95%."
+
+# ╔═╡ 56f21296-fcd2-46f7-a130-4cb6940c1133
+success_probability(63090, sample_size_paper; p = p_gRNA, r = r, m = 2)
+
+# ╔═╡ 09d77a14-01f4-430c-9038-25b85b31a1c2
+success_probability(63090, sample_size_paper; p = p_gRNA, r = r, m = 7)
+
+# ╔═╡ 071cdabe-3443-490c-ab79-e270a0a1de68
+success_probability(63090, sample_size_paper; p = p_gRNA, r = r, m = 10)
+
+# ╔═╡ c59c5fb7-7291-46e2-88af-03ed38c7c3eb
+begin
+	success_probabilities = []
+		for m in 1:15
+			push!(success_probabilities, success_probability(63090, sample_size_paper; p = p_gRNA, r = r, m = m))
+	end
+	
+	plot(success_probabilities, seriestype=:scatter, 
+		title="Coverage for sample size = $sample_size_paper cells
+		", 
+		xlabel="number of complete sets of gRNAs to observe (m)", ylabel="success probability", label="")
+	plot!([0, 15], [0.95, 0.95], label="95% success 
+		probability", legend = :best)
+end
+
+# ╔═╡ bb990e0c-df90-4635-80e4-e6639a62865a
+md"We see the sample size of the paper covers 9 complete sets of gRNAs. Thereafter, the success probability drops below 95%."
 
 # ╔═╡ dc696281-7a5b-4568-a4c2-8dde90af43f0
 md"The **fraction of the total number of available gRNAs that is expected to be observed** after injecting a given number of cells, is displayed by the curve below:"
@@ -63288,16 +63305,16 @@ expectation_fraction_collected(n_gRNAs, 5*10^4; p = p_gRNA, r = r)
 pᵢ_gRNA = p_gRNA[1]
 
 # ╔═╡ ead64d36-947a-4b9f-a0f7-a1821039f5b3
-n_cells = 3*10^6
+n_cells = 3*10^7
 
 # ╔═╡ f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
 md""" For the gRNA with the lowest abundance in the plasmid library, the probability that it is observed *k* times when injecting $n_cells cancer cells in the mice, can be described by the following curve:"""
 
 # ╔═╡ 60fff6ab-3e19-4af7-b102-17d3d47494f3
 begin
-	ed = Int(floor(n_cells*pᵢ_gRNA))
-	j = collect(0:1:minimum([20, 4*ed]))
-	x  = prob_occurrence_module.(pᵢ_gRNA, n_cells, j)
+	ed = Int(floor(n_cells*pᵢ_gRNA*r))
+	j = collect(0:1:2*ed)
+	x  = prob_occurrence_module.(pᵢ_gRNA, n_cells, r, j)
 	plot(j,x, seriestype=[:scatter, :line], xlabel="number of times gRNA is represented",
 					ylabel="probability", 
 					title=
@@ -63309,13 +63326,86 @@ begin
 end
 
 # ╔═╡ a041652b-365e-4594-9c48-c63d547b3295
+mean, std = n_cells * pᵢ_gRNA * r, sqrt(n_cells * pᵢ_gRNA * r)
 
+# ╔═╡ a6014a30-6643-4504-8081-17bcc8be2615
+md"##### [Rapid and High-Throughput Evaluation of Diverse Configurations of Engineered Lysins Using the VersaTile Technique (Duyvejonck *et al.*, 2021)](https://www.mdpi.com/2079-6382/10/3/293)
+
+This study aims engineering **modular endolysins** for obtaining optimal antibacterial properties. 
+
+#### Problem definition
+
+The endolysin engineered in the study can consists of different protein domains, e.g.:
+
+- an outer membrane permeabilizing peptide (OMP),
+- an enzymatically active domain (EAD),
+- a cell wall binding domain (CBD),
+- a peptide linker
+
+Different variants of these domain types are available and combined with the VersaTile DNA assembly technique.  The following picture represents an endolysin configuration that is considered in the paper:
+
+In this library, there is an availability of 
+
+- 42 OMPs, 
+- 7 linkers,
+- 6 CBDs, and
+- 23 EADs.  
+
+This results in a total number of 42 x 7 x 6 x 23 = **40572 possible endolysins**.
+
+"
+
+# ╔═╡ 5f480d13-2dd1-451e-adf5-45d5d7749fdc
+begin
+	n_OMP = 42;
+	n_linker = 7;
+	n_CBD = 6;
+	n_EAD = 23;
+end
+
+# ╔═╡ da16c262-4d76-4757-9e80-df6871546278
+md"However, due to limitations in the screening technique, only **188 endolysins from this library were analysed** for their activity against *Klebsiella pneumoniae*. "
+
+# ╔═╡ a4e1a017-c37c-4a81-915c-96638964eda2
+md"#### Determining coverage using BioCCP.jl"
+
+# ╔═╡ 12afa1a7-b4ed-4767-aff8-07dab6fa5d3c
+endolysins_sample_size = 188
+
+# ╔═╡ 16fd6703-d559-444c-8f42-26e314f29fb3
+md"The **probability that all available OMPs were observed at least once in this set**, will be calculated below. We assume that there is an equal probability for each OMP to be observed (optimistic scenario)."
+
+# ╔═╡ 63eed55a-1dfe-4b3d-b7aa-e4736718b105
+Float16(success_probability(n_OMP, endolysins_sample_size; p = ones(n_OMP)/n_OMP))
+
+# ╔═╡ a34b71fb-1da6-43db-981b-71e1a404e4d6
+md"The **probability that all available linkers were observed at least once in this set**, will be calculated below. We assume that there is an equal probability for each linker to be observed (optimistic scenario)."
+
+# ╔═╡ ca9f4254-b38c-4de2-bafb-f97dd15a46bc
+Float16(success_probability(n_linker, endolysins_sample_size; p = ones(n_linker)/n_linker))
+
+# ╔═╡ cf19ee57-174d-42b9-8f9d-f4654907fc2a
+md"The **probability that all available CBDs were observed at least once in this set**, will be calculated below. We assume that there is an equal probability for each CBD to be observed (optimistic scenario)."
+
+# ╔═╡ 63d90d97-ba80-449e-8d38-1bba52ab32ac
+Float16(success_probability(n_CBD, endolysins_sample_size; p = ones(n_CBD)/n_CBD))
+
+# ╔═╡ 062ceeb7-5d6d-48ce-8ad5-9e1d78a937e7
+md"The **probability that all available EADs were observed at least once in this set**, will be calculated below. We assume that there is an equal probability for each EAD to be observed (optimistic scenario)."
+
+# ╔═╡ 04a2acf6-52e2-42d7-96a0-f3e31d1f6b58
+Float16(success_probability(n_EAD, endolysins_sample_size; p = ones(n_EAD)/n_EAD))
+
+# ╔═╡ 63dedbcb-7ea0-4c4e-bb4c-fa8e258f9a93
+md"**We can conclude the EADs, CBDs and linker domains were sufficiently covered by the sample size of $endolysins_sample_size endolysins. However, the OMPs are only guaranteed to be covered for 62 %.** "
 
 # ╔═╡ fbffaab6-3154-49df-a226-d5810d0b7c38
 md"""## References"""
 
 # ╔═╡ 1f48143a-2152-4bb9-a765-a25e70c281a3
 md"""[^1]:  Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., ... & Sharp, P. A. (2015). *Genome-wide CRISPR screen in a mouse model of tumor growth and metastasis.* Cell, 160(6), 1246-1260.
+
+[^2]: Duyvejonck, L., Gerstmans, H., Stock, M., Grimon, D., Lavigne, R., & Briers, Y. (2021). *Rapid and High-Throughput Evaluation of Diverse Configurations of Engineered Lysins Using the VersaTile Technique.* Antibiotics, 10(3), 293.
 
 """
 
@@ -63337,7 +63427,7 @@ md"""[^1]:  Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., .
 # ╟─5c906c4a-8785-4199-8aba-a35c855e77f6
 # ╟─449ad144-90d4-4f74-867f-939b489ddaad
 # ╠═28dda5a1-546a-411f-9b8b-398e37195b13
-# ╠═827b42d9-9bf1-43a8-8440-47c36eedd5fc
+# ╠═aad92f19-6935-4cbd-8e0f-d16a0d379386
 # ╠═69fe641d-afb9-45dc-9aa0-436177b02ac3
 # ╠═e88e908f-be65-488f-a0dd-718a091f9d5c
 # ╠═480d6282-ce97-4127-957d-d0b9fd37a7e4
@@ -63349,18 +63439,18 @@ md"""[^1]:  Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., .
 # ╠═0a99939a-4edb-488d-bbdf-4a425c808607
 # ╠═f35928d5-e8c2-4c9f-b4ba-9cb58eafb9e0
 # ╠═b8fe484e-1189-4fd0-85b9-715e084d65da
-# ╟─ecf6292c-7cdd-4886-8a59-be8e4f2751b7
-# ╠═7087616e-2c36-4e50-b496-e3c282979b66
-# ╠═c9759dda-7c03-4970-9b1c-9c3cf51acbd6
-# ╠═c9a5ae62-adb0-4f37-ba5a-78ccd2c8f159
-# ╠═78a7242e-9398-4a26-b93a-69ccbed70381
-# ╠═aa11752d-7740-4c38-b7ee-ed5fe1b3fda3
-# ╠═f8322936-8e95-4c66-9fac-a79930359af0
-# ╠═4b4c6a86-d317-4d6c-be0d-1c9c805ecfe4
+# ╟─224d556c-cd9d-4c00-9cde-1c3df7cfcdef
+# ╟─aa29947a-4dcb-48d8-9ad0-3828f8d4b8d2
 # ╟─7b43e546-07f0-45ce-9d2a-52894adad822
 # ╟─ca7ecf8b-634e-4fa5-aaa8-102fa488c7a1
 # ╟─60c3ce0d-85be-42f0-a869-1895abc096f3
 # ╠═7eb18559-e2c0-4c34-a2b2-4e3c3ab831a6
+# ╟─ecf6292c-7cdd-4886-8a59-be8e4f2751b7
+# ╠═56f21296-fcd2-46f7-a130-4cb6940c1133
+# ╠═09d77a14-01f4-430c-9038-25b85b31a1c2
+# ╠═071cdabe-3443-490c-ab79-e270a0a1de68
+# ╟─c59c5fb7-7291-46e2-88af-03ed38c7c3eb
+# ╟─bb990e0c-df90-4635-80e4-e6639a62865a
 # ╟─dc696281-7a5b-4568-a4c2-8dde90af43f0
 # ╟─7968de5e-5ae8-4ab4-b089-c3d33475af2f
 # ╟─be8e6332-f79d-4d63-afae-51c2d829f998
@@ -63369,6 +63459,20 @@ md"""[^1]:  Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., .
 # ╠═667fc6a8-b3ff-464d-903c-e215e7d2f472
 # ╠═ead64d36-947a-4b9f-a0f7-a1821039f5b3
 # ╟─60fff6ab-3e19-4af7-b102-17d3d47494f3
-# ╟─a041652b-365e-4594-9c48-c63d547b3295
+# ╠═a041652b-365e-4594-9c48-c63d547b3295
+# ╟─a6014a30-6643-4504-8081-17bcc8be2615
+# ╠═5f480d13-2dd1-451e-adf5-45d5d7749fdc
+# ╟─da16c262-4d76-4757-9e80-df6871546278
+# ╟─a4e1a017-c37c-4a81-915c-96638964eda2
+# ╠═12afa1a7-b4ed-4767-aff8-07dab6fa5d3c
+# ╟─16fd6703-d559-444c-8f42-26e314f29fb3
+# ╠═63eed55a-1dfe-4b3d-b7aa-e4736718b105
+# ╟─a34b71fb-1da6-43db-981b-71e1a404e4d6
+# ╠═ca9f4254-b38c-4de2-bafb-f97dd15a46bc
+# ╟─cf19ee57-174d-42b9-8f9d-f4654907fc2a
+# ╠═63d90d97-ba80-449e-8d38-1bba52ab32ac
+# ╟─062ceeb7-5d6d-48ce-8ad5-9e1d78a937e7
+# ╠═04a2acf6-52e2-42d7-96a0-f3e31d1f6b58
+# ╟─63dedbcb-7ea0-4c4e-bb4c-fa8e258f9a93
 # ╟─fbffaab6-3154-49df-a226-d5810d0b7c38
 # ╟─1f48143a-2152-4bb9-a765-a25e70c281a3
