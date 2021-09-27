@@ -30,7 +30,7 @@ using BioCCP
     t = 500
 
     @testset "Success probability" begin
-        @test success_probability(n, t; p = p_uniform) isa Float64
+        @test success_probability(n, t; p = p_uniform) isa BigFloat
         @test success_probability(n, t; p = p_uniform) > success_probability(n, t; p = p_zipf)
         @test success_probability(n, t; p = p_uniform, m = 1) > success_probability(n, t; p = p_uniform, m = 2)
         @test all(success_probability(n, t; p = p_uniform) .< success_probability.(n, [t+10, t+100, t+1000]; p = p_uniform))
@@ -50,10 +50,11 @@ using BioCCP
 
     k = 2
     pᵢ = 0.005
+    r = 3
 
     @testset "Probability occurence" begin
-        @test prob_occurrence_module(pᵢ, t, k) isa Float64
-        @test all(prob_occurrence_module.(pᵢ, [0, 10, 100, 1000, 10000], k) .>= 0)
-        @test all(prob_occurrence_module.(pᵢ, [0, 10, 100, 1000, 10000], k) .<= 1)
+        @test prob_occurrence_module(pᵢ, t, r, k) isa Float64
+        @test all(prob_occurrence_module.(pᵢ, [0, 10, 100, 1000, 10000], r, k) .>= 0)
+        @test all(prob_occurrence_module.(pᵢ, [0, 10, 100, 1000, 10000], r, k) .<= 1)
     end
 end
