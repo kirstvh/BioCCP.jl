@@ -2,6 +2,7 @@ module BioCCP
 
  
 using Base: Integer
+using Distributions
 export expectation_minsamplesize, std_minsamplesize, success_probability, 
         expectation_fraction_collected, prob_occurrence_module
 
@@ -50,7 +51,7 @@ function exp_ccdf(n, t; p=ones(n)/n, m=1, r=1, normalize=true)
     for i in 1:n
           Sm = 0
         for j in 1:m
-            Sm += ((p[i]*r*t)^(j-1))/factorial(j-1) #formulas see paper reference [1]
+            Sm += ((p[i]*r*t)^(j-1))/factorial(big(j-1)) #formulas see paper reference [1]
         end 
         P_cdf *= (1 - Sm*exp(-p[i]*r*t))        
     end   
@@ -256,15 +257,18 @@ References:
 julia> pᵢ = 0.005
 julia> t = 500
 julia> k = 2
-julia> prob_occurrence_module(pᵢ, t, k)
+julia> r = 1
+julia> prob_occurrence_module(pᵢ, t, r, k)
 0.25651562069968376
 ```
 """
-function prob_occurrence_module(pᵢ, t::Integer, k::Integer)
+function prob_occurrence_module(pᵢ, t::Integer, r, k::Integer)
     @assert pᵢ > 0 && pᵢ <= 1
     @assert t >= 0
+    @assert r >= 0
     @assert k >= 0
-	return (exp(-1*(pᵢ*t))*(pᵢ*t)^k)/factorial(k) 
+    poisson = Poisson(pᵢ * t * r)
+	return pdf(poisson, k)
 end
 
 end
