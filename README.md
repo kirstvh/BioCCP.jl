@@ -60,7 +60,7 @@ Number of occurrence of a specific module      |      In this last part, you can
 
 #### Launch Pluto notebook from Browser 
 
-Launch the Pluto notebook directly from your browser using Binder (no installation of Julia/packages required): [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/PlutoNotebooks/main?urlpath=pluto/open?path=/home/jovyan/notebooks/BioCCP_Interactive_Notebook.jl)
+Launch the Pluto notebook directly from your browser using Binder (no installation of Julia/packages required): [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Interactive_Notebook.jl)
 
 #### Execute functions in Julia
 
@@ -83,7 +83,7 @@ Launch the Pluto notebook directly from your browser using Binder (no installati
 &emsp;&emsp; Finally, open the [notebook file](/notebooks/BioCCP_Interactive_Notebook.jl).
 
 ## Case study
-Via the following Binder link, a notebook can be accessed that illustrates the use of the BioCCP.jl package on real biological case studies: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/PlutoNotebooks/main?urlpath=pluto/open?path=/home/jovyan/notebooks/BioCCP_Case_Study.jl).
+Via the following Binder link, a notebook can be accessed that illustrates the use of the BioCCP.jl package on real biological case studies: [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Case_Study.jl).
 
 ## References
 The implementation of formulas was based on the references below:
