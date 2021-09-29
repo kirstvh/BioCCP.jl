@@ -5,3 +5,7 @@ version = "0.1.0"
 
 [deps]
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+
+[compat]
+Distributions = "0.24, 0.25"
+julia = "1"
