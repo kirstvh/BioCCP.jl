@@ -8,7 +8,7 @@ using InteractiveUtils
 # ╔═╡ 666850df-859e-489c-b92b-c63b6260c190
  begin 
  	using Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP.jl")
- 	Pkg.add(["Plots", "PlutoUI", "Distribution"])
+ 	Pkg.add(["Plots", "PlutoUI", "Distributions"])
 end
 
 # ╔═╡ e1a7f2da-a38b-4b3c-a238-076769e46408
