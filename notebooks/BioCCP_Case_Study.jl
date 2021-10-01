@@ -4,17 +4,15 @@
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ 9ee12a13-9829-45a8-bd26-25ad9b3d38c1
-using Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP.jl")
+
+# ╔═╡ 666850df-859e-489c-b92b-c63b6260c190
+ begin 
+ 	using Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP.jl")
+ 	Pkg.add(["Plots", "PlutoUI", "Distribution"])
+end
 
 # ╔═╡ e1a7f2da-a38b-4b3c-a238-076769e46408
 using Plots, PlutoUI, Distributions, BioCCP
-
-# ╔═╡ 666850df-859e-489c-b92b-c63b6260c190
-# begin 
-# 	using Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP.jl")
-# 	Pkg.add(["Plots", "PlutoUI", "Distribution"])
-# end
 
 # ╔═╡ 4d246460-af05-11eb-382b-590e60ba61f5
 md"## BioCCP Case studies
