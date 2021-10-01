@@ -1,14 +1,20 @@
 ### A Pluto.jl notebook ###
-# v0.16.0
+# v0.16.1
 
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ 666850df-859e-489c-b92b-c63b6260c190
-import Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP.jl")
+# ╔═╡ 9ee12a13-9829-45a8-bd26-25ad9b3d38c1
+using Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP.jl")
 
 # ╔═╡ e1a7f2da-a38b-4b3c-a238-076769e46408
 using Plots, PlutoUI, Distributions, BioCCP
+
+# ╔═╡ 666850df-859e-489c-b92b-c63b6260c190
+# begin 
+# 	using Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP.jl")
+# 	Pkg.add(["Plots", "PlutoUI", "Distribution"])
+# end
 
 # ╔═╡ 4d246460-af05-11eb-382b-590e60ba61f5
 md"## BioCCP Case studies
@@ -63144,9 +63150,10 @@ md"which can be summarized in the following unimodal read distribution: "
 
 # ╔═╡ 94bcc8de-a0be-47ab-a03a-b04c351ad6f0
 begin
-	histogram(reads_gRNA,  bar_edges=false, bins=100,  size = (700, 320), orientation=:v, titlefont=font(10), xguidefont=font(9), yguidefont=font(9), label="")
-	# using StatsPlots
-# density(reads_gRNA, label="") 
+	Pkg.build("GR")
+	histogram(reads_gRNA, bar_edges=false, bins=100,  size = (700, 320), orientation=:v, titlefont=font(10), xguidefont=font(9), yguidefont=font(9), label="")
+# 	# using StatsPlots
+# # density(reads_gRNA, label="") 
 			xlabel!("Number of reads"); ylabel!("Density"); title!("Distribution of gRNA reads in plasmid pool")
 end
 
@@ -63241,19 +63248,19 @@ end
 md"When the number of cells is equal to $sample_size_paper, the probability that all gRNAs will be represented in the genome-wide screening experiment at least once, is:"
 
 # ╔═╡ 7eb18559-e2c0-4c34-a2b2-4e3c3ab831a6
-success_probability(63090, 3*10^7; p = p_gRNA, r = r, m = m)
+Float64(success_probability(63090, 3*10^7; p = p_gRNA, r = r, m = m))
 
 # ╔═╡ ecf6292c-7cdd-4886-8a59-be8e4f2751b7
 md"Let's investigate how many complete sets of gRNAs that are suffficiently covered by the sample size of the study by Chen *et al.*. Let's define sufficient coverage as a success probability of at least 95%."
 
 # ╔═╡ 56f21296-fcd2-46f7-a130-4cb6940c1133
-success_probability(63090, sample_size_paper; p = p_gRNA, r = r, m = 2)
+Float64(success_probability(63090, sample_size_paper; p = p_gRNA, r = r, m = 2))
 
 # ╔═╡ 09d77a14-01f4-430c-9038-25b85b31a1c2
-success_probability(63090, sample_size_paper; p = p_gRNA, r = r, m = 7)
+Float64(success_probability(63090, sample_size_paper; p = p_gRNA, r = r, m = 7))
 
 # ╔═╡ 071cdabe-3443-490c-ab79-e270a0a1de68
-success_probability(63090, sample_size_paper; p = p_gRNA, r = r, m = 10)
+Float64(success_probability(63090, sample_size_paper; p = p_gRNA, r = r, m = 10))
 
 # ╔═╡ c59c5fb7-7291-46e2-88af-03ed38c7c3eb
 begin
@@ -63305,7 +63312,7 @@ expectation_fraction_collected(n_gRNAs, 5*10^4; p = p_gRNA, r = r)
 pᵢ_gRNA = p_gRNA[1]
 
 # ╔═╡ ead64d36-947a-4b9f-a0f7-a1821039f5b3
-n_cells = 3*10^7
+n_cells = 4*10^6
 
 # ╔═╡ f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
 md""" For the gRNA with the lowest abundance in the plasmid library, the probability that it is observed *k* times when injecting $n_cells cancer cells in the mice, can be described by the following curve:"""
@@ -63326,7 +63333,7 @@ begin
 end
 
 # ╔═╡ a041652b-365e-4594-9c48-c63d547b3295
-mean, std = n_cells * pᵢ_gRNA * r, sqrt(n_cells * pᵢ_gRNA * r)
+mean, std = floor(n_cells * pᵢ_gRNA * r), floor(sqrt(n_cells * pᵢ_gRNA * r))
 
 # ╔═╡ a6014a30-6643-4504-8081-17bcc8be2615
 md"##### [Rapid and High-Throughput Evaluation of Diverse Configurations of Engineered Lysins Using the VersaTile Technique (Duyvejonck *et al.*, 2021)](https://www.mdpi.com/2079-6382/10/3/293)
@@ -63412,6 +63419,7 @@ md"""[^1]:  Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., .
 
 # ╔═╡ Cell order:
 # ╠═666850df-859e-489c-b92b-c63b6260c190
+# ╠═9ee12a13-9829-45a8-bd26-25ad9b3d38c1
 # ╠═e1a7f2da-a38b-4b3c-a238-076769e46408
 # ╟─4d246460-af05-11eb-382b-590e60ba61f5
 # ╟─ad7e5e06-55b2-4752-9335-2364489932eb
