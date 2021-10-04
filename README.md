@@ -1,3 +1,6 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5547738.svg)](https://doi.org/10.5281/zenodo.5547738)
+
+
 # BioCCP.jl : Collecting Coupons in combinatorial biotechnology
 
 ## Intro
