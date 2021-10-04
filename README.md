@@ -91,3 +91,9 @@ The implementation of formulas was based on the references below:
 > Doumas, A. V., & Papanicolaou, V. G. (2016). *The coupon collector’s problem revisited: generalizing the double Dixie cup problem of Newman and Shepp.* ESAIM: Probability and Statistics, 20, 367-399. doi: 	https://doi.org/10.1051/ps/2016016
 
 > Boneh, A., & Hofri, M. (1997). *The coupon-collector problem revisited—a survey of engineering problems and computational methods.* Stochastic Models, 13(1), 39-66. doi: https://doi.org/10.1080/15326349708807412
+
+The case studies were based on the following references:
+
+> Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., ... & Sharp, P. A. (2015). *Genome-wide CRISPR screen in a mouse model of tumor growth and metastasis.* Cell, 160(6), 1246-1260. doi: https://doi.org/10.1016/j.cell.2015.02.038Get
+
+> Duyvejonck, L., Gerstmans, H., Stock, M., Grimon, D., Lavigne, R., & Briers, Y. (2021). *Rapid and High-Throughput Evaluation of Diverse Configurations of Engineered Lysins Using the VersaTile Technique.* Antibiotics, 10(3), 293. doi: https://doi.org/10.3390/antibiotics10030293
