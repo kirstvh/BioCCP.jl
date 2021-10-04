@@ -6,13 +6,14 @@ using InteractiveUtils
 
 
 # ╔═╡ 666850df-859e-489c-b92b-c63b6260c190
-# begin 
-#   	using Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP.jl")
-#   	Pkg.add(["Plots", "PlutoUI", "Distributions"])
-# end
+using Plots, PlutoUI, Distributions
 
 # ╔═╡ e1a7f2da-a38b-4b3c-a238-076769e46408
-using Plots, PlutoUI, Distributions, BioCCP
+begin 
+  	using Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP.jl")
+#   	Pkg.add(["Plots", "PlutoUI", "Distributions"])
+	using BioCCP
+end
 
 # ╔═╡ 4d246460-af05-11eb-382b-590e60ba61f5
 md"## BioCCP Case studies
