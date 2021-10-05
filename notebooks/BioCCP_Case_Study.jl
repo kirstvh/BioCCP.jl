@@ -13,14 +13,11 @@ Pkg.add("Plots")
 # ╔═╡ 79940a89-9e97-49a1-bbf5-6bfbdb3a12b9
 Pkg.add("PlutoUI")
 
-# ╔═╡ b2b6dcc2-67a8-4ad3-bc08-90c0b21de429
-Pkg.add("Images")
-
 # ╔═╡ 2ae24bb7-9323-490f-99b5-cbfe0863aa56
 Pkg.add("Distributions")
 
 # ╔═╡ 9937d1e4-6133-4bfc-a0ad-63e23a8bd3cb
-using Plots, PlutoUI, Images, Distributions, BioCCP
+using Plots, PlutoUI, Distributions, BioCCP
 
 # ╔═╡ 41beadc2-385e-42bf-9960-ab201242b400
 md"*Installing the packages might take a while...*"
@@ -51,11 +48,11 @@ The question is **how many cells should be injected in total, so we can study th
 md"###### 1.1 Problem definition"
 
 # ╔═╡ 50462b1a-f65e-4d91-8d8d-da9c93ad007c
-begin
-	url = "https://raw.githubusercontent.com/kirstvh/BioCCP/main/notebooks/CRISPR_img.png" 
-	filename = download(url)
-	img = load(filename)
-end
+# begin
+# 	url = "https://raw.githubusercontent.com/kirstvh/BioCCP/main/notebooks/CRISPR_img.png" 
+# 	filename = download(url)
+# 	img = load(filename)
+# end
 
 # ╔═╡ f3ef2715-da53-449e-b198-faeeb78ac83f
 md"###### 🔹 Number of modules (*n*)
