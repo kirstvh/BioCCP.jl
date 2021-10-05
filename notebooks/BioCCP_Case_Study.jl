@@ -5,7 +5,7 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ 666850df-859e-489c-b92b-c63b6260c190
-using Pkg; Pkg.add("BioCCP")
+using Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP")
 
 # ╔═╡ ee082fcf-54d1-4aea-9944-8d7f81c6dbf4
 Pkg.add("Plots")
