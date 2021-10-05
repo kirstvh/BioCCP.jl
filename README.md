@@ -87,8 +87,16 @@ Additionally, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) prov
 &emsp; **(2)** &emsp; Install BioCCP in the Julia REPL:
 
     using Pkg; Pkg.add("BioCCP")
+    
+&emsp; **(3)** &emsp; Load the BioCCP package:
 
-&emsp; **(3)** &emsp; For using the [Pluto notebook](/notebooks/BioCCP_Interactive_Notebook.jl):
+    using BioCCP
+    
+Now you are ready for executing BioCCP functions in the Julia REPL.
+
+##### Running the Pluto notebooks locally
+
+For using the Pluto notebooks:
 
 &emsp;&emsp; In the Julia REPL, hit the following command to install the [Pluto package](https://github.com/fonsp/Pluto.jl):
   
@@ -98,7 +106,7 @@ Additionally, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) prov
 
     using Pluto; Pluto.run()
     
-&emsp;&emsp; Finally, open the [notebook file](/notebooks/BioCCP_Interactive_Notebook.jl).
+&emsp;&emsp; Finally, open the notebook file ([report-generating notebook](/notebooks/BioCCP_Interactive_Notebook.jl) or [case study notebook]((/notebooks/BioCCP_Case_Study.jl).
 
 
 ## References
