@@ -5,20 +5,25 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ 666850df-859e-489c-b92b-c63b6260c190
-begin
-	import Pkg
-	Pkg.activate(mktempdir())
-	using Pkg
-	Pkg.add(url="https://github.com/kirstvh/BioCCP")
-	Pkg.add(["Plots", "PlutoUI", "Images", "Distributions"])
-	using Plots, PlutoUI, Images, Distributions, BioCCP
-end
+using Pkg; Pkg.add("BioCCP")
+
+# ╔═╡ ee082fcf-54d1-4aea-9944-8d7f81c6dbf4
+Pkg.add("Plots")
+
+# ╔═╡ 79940a89-9e97-49a1-bbf5-6bfbdb3a12b9
+Pkg.add("PlutoUI")
+
+# ╔═╡ b2b6dcc2-67a8-4ad3-bc08-90c0b21de429
+Pkg.add("Images")
+
+# ╔═╡ 2ae24bb7-9323-490f-99b5-cbfe0863aa56
+Pkg.add("Distributions")
+
+# ╔═╡ 9937d1e4-6133-4bfc-a0ad-63e23a8bd3cb
+using Plots, PlutoUI, Images, Distributions, BioCCP
 
 # ╔═╡ 41beadc2-385e-42bf-9960-ab201242b400
 md"*Installing the packages might take a while...*"
-
-# ╔═╡ e1a7f2da-a38b-4b3c-a238-076769e46408
-# using Plots, PlutoUI, Distributions, BioCCP
 
 # ╔═╡ 4d246460-af05-11eb-382b-590e60ba61f5
 md"## BioCCP Case studies
@@ -63453,7 +63458,11 @@ md"""[^1]:  Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., .
 # ╔═╡ Cell order:
 # ╟─41beadc2-385e-42bf-9960-ab201242b400
 # ╠═666850df-859e-489c-b92b-c63b6260c190
-# ╟─e1a7f2da-a38b-4b3c-a238-076769e46408
+# ╠═ee082fcf-54d1-4aea-9944-8d7f81c6dbf4
+# ╠═79940a89-9e97-49a1-bbf5-6bfbdb3a12b9
+# ╠═b2b6dcc2-67a8-4ad3-bc08-90c0b21de429
+# ╠═2ae24bb7-9323-490f-99b5-cbfe0863aa56
+# ╠═9937d1e4-6133-4bfc-a0ad-63e23a8bd3cb
 # ╟─4d246460-af05-11eb-382b-590e60ba61f5
 # ╟─ad7e5e06-55b2-4752-9335-2364489932eb
 # ╟─d6b7e9f5-3bda-4477-b92c-e32b836f1f0d
