@@ -28,7 +28,7 @@ For more info about the implementation of the functions, please consult the [doc
 
 ## Pluto notebooks
 
-### 1. Pluto notebook for generating a report
+### 1. Report-generating Pluto notebook
 
 The [first Pluto notebook](/notebooks/BioCCP_Interactive_Notebook.jl) provides an interactive illustration of all functions in BioCCP and assembles a report for your specific design set-up. 
 
@@ -60,19 +60,25 @@ Success probability      |    In this section, the report calculates the probabi
 Expected observed fraction of the total number of modules        |    Here, the fraction of the total number of modules in the design space that is expected to be observed is computed for a given sample size *t*. A saturation curve, displaying the expected fraction of modules observed in function of increasing sample size, is provided.
 Number of occurrence of a specific module      |      In this last part, you can specify the probability *p<sub>j</sub>* of a module of interest together with a particular sample size, to calculate a curve showing the probability for a module to occur *k* times (in function of *k*).   
 
-### Pluto notebook with case studies
+### Case study Pluto notebook
 
-The second Pluto notebooks contains two case studies, illustrating the application of the BioCCP.jl package to real biological case studies.
+The second Pluto notebooks contains two case studies, illustrating the application of the BioCCP.jl package to real biological problems, more specifically:
 
-Via the following Binder link, the notebook can be ran or edited: [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Case_Study.jl).
+&emsp; **(1)** &emsp; Studying the required sample size and related statistics for a genome-wide CRISPR experiment
+&emsp; **(2)** &emsp; Determining coverage of a combinatorial protein engineering experiment
 
-The following [link](https://kirstvh.github.io/BioCCP_Case_Study_html) provides an html file of the case study notebook.
 
 ## Getting started
 
 #### Launch Pluto notebook from Browser 
 
-Launch the Pluto notebook directly from your browser using Binder (no installation of Julia/packages required): [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Interactive_Notebook.jl)
+- The Pluto notebooks can be launched directly from your browser using Binder (no installation of Julia/packages required): 
+
+Report-generating Pluto notebook: [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Interactive_Notebook.jl)
+
+Case study Pluto notebook: [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Case_Study.jl).
+
+Additionally, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) provides an html file of the case study notebook to skip right to a fully executed notebook.
 
 #### Execute functions in Julia
 
@@ -80,13 +86,13 @@ Launch the Pluto notebook directly from your browser using Binder (no installati
 
 &emsp; **(2)** &emsp; Install BioCCP in the Julia REPL:
 
-    using Pkg; Pkg.add(url="https://github.com/kirstvh/BioCCP")
+    using Pkg; Pkg.add("BioCCP")
 
 &emsp; **(3)** &emsp; For using the [Pluto notebook](/notebooks/BioCCP_Interactive_Notebook.jl):
 
-&emsp;&emsp; In the Julia REPL, hit the following command to install the additional packages [Pluto](https://github.com/fonsp/Pluto.jl), [PlutoUI](https://github.com/fonsp/PlutoUI.jl) and [Plots](https://github.com/JuliaPlots/Plots.jl) :
+&emsp;&emsp; In the Julia REPL, hit the following command to install the [Pluto package](https://github.com/fonsp/Pluto.jl):
   
-    using Pkg; Pkg.add["Pluto", "PlutoUI", "Plots", "Distributions"]
+    using Pkg; Pkg.add["Pluto"]
 
 &emsp;&emsp; Then start Pluto in the Julia REPL:
 
