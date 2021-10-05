@@ -63152,7 +63152,7 @@ md"which can be summarized in the following unimodal read distribution: "
 
 # ╔═╡ 94bcc8de-a0be-47ab-a03a-b04c351ad6f0
 begin
-	Pkg.build("GR")
+	# Pkg.build("GR")
 	histogram(reads_gRNA, bar_edges=false, bins=100,  size = (700, 320), orientation=:v, titlefont=font(10), xguidefont=font(9), yguidefont=font(9), label="")
 # 	# using StatsPlots
 # # density(reads_gRNA, label="") 
