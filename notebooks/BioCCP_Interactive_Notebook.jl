@@ -19,8 +19,8 @@ begin
 	Pkg.activate(mktempdir())
 	using Pkg
 	Pkg.add(url="https://github.com/kirstvh/BioCCP")
-	Pkg.add(["Plots", "PlutoUI"])
-	using Plots, PlutoUI, BioCCP
+	Pkg.add(["Plots", "PlutoUI", "Images"])
+	using Plots, PlutoUI, Images, BioCCP
 end
 
 # ╔═╡ e1b554a6-db6c-4d2a-9dd3-0a35095f4d8c
