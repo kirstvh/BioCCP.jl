@@ -85,7 +85,7 @@ The Pluto notebooks can be launched directly from your browser using Binder (no 
 
 - Case study Pluto notebook: [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Case_Study.jl).
 
-Additionally, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) provides an html file of the case study notebook to skip right to a fully executed notebook.
+Additionally, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) provides an html file of the executed case study notebook (skip the run time and have immediate access to the results).
 
 
 #### Execute functions in Julia 
