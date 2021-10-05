@@ -60,7 +60,7 @@ Success probability      |    In this section, the report calculates the probabi
 Expected observed fraction of the total number of modules        |    Here, the fraction of the total number of modules in the design space that is expected to be observed is computed for a given sample size *t*. A saturation curve, displaying the expected fraction of modules observed in function of increasing sample size, is provided.
 Number of occurrence of a specific module      |      In this last part, you can specify the probability *p<sub>j</sub>* of a module of interest together with a particular sample size, to calculate a curve showing the probability for a module to occur *k* times (in function of *k*).   
 
-### Case study Pluto notebook
+### 2. Case study Pluto notebook
 
 The second Pluto notebooks contains two case studies, illustrating the application of the BioCCP.jl package to real biological problems, more specifically:
 
@@ -81,7 +81,7 @@ The Pluto notebooks can be launched directly from your browser using Binder (no 
 
 Additionally, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) provides an html file of the case study notebook to skip right to a fully executed notebook.
 
-#### Execute functions in Julia and running the Pluto notebooks locally
+#### Execute functions in Julia 
 
 &emsp; **(1)** &emsp; [Install Julia](https://julialang.org/downloads/) 
 
@@ -95,7 +95,9 @@ Additionally, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) prov
     
 Now you are ready for executing BioCCP functions in the Julia REPL.
 
-For using the Pluto notebooks:
+#### Run the Pluto notebooks locally
+
+Additionally, for using the Pluto notebooks, following steps need to be taken:
 
 &emsp;&emsp; In the Julia REPL, hit the following command to install the [Pluto package](https://github.com/fonsp/Pluto.jl):
   
@@ -105,7 +107,7 @@ For using the Pluto notebooks:
 
     using Pluto; Pluto.run()
     
-&emsp;&emsp; Finally, open the notebook file ([report-generating notebook](/notebooks/BioCCP_Interactive_Notebook.jl) or [case study notebook]((/notebooks/BioCCP_Case_Study.jl).
+&emsp;&emsp; Finally, open the notebook file ([report-generating notebook](/notebooks/BioCCP_Interactive_Notebook.jl) or [case study notebook](/notebooks/BioCCP_Case_Study.jl).
 
 
 ## References
