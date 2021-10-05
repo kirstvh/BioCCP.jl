@@ -14,7 +14,14 @@ macro bind(def, element)
 end
 
 # ╔═╡ e1a7f2da-a38b-4b3c-a238-076769e46408
-using Plots, PlutoUI, BioCCP
+begin
+	import Pkg
+	Pkg.activate(mktempdir())
+	using Pkg
+	Pkg.add(url="https://github.com/kirstvh/BioCCP")
+	Pkg.add(["Plots", "PlutoUI"])
+	using Plots, PlutoUI, BioCCP
+end
 
 # ╔═╡ e1b554a6-db6c-4d2a-9dd3-0a35095f4d8c
 begin
