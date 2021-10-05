@@ -62,7 +62,7 @@ Number of occurrence of a specific module      |      In this last part, you can
 
 ### 2. Case study Pluto notebook
 
-The second Pluto notebooks contains two case studies, illustrating the application of the BioCCP.jl package to real biological problems, more specifically:
+The [second Pluto notebook](/notebooks/BioCCP_Case_Study.jl) contains two case studies, illustrating the application of the BioCCP.jl package to real biological problems, more specifically:
 
 &emsp; **(1)** &emsp; Studying the required sample size and related statistics for a genome-wide CRISPR experiment
 
@@ -107,7 +107,7 @@ Additionally, for using the Pluto notebooks, following steps need to be taken:
 
     using Pluto; Pluto.run()
     
-&emsp;&emsp; Finally, open the notebook file ([report-generating notebook](/notebooks/BioCCP_Interactive_Notebook.jl) or [case study notebook](/notebooks/BioCCP_Case_Study.jl).
+&emsp;&emsp; Finally, open the notebook file ([report-generating notebook](/notebooks/BioCCP_Interactive_Notebook.jl) or [case study notebook](/notebooks/BioCCP_Case_Study.jl)).
 
 
 ## References
