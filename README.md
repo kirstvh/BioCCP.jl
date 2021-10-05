@@ -65,6 +65,7 @@ Number of occurrence of a specific module      |      In this last part, you can
 The second Pluto notebooks contains two case studies, illustrating the application of the BioCCP.jl package to real biological problems, more specifically:
 
 &emsp; **(1)** &emsp; Studying the required sample size and related statistics for a genome-wide CRISPR experiment
+
 &emsp; **(2)** &emsp; Determining coverage of a combinatorial protein engineering experiment
 
 
@@ -72,15 +73,15 @@ The second Pluto notebooks contains two case studies, illustrating the applicati
 
 #### Launch Pluto notebook from Browser 
 
-- The Pluto notebooks can be launched directly from your browser using Binder (no installation of Julia/packages required): 
+The Pluto notebooks can be launched directly from your browser using Binder (no installation of Julia/packages required): 
 
-Report-generating Pluto notebook: [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Interactive_Notebook.jl)
+- Report-generating Pluto notebook: [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Interactive_Notebook.jl)
 
-Case study Pluto notebook: [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Case_Study.jl).
+- Case study Pluto notebook: [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Case_Study.jl).
 
 Additionally, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) provides an html file of the case study notebook to skip right to a fully executed notebook.
 
-#### Execute functions in Julia
+#### Execute functions in Julia and running the Pluto notebooks locally
 
 &emsp; **(1)** &emsp; [Install Julia](https://julialang.org/downloads/) 
 
@@ -93,8 +94,6 @@ Additionally, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) prov
     using BioCCP
     
 Now you are ready for executing BioCCP functions in the Julia REPL.
-
-##### Running the Pluto notebooks locally
 
 For using the Pluto notebooks:
 
