@@ -25,7 +25,6 @@ end
 
 # ╔═╡ e1b554a6-db6c-4d2a-9dd3-0a35095f4d8c
 begin
-	using Images
 	url = "https://raw.githubusercontent.com/kirstvh/BioCCP/main/BioCCP_scheme.png" 
 	filename = download(url)
 	img = load(filename)
