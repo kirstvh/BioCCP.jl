@@ -6,7 +6,7 @@ using InteractiveUtils
 
 
 # ╔═╡ 666850df-859e-489c-b92b-c63b6260c190
-using Plots #, PlutoUI, Distributions
+#using Plots #, PlutoUI, Distributions
 # begin
 # 	import Pkg
 # 	Pkg.activate(mktempdir())
