@@ -67,11 +67,14 @@ Number of occurrence of a specific module      |      In this last part, you can
 
 ### 2. Case study Pluto notebook
 
-The [second Pluto notebook](/notebooks/BioCCP_Case_Study.jl) contains two case studies, illustrating the application of the BioCCP.jl package to real biological problems (references below), more specifically:
+The [second Pluto notebook](/notebooks/BioCCP_Case_Study.jl) contains two case studies, illustrating the application of the BioCCP.jl package to real biological problems, more specifically:
 
-&emsp; **(1)** &emsp; Studying the required sample size and related statistics for a genome-wide CRISPR experiment
+**(1)** &emsp; Studying the required sample size and related statistics for a genome-wide CRISPR experiment, based on a [study from Chen *et al.* (2015)](https://doi.org/10.1016/j.cell.2015.02.038) concerning tumour research in mouse models.
 
-&emsp; **(2)** &emsp; Determining coverage of a combinatorial protein engineering experiment
+
+**(2)** &emsp; Determining coverage of a combinatorial protein engineering experiment, based on a [study from Duyvejonck *et al.* (2021)](https://doi.org/10.3390/antibiotics10030293) focusing on the development of endolysins as alternative antibiotics.
+
+
 
 
 
@@ -81,11 +84,9 @@ The [second Pluto notebook](/notebooks/BioCCP_Case_Study.jl) contains two case s
 
 The Pluto notebooks can be launched directly from your browser using Binder (no installation of Julia/packages required): 
 
-- Report-generating Pluto notebook: [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.14.1/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Interactive_Notebook.jl)
+- Report-generating Pluto notebook: &emsp; [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.14.1/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Interactive_Notebook.jl)
 
-- Case study Pluto notebook: [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Case_Study.jl).
-
-Additionally, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) provides an html file of the executed case study notebook (skip the run time and have immediate access to the results).
+- Case study Pluto notebook:&emsp; &emsp; &emsp; &emsp;[![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Case_Study.jl) &#8594; To skip the run time and have immediate access to the results, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) provides an html file of the executed case study notebook.
 
 
 #### Execute functions in Julia 
