@@ -16,8 +16,11 @@ Pkg.add("PlutoUI")
 # ╔═╡ 2ae24bb7-9323-490f-99b5-cbfe0863aa56
 Pkg.add("Distributions")
 
+# ╔═╡ d2bbabd4-2981-4daa-b3ea-811a05e701cb
+Pkg.add("Images")
+
 # ╔═╡ 9937d1e4-6133-4bfc-a0ad-63e23a8bd3cb
-using Plots, PlutoUI, Distributions, BioCCP
+using Plots, PlutoUI, Distributions, Images, BioCCP
 
 # ╔═╡ 41beadc2-385e-42bf-9960-ab201242b400
 md"*Installing the packages might take a while...*"
@@ -26,11 +29,11 @@ md"*Installing the packages might take a while...*"
 md"## BioCCP Case studies
 
 
-In this notebook, the BioCCP.jl package will be applied onto a real biological problem. More specifically, we will 
+In this notebook, the BioCCP.jl package will be applied to two real biological problems, based on two studies from literature. More specifically, we will 
 
 (1) illustrate how BioCCP can aid in determining an appropriate sample size in order to guarantee sufficient coverage of a CRISPR-Cas 9 guide RNA library. For this case study, we consider the paper 'Genome-wide CRISPR Screen in a Mouse Model of Tumor Growth and Metastasis' (Chen *et al.*, 2015) [^1]. 
 
-(2) show how BioCCP assists in sample determination for screening of modular proteins. For this case study, we will use the study 'Rapid and High-Throughput Evaluation of Diverse Configurations of Engineered Lysins Using the VersaTile Technique' (Duyvejonck *et al.*, 2021) [^2].
+(2) show how BioCCP assists in sample determination for screening of modular proteins. For this case study, we will use the paper 'Rapid and High-Throughput Evaluation of Diverse Configurations of Engineered Lysins Using the VersaTile Technique' (Duyvejonck *et al.*, 2021) [^2].
 
 "
 
@@ -48,11 +51,11 @@ The question is **how many cells should be injected in total, so we can study th
 md"###### 1.1 Problem definition"
 
 # ╔═╡ 50462b1a-f65e-4d91-8d8d-da9c93ad007c
-# begin
-# 	url = "https://raw.githubusercontent.com/kirstvh/BioCCP/main/notebooks/CRISPR_img.png" 
-# 	filename = download(url)
-# 	img = load(filename)
-# end
+begin
+	url = "https://raw.githubusercontent.com/kirstvh/BioCCP/main/notebooks/CRISPR_img.png" 
+	filename = download(url)
+	img = load(filename)
+end
 
 # ╔═╡ f3ef2715-da53-449e-b198-faeeb78ac83f
 md"###### 🔹 Number of modules (*n*)
@@ -63203,7 +63206,7 @@ p_0gRNA = pdf(poisson, 0) # the probability that a cancer cell has 0 integrated 
 p_1gRNA = pdf(poisson, 1) # the probability that a cancer cell has 1 integrated gRNA construct
 
 # ╔═╡ 480d6282-ce97-4127-957d-d0b9fd37a7e4
-p_2gRNA = pdf(poisson, 2) # the probability that a cancer cell has 2 integrated gRNA constructs
+p_2gRNA = pdf(poisson, 2) # the probability that a cancer cell has 2 integrated gRNA  constructs
 
 # ╔═╡ 55e0b804-a3ee-4667-8367-38b1b20b0096
 md"
@@ -63221,6 +63224,7 @@ md"With this information, we can calculate the **average number of gRNA integran
 
 # ╔═╡ fa7b1373-006c-48e8-917b-c750bce86e09
 r = sum([k*pdf(poisson, k)/Pₛᵤᵣᵥᵢᵥₐₗ for k in 1:20]) 
+
 # calculation of expected value: summation over number of integrated constructs multiplied by its probability (normalized by percentage of cells that survived)
 
 # ╔═╡ 2ac080a7-af56-41ae-b913-8d65dedb9197
@@ -63254,12 +63258,12 @@ md"The **success probability curve**, describing the probability that the minimu
 
 # ╔═╡ ca7ecf8b-634e-4fa5-aaa8-102fa488c7a1
 begin
-	sample_size_initial = 10^5
-		while (1 - success_probability(n_gRNAs, sample_size_initial; p = p_gRNA, r = r, m = m)) > 0.0005
-			global sample_size_initial += Int(ceil(n_gRNAs/10))
+	sample_size_initial = 18*10^6
+		while (1 - success_probability(n_gRNAs, sample_size_initial; p = p_gRNA, r = r, m = m)) > 0.00005
+			global sample_size_initial += Int(ceil(10*n_gRNAs))
 		end
 			
-		sample_sizes = Int.(ceil.(0:n_gRNAs*3:sample_size_initial))
+		sample_sizes = Int.(ceil.(0:n_gRNAs*5:sample_size_initial))
 		successes = success_probability.(n_gRNAs, sample_sizes; p = p_gRNA, r = r, m = m)
 	plot(sample_sizes, successes, title = "Success probability to sample each gRNA at least $m time 
 in function of sample size", xlabel = "number of cells sampled", ylabel= "success probability", label = "", legend=:bottomright, size=(600,400), seriestype=:scatter, titlefont=font(10),xguidefont=font(9), yguidefont=font(9))
@@ -63308,12 +63312,12 @@ md"The **fraction of the total number of available gRNAs that is expected to be 
 
 # ╔═╡ 7968de5e-5ae8-4ab4-b089-c3d33475af2f
 begin
-global sample_size_initial_frac = 10000
+global sample_size_initial_frac = 7*10^6
 		while (1 - expectation_fraction_collected(n_gRNAs, sample_size_initial_frac; p=p_gRNA, r = r)) > 0.000005
-		global	 sample_size_initial_frac += Int(ceil(n_gRNAs/10))
+		global	 sample_size_initial_frac += Int(ceil(10*n_gRNAs))
 		end
 	
-	sample_sizes_frac = Int.(ceil.(collect(0 : n_gRNAs/5 : sample_size_initial_frac)))
+	sample_sizes_frac = Int.(ceil.(collect(0 : n_gRNAs/2 : sample_size_initial_frac)))
 	fracs = expectation_fraction_collected.(n_gRNAs, sample_sizes_frac; p=p_gRNA, r = r)
 	
 	plot(sample_sizes_frac, fracs, 
@@ -63359,7 +63363,7 @@ end
 mean, std = floor(n_cells * pᵢ_gRNA * r), floor(sqrt(n_cells * pᵢ_gRNA * r))
 
 # ╔═╡ cc4c712d-6562-4d25-8b84-64458cda4198
-
+md"The least abundant gRNA will be present on average 3 times with a standard deviation of 1, when 4 x 10⁶ cells are injected."
 
 # ╔═╡ a6014a30-6643-4504-8081-17bcc8be2615
 md"##### 2. [Rapid and High-Throughput Evaluation of Diverse Configurations of Engineered Lysins Using the VersaTile Technique (Duyvejonck *et al.*, 2021)](https://www.mdpi.com/2079-6382/10/3/293)
@@ -63415,13 +63419,31 @@ md"###### 2.2 Determining coverage using BioCCP.jl"
 endolysins_sample_size = 188
 
 # ╔═╡ 16fd6703-d559-444c-8f42-26e314f29fb3
-md"The **probability that all available OMPs were observed at least once in this set**, will be calculated below. We assume that there is an equal probability for each OMP to be observed (optimistic scenario)."
+md"First, let's take a look at the coverage of the OMP variants in the screening experiment. The **probability that all available OMPs were observed at least once in this set**, will be calculated below. We assume that there is an equal probability for each OMP to be observed (optimistic scenario)."
 
 # ╔═╡ 63eed55a-1dfe-4b3d-b7aa-e4736718b105
-Float16(success_probability(n_OMP, endolysins_sample_size; p = ones(n_OMP)/n_OMP))
+Float16(success_probability(n_OMP, endolysins_sample_size; p = ones(n_OMP)/n_OMP), m = 1)
+
+# ╔═╡ 55631080-6d7d-4059-b8c1-32fa10ef8884
+md"The OMPs are only guaranteed to be fully covered with 62 % probability at a sample size of 188 endolysins. "
+
+# ╔═╡ efac7679-df64-4db2-8b8b-06febdc8a5f0
+md"The success probability is way lower than 95%. Suppose we would execute a series of experiments in which we sample endolysins until all OMPs are observed at least once, what would be the average number of endolysins per experiment to see each OMP at least once in the set of sampled endolysins?"
+
+# ╔═╡ d26ab92f-3541-4eb6-9257-124266d6878a
+expectation_minsamplesize(n_OMP; p = ones(n_OMP)/n_OMP, m = 1)
+
+# ╔═╡ 0f98810b-c6c5-4f4b-9c40-0af0ec78c057
+std_minsamplesize(n_OMP; p = ones(n_OMP)/n_OMP, m = 1)
+
+# ╔═╡ c0ccc9c2-278e-4c21-ac1f-53c73d209e38
+md"Over different sampling experiments, when each time sampling 188 endolysins, on average a fraction of 98.9% of all OMP variants is expected to be observed:"
+
+# ╔═╡ 908644a9-a4db-41f7-9faf-1f3afb5dac79
+expectation_fraction_collected(n_OMP, endolysins_sample_size; p = ones(n_OMP)/n_OMP)
 
 # ╔═╡ a34b71fb-1da6-43db-981b-71e1a404e4d6
-md"The **probability that all available linkers were observed at least once in this set** (assuming that there is an equal probability for each linker to be observed):"
+md"Now, let's investigate how well the other module types are covered. The **probability that all available linkers were observed at least once in this set** (assuming that there is an equal probability for each linker to be observed):"
 
 # ╔═╡ ca9f4254-b38c-4de2-bafb-f97dd15a46bc
 Float16(success_probability(n_linker, endolysins_sample_size; p = ones(n_linker)/n_linker))
@@ -63439,7 +63461,7 @@ md"The **probability that all available EADs were observed at least once in this
 Float16(success_probability(n_EAD, endolysins_sample_size; p = ones(n_EAD)/n_EAD))
 
 # ╔═╡ 63dedbcb-7ea0-4c4e-bb4c-fa8e258f9a93
-md"**We can conclude the EADs, CBDs and linker domains were sufficiently covered by the sample size of $endolysins_sample_size endolysins. However, the OMPs are only guaranteed to be covered with 62 % probability.** "
+md"We can conclude the EADs, CBDs and linker domains were sufficiently covered by the sample size of $endolysins_sample_size endolysins."
 
 # ╔═╡ fbffaab6-3154-49df-a226-d5810d0b7c38
 md"""## References"""
@@ -63457,8 +63479,8 @@ md"""[^1]:  Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., .
 # ╠═666850df-859e-489c-b92b-c63b6260c190
 # ╠═ee082fcf-54d1-4aea-9944-8d7f81c6dbf4
 # ╠═79940a89-9e97-49a1-bbf5-6bfbdb3a12b9
-# ╠═b2b6dcc2-67a8-4ad3-bc08-90c0b21de429
 # ╠═2ae24bb7-9323-490f-99b5-cbfe0863aa56
+# ╠═d2bbabd4-2981-4daa-b3ea-811a05e701cb
 # ╠═9937d1e4-6133-4bfc-a0ad-63e23a8bd3cb
 # ╟─4d246460-af05-11eb-382b-590e60ba61f5
 # ╟─ad7e5e06-55b2-4752-9335-2364489932eb
@@ -63504,7 +63526,7 @@ md"""[^1]:  Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., .
 # ╟─bb990e0c-df90-4635-80e4-e6639a62865a
 # ╟─57309e16-8c1b-4268-b164-0b45b60b4fbd
 # ╟─dc696281-7a5b-4568-a4c2-8dde90af43f0
-# ╟─7968de5e-5ae8-4ab4-b089-c3d33475af2f
+# ╠═7968de5e-5ae8-4ab4-b089-c3d33475af2f
 # ╟─be8e6332-f79d-4d63-afae-51c2d829f998
 # ╟─f0eaf96b-0bc0-4194-9a36-886cb1d66e00
 # ╟─f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
@@ -63523,6 +63545,12 @@ md"""[^1]:  Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., .
 # ╠═12afa1a7-b4ed-4767-aff8-07dab6fa5d3c
 # ╟─16fd6703-d559-444c-8f42-26e314f29fb3
 # ╠═63eed55a-1dfe-4b3d-b7aa-e4736718b105
+# ╟─55631080-6d7d-4059-b8c1-32fa10ef8884
+# ╟─efac7679-df64-4db2-8b8b-06febdc8a5f0
+# ╠═d26ab92f-3541-4eb6-9257-124266d6878a
+# ╠═0f98810b-c6c5-4f4b-9c40-0af0ec78c057
+# ╟─c0ccc9c2-278e-4c21-ac1f-53c73d209e38
+# ╠═908644a9-a4db-41f7-9faf-1f3afb5dac79
 # ╟─a34b71fb-1da6-43db-981b-71e1a404e4d6
 # ╠═ca9f4254-b38c-4de2-bafb-f97dd15a46bc
 # ╟─cf19ee57-174d-42b9-8f9d-f4654907fc2a
