@@ -69,9 +69,10 @@ Number of occurrence of a specific module      |      In this last part, you can
 
 The [second Pluto notebook](/notebooks/BioCCP_Case_Study.jl) contains two case studies, illustrating the application of the BioCCP.jl package to real biological problems (references below), more specifically:
 
-&emsp; **(1)** &emsp; Studying the required sample size and related statistics for a genome-wide CRISPR experiment
+&emsp; **(1)** &emsp; Studying the required sample size and related statistics for a genome-wide CRISPR experiment, based on a [study from Chen *et al.* (2015)](https://doi.org/10.1016/j.cell.2015.02.038) about tumour research in mouse models.
 
-&emsp; **(2)** &emsp; Determining coverage of a combinatorial protein engineering experiment
+
+&emsp; **(2)** &emsp; Determining coverage of a combinatorial protein engineering experiment, based on a [study from Duyvejonck *et al.* (2021)](https://doi.org/10.3390/antibiotics10030293) about the development of endolysins as alternative antibiotics.
 
 
 
