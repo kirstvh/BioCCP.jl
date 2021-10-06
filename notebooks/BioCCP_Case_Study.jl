@@ -68,7 +68,9 @@ n_gRNAs = 63090
 # ╔═╡ 50d87809-df3b-4558-97ce-0a50fdfbcf69
 md"###### 🔹 Module distribution (*p*)
 
-The gRNA sequences were embedded into a plasmid library, with a single gRNA per lentiviral vector. Deep sequencing of this plasmid pool resulted in a number of reads for each gRNA, representing the abundance of each gRNA in the plasmid pool: "
+The gRNA sequences were embedded into a plasmid library, with a single gRNA per lentiviral vector. Deep sequencing of this plasmid pool resulted in a number of reads for each gRNA, representing the abundance of each gRNA in the plasmid pool:
+
+*Note: The log normalized reads were retrieved from the supplementary data from the paper and converted to normalized reads for each gRNA.*"
 
 # ╔═╡ 857da523-7c09-4230-9397-2dc0ef639007
 reads_gRNA = [7.33862316
