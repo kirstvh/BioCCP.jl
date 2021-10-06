@@ -84,9 +84,9 @@ The [second Pluto notebook](/notebooks/BioCCP_Case_Study.jl) contains two case s
 
 The Pluto notebooks can be launched directly from your browser using Binder (no installation of Julia/packages required): 
 
-- Report-generating Pluto notebook: &emsp; [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.14.1/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Interactive_Notebook.jl)
+- Report-generating Pluto notebook: &emsp; [![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.1/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Interactive_Notebook.jl)
 
-- Case study Pluto notebook:&emsp; &emsp; &emsp; &emsp;[![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.0/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Case_Study.jl) &#8594; To skip the run time and have immediate access to the results, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) provides an html file of the executed case study notebook.
+- Case study Pluto notebook:&emsp; &emsp; &emsp; &emsp;[![Binder](https://mybinder.org/badge_logo.svg)](https://binder.plutojl.org/v0.16.1/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fkirstvh%252FBioCCP.jl%252Fmain%252Fnotebooks%252FBioCCP_Case_Study.jl) &#8594; To skip the run time and have immediate access to the results, [this link](https://kirstvh.github.io/BioCCP_Case_Study_html) provides an html file of the executed case study notebook.
 
 
 #### Execute functions in Julia 
