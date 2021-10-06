@@ -63460,11 +63460,17 @@ expectation_minsamplesize(n_OMP; p = ones(n_OMP)/n_OMP, m = 1)
 # ╔═╡ 0f98810b-c6c5-4f4b-9c40-0af0ec78c057
 std_minsamplesize(n_OMP; p = ones(n_OMP)/n_OMP, m = 1)
 
+# ╔═╡ 7a1bed30-ecb8-4747-bf83-578b77f48e59
+md"The expected minimum number of endolysins to observe each OMP variant at least once is 182 (standard deviation: 51 endolysins)."
+
 # ╔═╡ c0ccc9c2-278e-4c21-ac1f-53c73d209e38
-md"Over different sampling experiments, when each time sampling 188 endolysins, on average a fraction of 98.9% of all OMP variants is expected to be observed:"
+md"Another research question we can ask ourselves is what **fraction of the total number of OMP variants is expected to be represented** for the set of 188 randomly sampled endolysins from the library."
 
 # ╔═╡ 908644a9-a4db-41f7-9faf-1f3afb5dac79
 expectation_fraction_collected(n_OMP, endolysins_sample_size; p = ones(n_OMP)/n_OMP)
+
+# ╔═╡ 19f4c16d-2f59-45ba-8502-b86cacd9cd10
+md"In other words, when over different sampling experiments, each time 188 endolysins are randomly sampled, on average a fraction of 98.9% of all OMP variants is expected to be observed."
 
 # ╔═╡ ae2c1a89-cff9-4514-8744-f1620e46663d
 
@@ -64885,8 +64891,10 @@ version = "0.9.1+5"
 # ╟─efac7679-df64-4db2-8b8b-06febdc8a5f0
 # ╠═d26ab92f-3541-4eb6-9257-124266d6878a
 # ╠═0f98810b-c6c5-4f4b-9c40-0af0ec78c057
+# ╟─7a1bed30-ecb8-4747-bf83-578b77f48e59
 # ╟─c0ccc9c2-278e-4c21-ac1f-53c73d209e38
 # ╠═908644a9-a4db-41f7-9faf-1f3afb5dac79
+# ╟─19f4c16d-2f59-45ba-8502-b86cacd9cd10
 # ╟─ae2c1a89-cff9-4514-8744-f1620e46663d
 # ╟─feedcbb2-e6a0-4cb6-9d88-81554ba4ccbf
 # ╟─a34b71fb-1da6-43db-981b-71e1a404e4d6
