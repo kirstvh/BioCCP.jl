@@ -70,7 +70,7 @@ md"###### 🔹 Module distribution (*p*)
 
 The gRNA sequences were embedded into a plasmid library, with a single gRNA per lentiviral vector. Deep sequencing of this plasmid pool resulted in a number of reads for each gRNA, representing the abundance of each gRNA in the plasmid pool:
 
-*Note: The log normalized reads were retrieved from the supplementary data from the paper and converted to normalized reads for each gRNA.*"
+*Note: The log normalized reads were retrieved from the supplementary data accompanying the paper and converted to normalized reads for each gRNA.*"
 
 # ╔═╡ 857da523-7c09-4230-9397-2dc0ef639007
 reads_gRNA = [7.33862316
@@ -63424,7 +63424,7 @@ endolysins_sample_size = 188
 md"First, let's take a look at the coverage of the OMP variants in the screening experiment. The **probability that all available OMPs were observed at least once in this set**, will be calculated below. We assume that there is an equal probability for each OMP to be observed (optimistic scenario)."
 
 # ╔═╡ 63eed55a-1dfe-4b3d-b7aa-e4736718b105
-Float16(success_probability(n_OMP, endolysins_sample_size; p = ones(n_OMP)/n_OMP), m = 1)
+Float16(success_probability(n_OMP, endolysins_sample_size; p = ones(n_OMP)/n_OMP, m = 1))
 
 # ╔═╡ 55631080-6d7d-4059-b8c1-32fa10ef8884
 md"The OMPs are only guaranteed to be fully covered with 62 % probability at a sample size of 188 endolysins. "
@@ -63528,7 +63528,7 @@ md"""[^1]:  Chen, S., Sanjana, N. E., Zheng, K., Shalem, O., Lee, K., Shi, X., .
 # ╟─bb990e0c-df90-4635-80e4-e6639a62865a
 # ╟─57309e16-8c1b-4268-b164-0b45b60b4fbd
 # ╟─dc696281-7a5b-4568-a4c2-8dde90af43f0
-# ╠═7968de5e-5ae8-4ab4-b089-c3d33475af2f
+# ╟─7968de5e-5ae8-4ab4-b089-c3d33475af2f
 # ╟─be8e6332-f79d-4d63-afae-51c2d829f998
 # ╟─f0eaf96b-0bc0-4194-9a36-886cb1d66e00
 # ╟─f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
