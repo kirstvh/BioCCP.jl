@@ -14,16 +14,20 @@ macro bind(def, element)
 end
 
 # ╔═╡ 3f0db645-a529-4717-b788-5d044450d6b0
-using Plots
+import Pkg; Pkg.add("Plots")
 
 # ╔═╡ d7e4a6f7-cc5d-4dd9-9a17-85ed1bd90596
-using PlutoUI
+Pkg.add("PlutoUI")
 
 # ╔═╡ e254f8ca-3b7d-41ec-bcbd-ec712b429a4b
-using Images
+Pkg.add("Images")
 
 # ╔═╡ f8d95fbf-f5f8-4342-868c-02a1e1cb775e
-using BioCCP
+begin
+ 	Pkg.add(url="https://github.com/kirstvh/BioCCP")
+	using Plots, PlutoUI, Images, BioCCP
+end
+
 
 # ╔═╡ 20ce43cd-7634-4c94-afdf-d243415525cb
 md"                                                             $(@bind date DateField())"
