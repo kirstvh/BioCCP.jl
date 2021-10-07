@@ -110,7 +110,7 @@ Additionally, for using the Pluto notebooks, following steps need to be taken:
 
 &emsp;&emsp; In the Julia REPL, hit the following command to install the [Pluto package](https://github.com/fonsp/Pluto.jl):
   
-    using Pkg; Pkg.add["Pluto"]
+    using Pkg; Pkg.add(name="Pluto", version="0.16.1")
 
 &emsp;&emsp; Then start Pluto in the Julia REPL:
 
