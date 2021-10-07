@@ -13,22 +13,6 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ 3f0db645-a529-4717-b788-5d044450d6b0
-using Plots, PlutoUI, Images
-
-# ╔═╡ d7e4a6f7-cc5d-4dd9-9a17-85ed1bd90596
-using BioCCP
-# import Pkg; Pkg.add("Plots")
-# Pkg.add("PlutoUI")
-
-# ╔═╡ e254f8ca-3b7d-41ec-bcbd-ec712b429a4b
-# Pkg.add("Images")
-
-# ╔═╡ f8d95fbf-f5f8-4342-868c-02a1e1cb775e
-# begin
-#  	Pkg.add(url="https://github.com/kirstvh/BioCCP")
-# 	using Plots, PlutoUI, Images, BioCCP
-# end
 
 
 # ╔═╡ 20ce43cd-7634-4c94-afdf-d243415525cb
@@ -42,7 +26,7 @@ This notebook provides functions and corresponding visualizations to determine e
 "
 
 # ╔═╡ 56571409-a81d-4772-98fd-e85e883aa4e4
-
+using Plots, PlutoUI, Images, BioCCP
 
 # ╔═╡ db12a68f-523a-48d2-9803-0ea9c8ddad7e
 md"*Installation of the packages might take a while...*"
