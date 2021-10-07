@@ -13,7 +13,8 @@ macro bind(def, element)
     end
 end
 
-
+# ╔═╡ 56571409-a81d-4772-98fd-e85e883aa4e4
+using Plots, PlutoUI, Images, BioCCP
 
 # ╔═╡ 20ce43cd-7634-4c94-afdf-d243415525cb
 md"                                                             $(@bind date DateField())"
@@ -24,12 +25,6 @@ md"## Collecting Coupons in combinatorial biotechnology
 This notebook provides functions and corresponding visualizations to determine expected minimum sample sizes for combinatorial biotechnology experiments, based on the mathematical framework of the Coupon Collector Problem (references see [^1], [^2]).
 
 "
-
-# ╔═╡ 56571409-a81d-4772-98fd-e85e883aa4e4
-using Plots, PlutoUI, Images, BioCCP
-
-# ╔═╡ db12a68f-523a-48d2-9803-0ea9c8ddad7e
-md"*Installation of the packages might take a while...*"
 
 # ╔═╡ 6183795b-62a0-4ed4-b8f9-ea522da956e2
 begin
@@ -1902,12 +1897,7 @@ version = "0.9.1+5"
 # ╔═╡ Cell order:
 # ╟─20ce43cd-7634-4c94-afdf-d243415525cb
 # ╟─4d246460-af05-11eb-382b-590e60ba61f5
-# ╟─56571409-a81d-4772-98fd-e85e883aa4e4
-# ╟─db12a68f-523a-48d2-9803-0ea9c8ddad7e
-# ╠═3f0db645-a529-4717-b788-5d044450d6b0
-# ╠═d7e4a6f7-cc5d-4dd9-9a17-85ed1bd90596
-# ╠═e254f8ca-3b7d-41ec-bcbd-ec712b429a4b
-# ╠═f8d95fbf-f5f8-4342-868c-02a1e1cb775e
+# ╠═56571409-a81d-4772-98fd-e85e883aa4e4
 # ╟─6183795b-62a0-4ed4-b8f9-ea522da956e2
 # ╟─a8c81622-194a-443a-891b-bfbabffccff1
 # ╟─e1b554a6-db6c-4d2a-9dd3-0a35095f4d8c

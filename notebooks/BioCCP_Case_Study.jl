@@ -5,10 +5,10 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ ee082fcf-54d1-4aea-9944-8d7f81c6dbf4
-using Plots, BioCCP, Distributions, Images
+using  BioCCP, Plots, Distributions, Images
 
 # ╔═╡ 41beadc2-385e-42bf-9960-ab201242b400
-md"*Installing the packages might take a while...*"
+md"*Loading the required packages...*"
 
 # ╔═╡ 4d246460-af05-11eb-382b-590e60ba61f5
 md"## BioCCP Case studies
@@ -64803,9 +64803,6 @@ version = "0.9.1+5"
 # ╔═╡ Cell order:
 # ╟─41beadc2-385e-42bf-9960-ab201242b400
 # ╠═ee082fcf-54d1-4aea-9944-8d7f81c6dbf4
-# ╠═79940a89-9e97-49a1-bbf5-6bfbdb3a12b9
-# ╠═2ae24bb7-9323-490f-99b5-cbfe0863aa56
-# ╠═d2bbabd4-2981-4daa-b3ea-811a05e701cb
 # ╟─4d246460-af05-11eb-382b-590e60ba61f5
 # ╟─ad7e5e06-55b2-4752-9335-2364489932eb
 # ╟─d6b7e9f5-3bda-4477-b92c-e32b836f1f0d
