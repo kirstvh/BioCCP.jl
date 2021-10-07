@@ -5,16 +5,23 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ ee082fcf-54d1-4aea-9944-8d7f81c6dbf4
-using Plots
+begin
+	import Pkg
+	Pkg.activate(mktempdir())
+	using Pkg
+	Pkg.add(url="https://github.com/kirstvh/BioCCP")
+	Pkg.add("Distributions")
+end
+
 
 # ╔═╡ 79940a89-9e97-49a1-bbf5-6bfbdb3a12b9
-using BioCCP
+Pkg.add("Plots")
 
 # ╔═╡ 2ae24bb7-9323-490f-99b5-cbfe0863aa56
-using Distributions
+Pkg.add("Images")
 
 # ╔═╡ d2bbabd4-2981-4daa-b3ea-811a05e701cb
-using Images
+using Plots, BioCCP, Distributions, Images
 
 # ╔═╡ 41beadc2-385e-42bf-9960-ab201242b400
 md"*Installing the packages might take a while...*"
