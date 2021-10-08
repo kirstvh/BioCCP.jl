@@ -6,23 +6,16 @@ using Distributions
 export expectation_minsamplesize, std_minsamplesize, success_probability, 
         expectation_fraction_collected, prob_occurrence_module
 
-"""
-    factorial_custom(n)
 
-Helper function that calculates factorial of small numbers (< 20) exactly and approximates factorial of big numbers (>= 20) with Sterling Approximation.
-"""
-function factorial_custom(n)
-	logfact = n < 20 ? log(factorial(n)) : 0.5log(2pi*n) + n * log(n/exp(1))  # Sterling approximation for numbers >= 20
-	fact = exp(logfact)
-	return fact
-end		
+"""Computes the log of factorial(n), falls back on Stirling's approximation for `n` > 20"""
+logfactorial(n) = n ≤ 20 ? log(factorial(n)) : 0.5log(2pi*n) + n * log(n/ℯ) 
 
 """
     exp_ccdf(n, T; p=ones(n)/n, m=1, r=1, normalize=true)
 
 Calculates `1 - F(t)`, which is the complement of the success probability
 `F(t)=P(T ≤ t)` (= probability that the expected minimum
-  number of designs T is smaller than `t` in order to 
+  number of designs `T` is smaller than `t` in order to 
   see each module at least `m` times). This function
   serves as the integrand for calculating `E[T]`.
  
@@ -40,7 +33,6 @@ References:
         engineering problems and computational methods. Stochastic Models, 13(1), 39-66.
 
 ## Examples
- 
 
 ```julia-repl
 julia> n = 100
@@ -54,24 +46,25 @@ function exp_ccdf(n, t; p=ones(n)/n, m=1, r=1, normalize=true)
 	
     # Normalize probabilities
     if normalize
-        p=p ./ sum(p)    
+        p ./= sum(p)    
     end   
     # Initialize probability P
-    P_cdf = 1
+    P_cdf = 1.0
     for i in 1:n
           Sm = 0.0
         for j in 1:m
-            Sm += ((p[i]*r*t)^(j-1))/factorial_custom(j-1) #formulas see paper reference [1]
+            # formulas see paper reference [1]
+            Sm += (j-1) * log(p[i]) + log(r) + log(t) - logfactorial(j-1) |> exp
         end 
-        P_cdf *= (1 - Sm*exp(-p[i]*r*t))        
+        P_cdf *= (1 - Sm * exp(-p[i]*r*t))        
     end   
-    P = 1 - P_cdf
+    P = 1.0 - P_cdf
     return P
 end   
 
 """
     approximate_moment(n, fun; p=ones(n)/n, q=1, m=1, r=1,
-steps=1000, normalize=true)
+                steps=1000, normalize=true, ϵ = 1e-3)
 
 Calculates the q-th rising moment of `T[N]` (number of designs that are needed to collect
 all modules `m` times). Integral is approximated by the Riemann sum.
@@ -92,22 +85,23 @@ steps=10000, normalize=true)
 ```
 """
 function approximate_moment(n, fun; p=ones(n)/n, q=1, m=1, r=1,
-	        steps=500, normalize=true)
+	        steps=500, normalize=true, ϵ=1e-3)
     @assert length(p) == n
     a = 0; b = n*log(n) 
-    ϵ = 0.001 # error tolerance
     while fun(n, b; p=p, m=m, r=r, normalize=normalize) > ϵ
         b += n
     end
     
     # integration exp_ccdf, see paper References [1]
-    # build in adaptive integration (exp_ccdf is a very steep function): minimize function evaluation at constant function value, only evaluate function at steep part
-    a = deepcopy(b)
+    # build in adaptive integration (exp_ccdf is a very steep function):
+    #        minimize function evaluation at constant function value, only evaluate function at steep part
+    a = b
     while fun(n, a; p=p, m=m, r=r, normalize=normalize) < 1 - ϵ
-	a += -n/10
+	a += -n / 10
     end
     δ = (b-a)/steps; t = a:δ:b
-    qth_moment = q * sum(δ .* 1 .* (0:δ:a-δ).^[q-1])  + q * sum(δ .* fun.(n, t; p=p, m=m, r=r, normalize=normalize) .* t.^[q-1]) 
+    qth_moment = q * sum(δ .* 1 .* (0:δ:a-δ).^[q-1])  +
+                 q * sum(δ .* fun.(n, t; p=p, m=m, r=r, normalize=normalize) .* t.^[q-1]) 
     return qth_moment           
 end
 
@@ -173,8 +167,8 @@ function std_minsamplesize(n::Integer; p=ones(n)/n, m::Integer=1, r=1, normalize
     @assert all(p .>= 0)
     @assert m > 0
     @assert r > 0
-    M1 = approximate_moment(n, exp_ccdf; p=p, q=1, m=m, r=r,  normalize=normalize)
-    M2 = approximate_moment(n, exp_ccdf; p=p, q=2, m=m, r=r, normalize=normalize)
+    M1 = approximate_moment(n, exp_ccdf; p, m, r, normalize, q=1)
+    M2 = approximate_moment(n, exp_ccdf; p, m, r, normalize, q=1)
     var = M2 - M1 - M1^2
     return Int(ceil(sqrt(var)))
 end
@@ -212,7 +206,7 @@ function success_probability(n::Integer, t::Integer; p=ones(n)/n, m::Integer=1, 
     @assert t >= 0
     @assert m > 0
     @assert r > 0
-    P_success = 1 - exp_ccdf(n, t; p=p, m=m, r=r, normalize=normalize) 
+    P_success = 1.0 - exp_ccdf(n, t; p, m, r, normalize) 
     return P_success
 end
 
@@ -247,7 +241,7 @@ function expectation_fraction_collected(n::Integer, t::Integer; p=ones(n)/n, r=1
     @assert t >= 0
     @assert r > 0
     if normalize
-        p = p./sum(p)
+        p ./= sum(p)
     end
     frac = sum( (1-(1-p[i])^(t*r)) for i in 1:n )/n
     return frac
