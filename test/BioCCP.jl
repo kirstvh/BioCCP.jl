@@ -30,7 +30,7 @@ using BioCCP
     t = 500
 
     @testset "Success probability" begin
-        @test success_probability(n, t; p = p_uniform) isa BigFloat
+        @test success_probability(n, t; p = p_uniform) isa Float64
         @test success_probability(n, t; p = p_uniform) > success_probability(n, t; p = p_zipf)
         @test success_probability(n, t; p = p_uniform, m = 1) > success_probability(n, t; p = p_uniform, m = 2)
         @test all(success_probability(n, t; p = p_uniform) .< success_probability.(n, [t+10, t+100, t+1000]; p = p_uniform))
