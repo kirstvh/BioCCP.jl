@@ -135,7 +135,7 @@ References:
 ```julia-repl
 julia> n = 100
 julia> expectation_minsamplesize(n; p=ones(n)/n, m=1, r=1, normalize=true)
-519
+518
 ```
 """
 function expectation_minsamplesize(n::Integer; p=ones(n)/n, m::Integer=1, r=1, normalize=true)
