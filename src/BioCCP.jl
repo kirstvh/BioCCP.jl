@@ -6,6 +6,16 @@ using Distributions
 export expectation_minsamplesize, std_minsamplesize, success_probability, 
         expectation_fraction_collected, prob_occurrence_module
 
+"""
+    factorial_custom(n)
+
+Helper function that calculates factorial of small numbers (< 20) exactly and approximates factorial of big numbers (>= 20) with Sterling Approximation.
+"""
+function factorial_custom(n)
+	logfact = n < 20 ? log(factorial(n)) : 0.5log(2pi*n) + n * log(n/exp(1))  # Sterling approximation for numbers >= 20
+	fact = exp(logfact)
+	return fact
+end		
 
 """
     exp_ccdf(n, T; p=ones(n)/n, m=1, r=1, normalize=true)
@@ -41,7 +51,7 @@ julia> exp_ccdf(n, t; p=ones(n)/n, m=1, r=1, normalize=true)
 """
 function exp_ccdf(n, t; p=ones(n)/n, m=1, r=1, normalize=true)   
     @assert length(p) == n
-	    
+	
     # Normalize probabilities
     if normalize
         p=p ./ sum(p)    
@@ -51,7 +61,7 @@ function exp_ccdf(n, t; p=ones(n)/n, m=1, r=1, normalize=true)
     for i in 1:n
           Sm = 0
         for j in 1:m
-            Sm += ((p[i]*r*t)^(j-1))/factorial(big(j-1)) #formulas see paper reference [1]
+            Sm += ((p[i]*r*t)^(j-1))/factorial_custom(j-1) #formulas see paper reference [1]
         end 
         P_cdf *= (1 - Sm*exp(-p[i]*r*t))        
     end   
