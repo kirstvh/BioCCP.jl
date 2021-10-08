@@ -59,7 +59,7 @@ function exp_ccdf(n, t; p=ones(n)/n, m=1, r=1, normalize=true)
     # Initialize probability P
     P_cdf = 1
     for i in 1:n
-          Sm = 0
+          Sm = 0.0
         for j in 1:m
             Sm += ((p[i]*r*t)^(j-1))/factorial_custom(j-1) #formulas see paper reference [1]
         end 
