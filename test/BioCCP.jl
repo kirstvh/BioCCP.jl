@@ -2,7 +2,7 @@ using Base: Int64
 using BioCCP
 @testset "BioCCP" begin
     
-    n = 100
+    n = 20
 
     # Equal probabilities
     p_uniform = ones(n)/n
@@ -18,7 +18,7 @@ using BioCCP
         @test expectation_minsamplesize(n; p = p_uniform) == Int(ceil(n*sum(1 ./ (1:n))))
         @test expectation_minsamplesize(n; p = p_uniform) < expectation_minsamplesize(n; p = p_zipf)
         @test expectation_minsamplesize(n; p = p_uniform, m = 1) < expectation_minsamplesize(n; p = p_uniform, m = 2)
-        @test expectation_minsamplesize(n; p = p_uniform, m = 1, r = 1)/3 == expectation_minsamplesize(n; p = p_uniform, m = 1, r = 3)
+        @test Int(ceil(expectation_minsamplesize(n; p = p_uniform, m = 1, r = 1)/3)) == expectation_minsamplesize(n; p = p_uniform, m = 1, r = 3)
     end
 
     @testset "Standard deviation" begin
