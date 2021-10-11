@@ -97,7 +97,7 @@ function approximate_moment(n, fun; p=ones(n)/n, q=1, m=1, r=1,
     #        minimize function evaluation at constant function value, only evaluate function at steep part
     a = b
     while fun(n, a; p=p, m=m, r=r, normalize=normalize) < 1 - ϵ
-	a += -n / 10
+	    a += -n / 10
     end
     δ = (b-a)/steps; t = a:δ:b
     qth_moment = q * sum(δ .* 1 .* (0:δ:a-δ).^[q-1])  +
@@ -168,7 +168,7 @@ function std_minsamplesize(n::Integer; p=ones(n)/n, m::Integer=1, r=1, normalize
     @assert m > 0
     @assert r > 0
     M1 = approximate_moment(n, exp_ccdf; p, m, r, normalize, q=1)
-    M2 = approximate_moment(n, exp_ccdf; p, m, r, normalize, q=1)
+    M2 = approximate_moment(n, exp_ccdf; p, m, r, normalize, q=2)
     var = M2 - M1 - M1^2
     return Int(ceil(sqrt(var)))
 end
