@@ -5,7 +5,7 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ ee082fcf-54d1-4aea-9944-8d7f81c6dbf4
-using  BioCCP, Plots, Distributions, Images
+using  BioCCP, Plots, Distributions
 
 # ╔═╡ 41beadc2-385e-42bf-9960-ab201242b400
 md"*Loading the required packages...*"
@@ -36,11 +36,7 @@ The question is **how many cells should be injected in total, so we can study th
 md"##### 1.1 Problem definition"
 
 # ╔═╡ 50462b1a-f65e-4d91-8d8d-da9c93ad007c
-begin
-	url = "https://raw.githubusercontent.com/kirstvh/BioCCP/main/notebooks/CRISPR_img.png" 
-	filename = download(url)
-	img = load(filename)
-end
+Show(MIME"image/png"(), read("CRISPR_img.png"))
 
 # ╔═╡ f3ef2715-da53-449e-b198-faeeb78ac83f
 md"###### 🔹 Number of modules (*n*)
@@ -63155,11 +63151,10 @@ md"which can be summarized in the following unimodal read distribution: "
 
 # ╔═╡ 94bcc8de-a0be-47ab-a03a-b04c351ad6f0
 begin
-	# Pkg.build("GR")
 	histogram(reads_gRNA, bar_edges=false, bins=100,  size = (700, 320), orientation=:v, titlefont=font(10), xguidefont=font(9), yguidefont=font(9), label="")
-# 	# using StatsPlots
-# # density(reads_gRNA, label="") 
-			xlabel!("Number of reads"); ylabel!("Density"); title!("Distribution of gRNA reads in plasmid pool")
+	xlabel!("Number of reads")
+	ylabel!("Density")
+	title!("Distribution of gRNA reads in plasmid pool")
 end
 
 # ╔═╡ 364c38ca-8637-4d26-8d64-525222d24033
@@ -63391,11 +63386,7 @@ The endolysin engineered in the study can consists of different protein domains,
 Different variants of these domain types are available and combined with the VersaTile DNA assembly technique.  The following picture represents an endolysin configuration that is considered in the paper:"
 
 # ╔═╡ 45fd4574-679f-42b8-9aa5-b949d252e2e7
-begin
-	url_2 = "https://raw.githubusercontent.com/kirstvh/BioCCP/main/notebooks/Endolysin_img.png" 
-	filename_2 = download(url_2)
-	img_2 = load(filename_2)
-end
+Show(MIME"image/png"(), read("Endolysin_img.png"))
 
 # ╔═╡ 8032bbab-67a8-4058-873a-a33c4b39066f
 md"In this library, there is an availability of 

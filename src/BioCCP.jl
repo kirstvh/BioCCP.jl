@@ -54,7 +54,7 @@ function exp_ccdf(n, t; p=ones(n)/n, m=1, r=1, normalize=true)
           Sm = 0.0
         for j in 1:m
             # formulas see paper reference [1]
-            Sm += (j-1) * log(p[i]) + log(r) + log(t) - logfactorial(j-1) |> exp
+            Sm += (j-1) * (log(p[i]) + log(r) + log(t)) - logfactorial(j-1) |> exp
         end 
         P_cdf *= (1 - Sm * exp(-p[i]*r*t))        
     end   
