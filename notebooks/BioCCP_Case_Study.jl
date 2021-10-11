@@ -63428,7 +63428,7 @@ md"###### 🔹 Coverage OMP variants in endolysin library"
 md"First, let's take a look at the coverage of the OMP variants in the screening experiment. The **probability that all available OMPs were observed at least once in this set**, will be calculated below. We assume that there is an equal probability for each OMP to be observed (optimistic scenario)."
 
 # ╔═╡ 63eed55a-1dfe-4b3d-b7aa-e4736718b105
-Float16(success_probability(n_OMP, endolysins_sample_size; p = ones(n_OMP)/n_OMP, m = 1))
+success_probability(n_OMP, endolysins_sample_size; p = ones(n_OMP)/n_OMP, m = 1)
 
 # ╔═╡ 55631080-6d7d-4059-b8c1-32fa10ef8884
 md"The OMPs are only guaranteed to be fully covered with 62 % probability at a sample size of 188 endolysins. "
@@ -63464,19 +63464,19 @@ md"###### 🔹 Coverage linkers, CBDs and EADs in endolysin library"
 md"Now, let's investigate how well the other module types are covered. The **probability that all available linkers were observed at least once in this set** (assuming that there is an equal probability for each linker to be observed):"
 
 # ╔═╡ ca9f4254-b38c-4de2-bafb-f97dd15a46bc
-Float16(success_probability(n_linker, endolysins_sample_size; p = ones(n_linker)/n_linker))
+success_probability(n_linker, endolysins_sample_size; p = ones(n_linker)/n_linker)
 
 # ╔═╡ cf19ee57-174d-42b9-8f9d-f4654907fc2a
 md"The **probability that all available CBDs were observed at least once in this set** (assuming that there is an equal probability for each CBD to be observed):"
 
 # ╔═╡ 63d90d97-ba80-449e-8d38-1bba52ab32ac
-Float16(success_probability(n_CBD, endolysins_sample_size; p = ones(n_CBD)/n_CBD))
+success_probability(n_CBD, endolysins_sample_size; p = ones(n_CBD)/n_CBD)
 
 # ╔═╡ 062ceeb7-5d6d-48ce-8ad5-9e1d78a937e7
 md"The **probability that all available EADs were observed at least once in this set** (assuming that there is an equal probability for each EAD to be observed):"
 
 # ╔═╡ 04a2acf6-52e2-42d7-96a0-f3e31d1f6b58
-Float16(success_probability(n_EAD, endolysins_sample_size; p = ones(n_EAD)/n_EAD))
+success_probability(n_EAD, endolysins_sample_size; p = ones(n_EAD)/n_EAD)
 
 # ╔═╡ 63dedbcb-7ea0-4c4e-bb4c-fa8e258f9a93
 md"We can conclude the EADs, CBDs and linker domains were sufficiently covered by the sample size of $endolysins_sample_size endolysins."
@@ -63501,8 +63501,8 @@ Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
-BioCCP = "~0.1.0"
-Distributions = "~0.25.18"
+BioCCP = "~0.1.1"
+Distributions = "~0.25.19"
 Plots = "~1.22.4"
 PlutoUI = "~0.7.16"
 """
@@ -63533,9 +63533,9 @@ uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[BioCCP]]
 deps = ["Distributions"]
-git-tree-sha1 = "791b4218060972fa3a37313208c674597581ee05"
+git-tree-sha1 = "4293935cfb1576a783192e81d965addff4d1b47a"
 uuid = "79e6b149-e254-49fe-a721-3c4960de1574"
-version = "0.1.0"
+version = "0.1.1"
 
 [[Bzip2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -63621,9 +63621,9 @@ uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[Distributions]]
 deps = ["ChainRulesCore", "FillArrays", "LinearAlgebra", "PDMats", "Printf", "QuadGK", "Random", "SparseArrays", "SpecialFunctions", "Statistics", "StatsBase", "StatsFuns"]
-git-tree-sha1 = "ff7890c74e2eaffbc0b3741811e3816e64b6343d"
+git-tree-sha1 = "e13d3977b559f013b3729a029119162f84e93f5b"
 uuid = "31c24e10-a181-5473-b8eb-7969acd0382f"
-version = "0.25.18"
+version = "0.25.19"
 
 [[DocStringExtensions]]
 deps = ["LibGit2"]
@@ -63663,9 +63663,9 @@ version = "4.3.1+4"
 
 [[FillArrays]]
 deps = ["LinearAlgebra", "Random", "SparseArrays", "Statistics"]
-git-tree-sha1 = "29890dfbc427afa59598b8cfcc10034719bd7744"
+git-tree-sha1 = "8756f9935b7ccc9064c6eef0bff0ad643df733a3"
 uuid = "1a297f60-69ca-5386-bcde-b61e274b549b"
-version = "0.12.6"
+version = "0.12.7"
 
 [[FixedPointNumbers]]
 deps = ["Statistics"]
@@ -64179,10 +64179,10 @@ uuid = "82ae8749-77ed-4fe6-ae5f-f523153014b0"
 version = "1.0.0"
 
 [[StatsBase]]
-deps = ["DataAPI", "DataStructures", "LinearAlgebra", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Statistics", "StatsAPI"]
-git-tree-sha1 = "8cbbc098554648c84f79a463c9ff0fd277144b6c"
+deps = ["DataAPI", "DataStructures", "LinearAlgebra", "LogExpFunctions", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Statistics", "StatsAPI"]
+git-tree-sha1 = "65fb73045d0e9aaa39ea9a29a5e7506d9ef6511f"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
-version = "0.33.10"
+version = "0.33.11"
 
 [[StatsFuns]]
 deps = ["ChainRulesCore", "IrrationalConstants", "LogExpFunctions", "Reexport", "Rmath", "SpecialFunctions"]
