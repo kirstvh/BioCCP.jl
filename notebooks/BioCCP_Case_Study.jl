@@ -18,7 +18,7 @@ In this notebook, the BioCCP.jl package will be applied to two real biological p
 
 (1) illustrate how BioCCP can aid in determining an appropriate sample size in order to guarantee sufficient coverage of a CRISPR-Cas 9 guide RNA library. For this case study, we consider the paper 'Genome-wide CRISPR Screen in a Mouse Model of Tumor Growth and Metastasis' (Chen *et al.*, 2015) [^1]. 
 
-(2) show how BioCCP assists in sample determination for screening of modular proteins. For this case study, we will use the paper 'Rapid and High-Throughput Evaluation of Diverse Configurations of Engineered Lysins Using the VersaTile Technique' (Duyvejonck *et al.*, 2021) [^2].
+(2) show how BioCCP assists in sample size determination for screening of modular proteins. For this case study, we will use the paper 'Rapid and High-Throughput Evaluation of Diverse Configurations of Engineered Lysins Using the VersaTile Technique' (Duyvejonck *et al.*, 2021) [^2].
 
 "
 
@@ -63231,7 +63231,7 @@ expectation_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = m)
 std_minsamplesize(n_gRNAs; p = p_gRNA, r = r, m = m)
 
 # ╔═╡ d4cd5ff7-88b8-4e5c-a540-04c51ad51f42
-
+md"We see that the expected number of cells that needs to be injected in order to observe each gene knockout at least once is 8 x 10⁶ cells with a standard deviation of approximately 1 x 10 ⁶ cells."
 
 # ╔═╡ 224d556c-cd9d-4c00-9cde-1c3df7cfcdef
 md"In the study of Chen *et al.*, 3 × 10⁷ cells are injected into the flanks of mice. This exceeds the expected minimum sample size to observe each gRNA at least once."
@@ -63243,7 +63243,7 @@ sample_size_paper = 3*10^7
 md"###### 🔹 Probability to observe each gRNA at least once w.r.t. sample size"
 
 # ╔═╡ 7b43e546-07f0-45ce-9d2a-52894adad822
-md"The **success probability curve**, describing the probability that the minimum number of cells that should be sampled to observe all gRNAs at least $m time(s) is smaller than or equal to a given sample size  on the x-axis:"
+md"The **success probability** describes the probability that the minimum number of cells that should be sampled to observe all gRNAs at least $m time(s), is smaller than or equal to a given sample size. The success probability with respect to sample size is visualized below:"
 
 # ╔═╡ ca7ecf8b-634e-4fa5-aaa8-102fa488c7a1
 begin
@@ -63259,13 +63259,16 @@ in function of sample size", xlabel = "number of cells sampled", ylabel= "succes
 end
 
 # ╔═╡ 60c3ce0d-85be-42f0-a869-1895abc096f3
-md"When the number of cells is equal to $sample_size_paper, the probability that all gRNAs will be represented in the genome-wide screening experiment at least once, is:"
+md"When the number of cells is equal to the sample size used in the paper ($sample_size_paper cells), the probability that all gRNAs will be represented in the genome-wide screening experiment at least once, is:"
 
 # ╔═╡ 7eb18559-e2c0-4c34-a2b2-4e3c3ab831a6
 success_probability(63090, 3*10^7; p = p_gRNA, r = r, m = m)
 
+# ╔═╡ b665f292-e3db-43b1-8646-d4415ea03bcf
+md"We see that the success probability indicates an adequate coverage of 1 complete set of all gRNAs."
+
 # ╔═╡ ecf6292c-7cdd-4886-8a59-be8e4f2751b7
-md"Let's investigate how many complete sets of gRNAs that are suffficiently covered by the sample size of the study by Chen *et al.*. Let's define sufficient coverage as a success probability of at least 95%."
+md"Let's investigate how many complete sets of gRNAs that are suffficiently covered by the sample size used in the study by Chen *et al.*. Let's define sufficient coverage as a success probability of at least 95%."
 
 # ╔═╡ 56f21296-fcd2-46f7-a130-4cb6940c1133
 success_probability(63090, sample_size_paper; p = p_gRNA, r = r, m = 2)
@@ -63291,7 +63294,7 @@ probability", legend = :best, titlefont=font(10),xguidefont=font(9), yguidefont=
 end
 
 # ╔═╡ bb990e0c-df90-4635-80e4-e6639a62865a
-md"We see the sample size of the paper covers 9 complete sets of gRNAs. Thereafter, the success probability drops below 95%."
+md"We see the sample size of the paper covers 9 complete sets of gRNAs with a probability more than 95%. Thereafter (for m > 9), the success probability drops below 95%, as illustrated by the plot above."
 
 # ╔═╡ 57309e16-8c1b-4268-b164-0b45b60b4fbd
 
@@ -63321,11 +63324,20 @@ global sample_size_initial_frac = 7*10^6
  	
 end
 
-# ╔═╡ be8e6332-f79d-4d63-afae-51c2d829f998
-md"When 50000 cells are injected, it is expected that, on average, approximately 53% of the gRNAs is represented:"
+# ╔═╡ d71fb462-8bea-49dc-b899-57d53c4efbec
+md"Let's say we are interested in observing *on average* only 90% of all gene knockouts (gRNAs). Then we can calculate the number of cells that should be injected as follows:"
 
 # ╔═╡ f0eaf96b-0bc0-4194-9a36-886cb1d66e00
-expectation_fraction_collected(n_gRNAs, 5*10^4; p = p_gRNA, r = r)
+begin
+	sample_size_90 = 10^4
+	while expectation_fraction_collected(n_gRNAs, sample_size_90; p = p_gRNA, r = r) < 0.9
+		sample_size_90 += 10^4
+	end
+	sample_size_90
+end
+
+# ╔═╡ be8e6332-f79d-4d63-afae-51c2d829f998
+md"We see that, when $sample_size_90 cells are injected, it is expected that, on average, approximately 90% of the gRNAs are represented at least once in the screening experiment."
 
 # ╔═╡ 293386f0-aafe-4e94-8e16-3237659d6963
 
@@ -63333,14 +63345,17 @@ expectation_fraction_collected(n_gRNAs, 5*10^4; p = p_gRNA, r = r)
 # ╔═╡ b2111d05-a153-4969-aeae-a7f0c01e3365
 md"###### 🔹 Occurence of specific gRNA w.r.t. sample size" 
 
+# ╔═╡ f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
+md""" Suppose we are interested in studying the occurence of a specific gRNA for a screening experiment with a specific sample size. For example, let's examine the number of times that the least abundant gRNA in the plasmid library will be represented in a sample size of 4 x 10⁶ cells."""
+
 # ╔═╡ 667fc6a8-b3ff-464d-903c-e215e7d2f472
 pᵢ_gRNA = p_gRNA[1]
 
 # ╔═╡ ead64d36-947a-4b9f-a0f7-a1821039f5b3
 n_cells = 4*10^6
 
-# ╔═╡ f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
-md""" For the gRNA with the lowest abundance in the plasmid library, the probability that it is observed *k* times when injecting $n_cells cancer cells in the mice, can be described by the following curve:"""
+# ╔═╡ f29d4112-40f8-4bfb-a9e3-2bb5d5944a13
+md"The probability that this gRNA is observed *k* times when injecting 4 x 10⁶ cancer cells in the mouse models, can be described by the following curve:"
 
 # ╔═╡ 60fff6ab-3e19-4af7-b102-17d3d47494f3
 begin
@@ -63361,7 +63376,7 @@ end
 mean, std = floor(n_cells * pᵢ_gRNA * r), floor(sqrt(n_cells * pᵢ_gRNA * r))
 
 # ╔═╡ cc4c712d-6562-4d25-8b84-64458cda4198
-md"The least abundant gRNA will be present on average 3 times with a standard deviation of 1, when 4x10⁶ cells are injected."
+md"The least abundant gRNA will be present on average 3 times (standard deviation of 1), when 4x10⁶ cells are injected."
 
 # ╔═╡ 752392c9-198a-4d5a-8ce7-7c154ce834ec
 
@@ -63434,7 +63449,10 @@ success_probability(n_OMP, endolysins_sample_size; p = ones(n_OMP)/n_OMP, m = 1)
 md"The OMPs are only guaranteed to be fully covered with 62 % probability at a sample size of 188 endolysins. "
 
 # ╔═╡ efac7679-df64-4db2-8b8b-06febdc8a5f0
-md"The success probability is way lower than 95%. Suppose we would execute a series of experiments in which we sample endolysins until all OMPs are observed at least once, what would be the **average required number of endolysins per experiment to see each OMP at least once** in the set of sampled endolysins?"
+md"The success probability is way lower than 95%. 
+
+Suppose we would execute a series of experiments in which we sample endolysins until all OMPs are observed at least once.
+What would be the **average required number of endolysins per experiment to see each OMP at least once** in the set of sampled endolysins?"
 
 # ╔═╡ d26ab92f-3541-4eb6-9257-124266d6878a
 expectation_minsamplesize(n_OMP; p = ones(n_OMP)/n_OMP, m = 1)
@@ -63443,7 +63461,7 @@ expectation_minsamplesize(n_OMP; p = ones(n_OMP)/n_OMP, m = 1)
 std_minsamplesize(n_OMP; p = ones(n_OMP)/n_OMP, m = 1)
 
 # ╔═╡ 7a1bed30-ecb8-4747-bf83-578b77f48e59
-md"The expected minimum number of endolysins to observe each OMP variant at least once is 182 (standard deviation: 51 endolysins)."
+md"The expected minimum number of endolysins to observe each OMP variant at least once is 182 endolysins (standard deviation: 51 endolysins)."
 
 # ╔═╡ c0ccc9c2-278e-4c21-ac1f-53c73d209e38
 md"Another research question we can ask ourselves is what **fraction of the total number of OMP variants is expected to be represented** for the set of 188 randomly sampled endolysins from the library."
@@ -63461,7 +63479,7 @@ md"In other words, when over different sampling experiments, each time 188 endol
 md"###### 🔹 Coverage linkers, CBDs and EADs in endolysin library"
 
 # ╔═╡ a34b71fb-1da6-43db-981b-71e1a404e4d6
-md"Now, let's investigate how well the other module types are covered. The **probability that all available linkers were observed at least once in this set** (assuming that there is an equal probability for each linker to be observed):"
+md"Now, let's investigate how well the other module types are covered. The **probability that all available linkers were observed at least once in this set** (assuming that there is an equal probability for each linker to be observed), can be calculated as follows:"
 
 # ╔═╡ ca9f4254-b38c-4de2-bafb-f97dd15a46bc
 success_probability(n_linker, endolysins_sample_size; p = ones(n_linker)/n_linker)
@@ -64486,6 +64504,7 @@ version = "0.9.1+5"
 # ╟─ca7ecf8b-634e-4fa5-aaa8-102fa488c7a1
 # ╟─60c3ce0d-85be-42f0-a869-1895abc096f3
 # ╠═7eb18559-e2c0-4c34-a2b2-4e3c3ab831a6
+# ╟─b665f292-e3db-43b1-8646-d4415ea03bcf
 # ╟─ecf6292c-7cdd-4886-8a59-be8e4f2751b7
 # ╠═56f21296-fcd2-46f7-a130-4cb6940c1133
 # ╠═09d77a14-01f4-430c-9038-25b85b31a1c2
@@ -64496,13 +64515,15 @@ version = "0.9.1+5"
 # ╟─ca947d4b-18e6-4bad-8d9b-b73324a5c40b
 # ╟─dc696281-7a5b-4568-a4c2-8dde90af43f0
 # ╟─7968de5e-5ae8-4ab4-b089-c3d33475af2f
+# ╟─d71fb462-8bea-49dc-b899-57d53c4efbec
+# ╠═f0eaf96b-0bc0-4194-9a36-886cb1d66e00
 # ╟─be8e6332-f79d-4d63-afae-51c2d829f998
-# ╟─f0eaf96b-0bc0-4194-9a36-886cb1d66e00
 # ╟─293386f0-aafe-4e94-8e16-3237659d6963
 # ╟─b2111d05-a153-4969-aeae-a7f0c01e3365
 # ╟─f92a6b6e-a556-45cb-a1ae-9f5fe791ffd2
 # ╠═667fc6a8-b3ff-464d-903c-e215e7d2f472
 # ╠═ead64d36-947a-4b9f-a0f7-a1821039f5b3
+# ╟─f29d4112-40f8-4bfb-a9e3-2bb5d5944a13
 # ╟─60fff6ab-3e19-4af7-b102-17d3d47494f3
 # ╠═a041652b-365e-4594-9c48-c63d547b3295
 # ╟─cc4c712d-6562-4d25-8b84-64458cda4198
