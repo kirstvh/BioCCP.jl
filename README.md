@@ -82,7 +82,7 @@ The [second Pluto notebook](/notebooks/BioCCP_Case_Study.jl) contains two case s
 
 #### Launch Pluto notebook from Browser 
 
-The Pluto notebooks can be launched directly from your browser using Binder (no installation of Julia/packages required): 
+The Pluto notebooks can be launched directly from your browser using Binder (no installation of Julia/packages required, however, the runtime will be significantly longer compared to using Pluto locally): 
 
 - Report-generating Pluto notebook: &emsp; [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/kirstvh/PlutoNotebooks/main?urlpath=pluto/open?path=/home/jovyan/notebooks/BioCCP_Interactive_Notebook.jl)
 
