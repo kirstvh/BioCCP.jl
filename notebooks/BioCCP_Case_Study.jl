@@ -63461,7 +63461,7 @@ expectation_minsamplesize(n_OMP; p = ones(n_OMP)/n_OMP, m = 1)
 std_minsamplesize(n_OMP; p = ones(n_OMP)/n_OMP, m = 1)
 
 # ╔═╡ 7a1bed30-ecb8-4747-bf83-578b77f48e59
-md"The expected minimum number of endolysins to observe each OMP variant at least once is 182 endolysins (standard deviation: 51 endolysins)."
+md"The average required number of endolysins to observe each OMP variant at least once is 182 endolysins (standard deviation: 51 endolysins)."
 
 # ╔═╡ c0ccc9c2-278e-4c21-ac1f-53c73d209e38
 md"Another research question we can ask ourselves is what **fraction of the total number of OMP variants is expected to be represented** for the set of 188 randomly sampled endolysins from the library."
