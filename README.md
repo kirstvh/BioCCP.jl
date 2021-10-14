@@ -23,7 +23,7 @@ Function name    | Short description
 `std_minsamplesize`      | Calculates standard deviation on the minimum number of designs 
 `success_probability`         | Calculates the probability that the minimum number of designs *T* is smaller than or equal to a given sample size *t*  
 `expectation_fraction_collected` | Returns the fraction of the total number of modules in the design space that is expected to be observed for a given sample size *t*
-`prob_occurrence_module` | Calculates for a module with specified module probability *p*, the probability that the module has occurred *k* times when a given number of designs has been collected
+`prob_occurrence_module` | Calculates for a module with specified module probability *p*, the probability that this module occurs *k* times when a given number of designs has been collected
 
 
 For more info about the implementation of the functions, please consult the [docs](https://kirstvh.github.io/BioCCP.jl/) or [source code](/src/BioCCP.jl).
@@ -41,14 +41,14 @@ Inputs     |
 
 Symbol    | Short description
 ---------------- | -----------------
- *n*       |  Total number of modules in the design space
+ *n*       |  The total number of modules in the design space
 *r*     |  The number of modules per design 
  *m*        | The number of times each module has to be observed (default = 1) in the sampled set of designs
  *p*   (\*) |  Probability distribution of the modules 
 
 >  (\*) 
 >  *When exact probabilities are known*, define your custom module probability/abundance vector or load them in the notebook from an external file.
->  *When probabilities and/or their distribution are unknown*, you can either:
+>  *When probabilities and/or their distribution are unknown*, the user can either:
  > >  1) Assume the probabilities of all modules to be equal (uniform distribution), or
  > >  2) Assume the module probabilities to follow *Zipf's law*, specifying the ratio p<sub>max</sub>/p<sub>min</sub>, or
  > >  3) Assume the histogram of the module probabilities to behave like a *bell curve*, specifying the ratio p<sub>max</sub>/p<sub>min</sub>   
@@ -59,10 +59,10 @@ Using the inputs, a report for sample size determination is created using the [f
 Report section    |   Short description       
 ---------------- |  -----------------           
 Module probabilities       |     This section shows a plot with the probability of each module in the design space during library generation.   
-Expected minimum sample size      |     This part displays the expected minimum number of designs **E**[_T_] and the standard deviation.         
-Success probability      |    In this section, the report calculates the probability *F(t)* that the minimum number of designs *T* is smaller than or equal to a given sample size *t*. Moreover, a curve describing the success probability *F(t)* in function of an increasing sample size *t* is available, to determine a minimum sample size according to a probability cut-off.  
-Expected observed fraction of the total number of modules        |    Here, the fraction of the total number of modules in the design space that is expected to be observed is computed for a given sample size *t*. A saturation curve, displaying the expected fraction of modules observed in function of increasing sample size, is provided.
-Number of occurrence of a specific module      |      In this last part, you can specify the probability *p<sub>j</sub>* of a module of interest together with a particular sample size, to calculate a curve showing the probability for a module to occur *k* times (in function of *k*).   
+Expected minimum sample size      |     This section displays the expected minimum number of designs **E**[_T_] and the standard deviation.         
+Success probability      |    In this section, the report shows the probability *F(t)* that the minimum number of designs *T* is smaller than or equal to a given sample size *t*. Moreover, a graph describing the success probability *F(t)* in function of an increasing sample size *t* is available, to determine a minimum sample size according to a probability cut-off.  
+Expected observed fraction of the total number of modules        |    In this section, the fraction of the total number of modules in the design space that is expected to be observed is computed for a given sample size *t*. A saturation curve, displaying the expected fraction of modules observed in function of increasing sample size, is provided.
+Number of occurrences of a specific module      |      In this last section, you can specify the probability *p<sub>j</sub>* of a module of interest together with a particular sample size, to calculate a curve showing the probability for a module to occur *k* times (in function of *k*).   
 
 
 ### 2. Case study Pluto notebook
