@@ -461,7 +461,7 @@ begin
 	if show_satur == "🔻 SHOW " 
 global sample_size_initial_frac = 5
 		while (1 - expectation_fraction_collected(n, sample_size_initial_frac; p = p_vec, r = r)) > 0.0005
-		global	 sample_size_initial_frac += ceil(Int(n/10))
+		global	 sample_size_initial_frac += Int(ceil(n/10))
 		end
 	
 	sample_sizes_frac = Int.(ceil.(collect(0 : n/10 : sample_size_initial_frac)))
